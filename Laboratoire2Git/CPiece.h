@@ -92,7 +92,7 @@ public:
 	virtual bool priseEnPassant();
 	virtual bool Manger(int incX, int incY);
 	virtual std::string type_piece();
-	virtual void modifPriseEnPassant();
+	virtual void modifPriseEnPassant() { /*rien*/ };
 	/**  modification (FIN)
 	/********************************/
 };
