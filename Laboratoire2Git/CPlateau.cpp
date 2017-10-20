@@ -69,7 +69,7 @@ void CPlateau::verifPriseEnPassant(CPlateau &plateau)
 	}
 }
 
-CPlateau::CPlateau(CPiece*** const plateau)
+/*CPlateau::CPlateau(CPiece*** const plateau)
 {
 	Jeu = new CPiece**[T];
 	for (int z = 0; z < T; z++)
@@ -107,7 +107,7 @@ CPlateau::CPlateau(CPiece*** const plateau)
 	}
 
 
-}
+}*/
 
 
 	//On ne peux pas faire directement Jeu[i][j] = P[i][j]
