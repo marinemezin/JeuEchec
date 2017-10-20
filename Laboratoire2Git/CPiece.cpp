@@ -135,6 +135,7 @@ std::string CPiece::type_piece()
 	return "CPiece";
 }
 
+
 /**  modification (FIN)
 /********************************/
 

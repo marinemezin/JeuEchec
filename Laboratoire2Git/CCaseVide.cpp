@@ -23,3 +23,14 @@ void CCaseVide::Afficher()
 	dessineCase();
 	cout << (" ");
 }
+
+/********************************
+/**  modification (DEBUT)*/
+
+std::string CCaseVide::type_piece()
+{
+	return "CCasevide";
+}
+
+/**  modification (FIN)
+/********************************/
