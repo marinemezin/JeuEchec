@@ -133,12 +133,12 @@ std::string CPion::type_piece()
 
 void CPion::modifPriseEnPassant()
 {
-	if (tour == 1) { tour++; }
 	if (tour == 2)
 	{
 		tour = 0;
 		viensDavancer2Cases = false;
 	}
+	if (tour == 1) { tour++; }
 }
 /**  modification (FIN)
 /********************************/
