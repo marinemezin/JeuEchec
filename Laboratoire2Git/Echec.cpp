@@ -6,6 +6,7 @@ using namespace std;
 #include "CCaseVide.h"
 
 // Prototypes
+//test
 char Lire();
 
 
