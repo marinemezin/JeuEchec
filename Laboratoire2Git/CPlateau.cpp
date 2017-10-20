@@ -88,11 +88,11 @@ CPlateau::CPlateau(CPiece*** const plateau)
 			}
 			if ((*plateau)[i][j].type_piece() == "CReine")
 			{
-				Jeu[i][j] = new CReine(this, (*plateau)[i][j].isCoulBlanc());
+				//Jeu[i][j] = new CReine(this, i, j ,8, (*plateau)[i][j].isCoulBlanc());
 			}
 			if ((*plateau)[i][j].type_piece() == "CRoi")
 			{
-				Jeu[i][j] = new CRoi(this, i, j, (*plateau)[i][j].isCoulBlanc());
+				//Jeu[i][j] = new CRoi(this, i, j, (*plateau)[i][j].isCoulBlanc());
 			}
 			if ((*plateau)[i][j].type_piece() == "CTour")
 			{

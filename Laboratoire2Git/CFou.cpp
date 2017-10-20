@@ -4,10 +4,14 @@
 #include <iostream>
 using namespace std;
 
-
-CFou::CFou (CPlateau* J, int PX, int PY, int Coul) : CPiece(J, PX, PY, 3, Coul)
+/********************************
+/**  modification (DEBUT)*/
+CFou::CFou (CPlateau* J, int PX, int PY, int Coul) : CPiece(J, PX, PY, 4, Coul)
 {
 }
+/**  modification (FIN)
+/********************************/
+
 
 
 void CFou::Afficher()
