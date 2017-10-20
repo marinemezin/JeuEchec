@@ -64,14 +64,23 @@ CPlateau::CPlateau(CPlateau const& P)
 	for (int z = 0; z < T; z++)
 		Jeu[z] = new CPiece*[T];
 
-
-	for (int i = 0; i < T; i++)
+	for(int i = 0; i < T; i++)
 	{
-		for (int j = 0; j < T; j++)
+		for(int j = 0; j < T; j++)
 		{
-			P[i][j].type_piece();
+			switch (((*P)[i][j]).type_piece())
+			{
+			case "CCavalier": 
+				break;
+			case "CFou:
+				break;
+			default:
+				SORTIE DEFAULT;
+				break;
+			}
 		}
 	}
+
 
 	//On ne peux pas faire directement Jeu[i][j] = P[i][j]
 	//Car je pense que dans ce cas les deux cases pointeront vers la même adresse mémoire
