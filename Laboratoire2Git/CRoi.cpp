@@ -11,6 +11,15 @@ CRoi::CRoi (CPlateau* J, int Coul) :
 	// rien
 }
 
+/********************************
+/**  modification (DEBUT)*/
+CRoi::CRoi(CPlateau* J, int PX, int PY, int Force, int Coul)
+	: CReine(J, PX, PY, Force, Coul)
+{
+	// rien
+}
+/**  modification (FIN)
+/********************************/
 
 void CRoi::Afficher()
 {

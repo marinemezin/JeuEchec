@@ -13,6 +13,10 @@ class CRoi : public CReine
 {
 public:
 	CRoi (CPlateau* J, int Coul);
+	/********************************
+	/**  modification (DEBUT)*/
+	CRoi::CRoi(CPlateau* J, int PX, int PY, int Force, int Coul);
+	/**  modification (FIN)
 
 /**
   * Dessine un Carre de la bonne taille et y mets le bon caractère pour la pièce,
