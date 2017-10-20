@@ -85,23 +85,23 @@ CPlateau::CPlateau(CPiece*** const plateau)
 			}
 			if ((*plateau)[i][j].type_piece() == "CReine")
 			{
-				//Jeu[i][j] = new CReine(this, i, j ,8, (*plateau)[i][j].isCoulBlanc());
+				Jeu[i][j] = new CReine(this, i, j ,8, (*plateau)[i][j].isCoulBlanc());
 			}
 			if ((*plateau)[i][j].type_piece() == "CRoi")
 			{
-				//Jeu[i][j] = new CRoi(this, i, j, (*plateau)[i][j].isCoulBlanc());
+				Jeu[i][j] = new CRoi(this, i, j, 5, (*plateau)[i][j].isCoulBlanc());
 			}
 			if ((*plateau)[i][j].type_piece() == "CTour")
 			{
-
+				Jeu[i][j] = new CTour(this, i, j, (*plateau)[i][j].isCoulBlanc());
 			}
 			if ((*plateau)[i][j].type_piece() == "CCavalier")
 			{
-
+				Jeu[i][j] = new CCavalier(this, i, j, (*plateau)[i][j].isCoulBlanc());
 			}
 			if ((*plateau)[i][j].type_piece() == "CCasevide")
 			{
-
+				Jeu[i][j] = new CCaseVide(this, i, j);
 			}
 		}
 	}
@@ -138,7 +138,7 @@ CPlateau::CPlateau(CPiece*** const plateau)
 	Il faudrai peut-être créer la méthode virtuelle pure dans CPièce, et la redéfinir dans toutes les classes des autres pièces
 	*/
 	
-}
+
 /**  modification (FIN)
 /********************************/
 
