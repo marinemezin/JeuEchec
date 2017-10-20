@@ -71,12 +71,13 @@ bool CPion::Bouger(int incX, int incY)
 				Prise en passant*/
 				else {
 					//Si c'est prise en passant
-					int valeurCaseAManger = IsCoulBlanc == 1 ? 1 : -1;
+					int valeurCaseAManger = IsCoulBlanc == 1 ? -1 : 1;
 					//Si la case ou je veux aller -1 ou +1 est prise par un pion venant d'avancer de deux cases
 					if (!Jeu->Case(PosY + incY + valeurCaseAManger, PosX + incX)->isCaseVide() && Jeu->Case(PosY + incY + valeurCaseAManger, PosX + incX)->priseEnPassant())
 					{
-						if (CPiece::Manger(incX, incY))
+						if (CPiece::Bouger(incX, incY))
 						{
+							Jeu->prendrePiece(PosX, PosY + valeurCaseAManger);
 							if (premierTour == true) premierTour = false;
 							Retour = true;//on mange en passant
 						}
