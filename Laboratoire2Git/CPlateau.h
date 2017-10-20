@@ -23,7 +23,8 @@ public:
 
 	/********************************
 	/**  modification (DEBUT)*/
-	CPlateau(CPlateau const& P); //constructeur par copie
+	CPlateau(CPiece*** const& P); //constructeur par copie
+	static void verifPriseEnPassant(CPiece*** const plateau);
 	/**  modification (FIN)
 	/********************************/
 
