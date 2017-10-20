@@ -41,11 +41,13 @@ public:
 
 	/********************************
 	/**  modification (DEBUT)*/
-	bool priseEnPassant();
+	bool priseEnPassant() override;
 	std::string type_piece() override;
-	bool getViensDavancer2Cases() { return viensDavancer2Cases; }
+	/*bool getViensDavancer2Cases() { return viensDavancer2Cases; }
 	int getTour() { return tour; }
-	int setTour(int value) { tour += value; }
+	int setTour(int value) { tour += value; }*/
+	static void verifPriseEnPassant(CPiece*** plateau);
+	void modifPriseEnPassant() override;
 	/**  modification (FIN)
 	/********************************/
 };
