@@ -11,9 +11,6 @@ class CPlateau;
   */
 class CReine : public CPiece
 {
-protected:
-	CReine (CPlateau* J, int PX, int PY, int Force, int Coul);
-
 public:
 	CReine (CPlateau* J, int Coul);
 
@@ -35,6 +32,7 @@ public:
 	/********************************
 	/**  modification (DEBUT)*/
 	std::string type_piece();
+	CReine(CPlateau* J, int PX, int PY, int Force, int Coul);
 	/**  modification (FIN)
 	/********************************/
 };
