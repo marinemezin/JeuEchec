@@ -103,6 +103,10 @@ CPlateau::CPlateau(CPlateau const& plateau)
 			{
 				Jeu[i][j] = new CCaseVide(this, i, j);
 			}
+			if (plateau.Case(i, j)->type_piece() == "CFou")
+			{
+				Jeu[i][j] = new CFou(this, i, j, plateau.Case(i, j)->isCoulBlanc());
+			}
 		}
 	}
 }

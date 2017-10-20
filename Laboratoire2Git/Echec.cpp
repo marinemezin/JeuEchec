@@ -14,7 +14,7 @@ int main ()
 	CPlateau* P = new CPlateau(); 
 
 	int nbrCoup = 0;
-	/*while (nbrCoup < 10)
+	while (nbrCoup < 10)
 	{
 		nbrCoup++;
 		CPlateau::verifPriseEnPassant(*P);
@@ -30,14 +30,14 @@ int main ()
 		if (P->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1'));
 		else
 			cout << ("Ca marche pas!!!") << endl;
-	}*/
+	}
 
-	CPlateau* P2 = new CPlateau(*P);
+	/*CPlateau* P2 = new CPlateau(*P);
 	delete P2;
 	cout << endl;
 	delete P;
 
-	system("PAUSE");
+	system("PAUSE");*/
 	return 0;
 }
 
