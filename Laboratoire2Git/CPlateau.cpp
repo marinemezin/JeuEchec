@@ -58,7 +58,7 @@ CPlateau::CPlateau()
 
 /********************************
 /**  modification (DEBUT)*/
-void CPlateau::verifPriseEnPassant(CPlateau plateau)
+void CPlateau::verifPriseEnPassant(CPlateau &plateau)
 {
 	for (int i = 0; i < 8; i++)
 	{
