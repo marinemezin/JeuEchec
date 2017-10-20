@@ -43,7 +43,6 @@ public:
 	/**  modification (DEBUT)*/
 	bool priseEnPassant() override;
 	std::string type_piece() override;
-	static void verifPriseEnPassant(CPiece*** plateau);
 	void modifPriseEnPassant() override;
 	/**  modification (FIN)
 	/********************************/

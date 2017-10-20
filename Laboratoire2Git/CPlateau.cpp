@@ -58,6 +58,20 @@ CPlateau::CPlateau()
 
 /********************************
 /**  modification (DEBUT)*/
+void CPlateau::verifPriseEnPassant(CPiece*** plateau)
+{
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			if ((*plateau)[i][j].type_piece() == "CPion")
+			{
+				(*plateau)[i][j].modifPriseEnPassant();
+			}
+		}
+	}
+}
+
 CPlateau::CPlateau(CPiece*** const& P)
 {
 	Jeu = new CPiece**[T];
