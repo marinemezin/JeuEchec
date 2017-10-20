@@ -68,15 +68,15 @@ CPlateau::CPlateau(CPlateau const& P)
 	{
 		for(int j = 0; j < T; j++)
 		{
-			switch (((*P)[i][j]).type_piece())
+			switch ((P[i][j])->type_piece())
 			{
-			case "CCavalier": 
+			/*case "CCavalier": 
 				break;
 			case "CFou:
 				break;
 			default:
 				SORTIE DEFAULT;
-				break;
+				break;*/
 			}
 		}
 	}
