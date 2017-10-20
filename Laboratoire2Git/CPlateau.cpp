@@ -72,27 +72,44 @@ void CPlateau::verifPriseEnPassant(CPiece*** plateau)
 	}
 }
 
-CPlateau::CPlateau(CPiece*** const& P)
+CPlateau::CPlateau(CPiece*** const plateau)
 {
 	Jeu = new CPiece**[T];
 	for (int z = 0; z < T; z++)
 		Jeu[z] = new CPiece*[T];
 
-	for(int i = 0; i < T; i++)
+	for (int i = 0; i < T; i++)
 	{
-		for(int j = 0; j < T; j++)
+		for (int j = 0; j < T; j++)
 		{
-			switch ((P[i][j])->type_piece())
+			if((*plateau)[i][j].type_piece() == "CPion")
 			{
-			/*case "CCavalier": 
-				break;
-			case "CFou:
-				break;
-			default:
-				SORTIE DEFAULT;
-				break;*/
+				Jeu[i][j] = new CPion(this, i, j, (*plateau)[i][j].isCoulBlanc());
+			}
+			if ((*plateau)[i][j].type_piece() == "CReine")
+			{
+				Jeu[i][j] = new CReine(this, (*plateau)[i][j].isCoulBlanc());
+			}
+			if ((*plateau)[i][j].type_piece() == "CRoi")
+			{
+				Jeu[i][j] = new CRoi(this, i, j, (*plateau)[i][j].isCoulBlanc());
+			}
+			if ((*plateau)[i][j].type_piece() == "CTour")
+			{
+
+			}
+			if ((*plateau)[i][j].type_piece() == "CCavalier")
+			{
+
+			}
+			if ((*plateau)[i][j].type_piece() == "CCasevide")
+			{
+
 			}
 		}
+	}
+
+
 	}
 
 
@@ -124,7 +141,7 @@ CPlateau::CPlateau(CPiece*** const& P)
 	Il faudrai peut-être créer la méthode virtuelle pure dans CPièce, et la redéfinir dans toutes les classes des autres pièces
 	*/
 	
-}
+
 /**  modification (FIN)
 /********************************/
 

@@ -28,6 +28,13 @@ public:
   * Affiche le Carre et un espace, juste pour la forme.
   */
 	void Afficher();
+
+	/********************************
+	/**  modification (DEBUT)*/
+	std::string type_piece();
+	/**  modification (FIN)
+	/********************************/
+
 };
 
 #endif
