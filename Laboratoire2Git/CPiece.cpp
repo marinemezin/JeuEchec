@@ -31,7 +31,7 @@ bool CPiece::CheminVide (int incX, int incY)
 
 	if (CheminLibre)
 	{
-		int setCouleurArriver = Jeu->Case(PosX+incX,PosY+incY)->isCoulBlanc();
+		int setCouleurArriver = Jeu->Case(PosY+incY, PosX+incX)->isCoulBlanc();
 		if (!(IsCoulBlanc == -setCouleurArriver || setCouleurArriver == 0))
 			CheminLibre = false;
 	}
