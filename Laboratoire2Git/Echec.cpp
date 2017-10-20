@@ -17,7 +17,7 @@ int main ()
 	while (nbrCoup < 10)
 	{
 		nbrCoup++;
-		CPlateau::verifPriseEnPassant(P);
+		CPlateau::verifPriseEnPassant(*P);
 		P->Afficher();
 
 		char initialX = Lire();
