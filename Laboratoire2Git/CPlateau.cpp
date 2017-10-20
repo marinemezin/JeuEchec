@@ -56,9 +56,13 @@ CPlateau::CPlateau()
 	Jeu[7][4] = new CRoi (this, -1);			//Roi Noir
 }
 
+CPlateau::CPlateau(CPiece *** const & P)
+{
+}
+
 /********************************
 /**  modification (DEBUT)*/
-void CPlateau::verifPriseEnPassant(CPlateau plateau)
+void CPlateau::verifPriseEnPassant(CPlateau &plateau)
 {
 	for (int i = 0; i < 8; i++)
 	{
@@ -69,7 +73,7 @@ void CPlateau::verifPriseEnPassant(CPlateau plateau)
 	}
 }
 
-CPlateau::CPlateau(CPiece*** const plateau)
+/*CPlateau::CPlateau(CPiece*** const plateau)
 {
 	Jeu = new CPiece**[T];
 	for (int z = 0; z < T; z++)
@@ -107,7 +111,7 @@ CPlateau::CPlateau(CPiece*** const plateau)
 	}
 
 
-}
+}*/
 
 
 	//On ne peux pas faire directement Jeu[i][j] = P[i][j]
@@ -138,7 +142,6 @@ CPlateau::CPlateau(CPiece*** const plateau)
 	Il faudrai peut-être créer la méthode virtuelle pure dans CPièce, et la redéfinir dans toutes les classes des autres pièces
 	*/
 	
-}
 /**  modification (FIN)
 /********************************/
 
