@@ -69,7 +69,7 @@ CPlateau::CPlateau(CPlateau const& P)
 	{
 		for (int j = 0; j < T; j++)
 		{
-			P[i][j].type_piece();
+			//P[i][j].type_piece();
 		}
 	}
 
