@@ -2,6 +2,7 @@
 /********************************
 /**  modification (DEBUT)*/
 #include <typeinfo>
+#include <string>
 /**  modification (FIN)
 /********************************/
 #include <iostream>
@@ -122,3 +123,11 @@ void CPion::Afficher()
 	cout << ("P");
 }
 
+/********************************
+/**  modification (DEBUT)*/
+std::string CPion::type_piece()
+{
+	return "CPion";
+}
+/**  modification (FIN)
+/********************************/

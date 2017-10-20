@@ -27,3 +27,12 @@ bool CRoi::Bouger (int incX, int incY)
 	else
 		return false;
 }
+
+/********************************
+/**  modification (DEBUT)*/
+std::string CRoi::type_piece()
+{
+	return "CRoi";
+}
+/**  modification (FIN)
+/********************************/

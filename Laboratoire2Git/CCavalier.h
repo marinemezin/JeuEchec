@@ -30,6 +30,12 @@ public:
   * retourne vrai si le déplacement a eu lieu correctement, faux sinon.
   */
 	bool Bouger (int incX, int incY);
+
+	/********************************
+	/**  modification (DEBUT)*/
+	std::string type_piece();
+	/**  modification (FIN)
+	/********************************/
 };
 
 #endif

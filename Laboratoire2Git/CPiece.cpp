@@ -1,5 +1,9 @@
 #include "CPiece.h"
-
+/********************************
+/**  modification (DEBUT)*/
+#include <string>
+/**  modification (FIN)
+/********************************/
 
 #include <iostream>
 using namespace std;
@@ -31,7 +35,7 @@ bool CPiece::CheminVide (int incX, int incY)
 
 	if (CheminLibre)
 	{
-		int setCouleurArriver = Jeu->Case(PosY+incY, PosX+incX)->isCoulBlanc();
+		int setCouleurArriver = Jeu->Case(PosX+incX,PosY+incY)->isCoulBlanc();
 		if (!(IsCoulBlanc == -setCouleurArriver || setCouleurArriver == 0))
 			CheminLibre = false;
 	}
@@ -125,5 +129,12 @@ bool CPiece::Manger(int incX, int incY)
 	}
 	return false;
 }
+
+std::string CPiece::type_piece()
+{
+	return "CPiece";
+}
+
 /**  modification (FIN)
 /********************************/
+

@@ -41,3 +41,14 @@ bool CCavalier::Bouger (int incX, int incY)
 	else
 		return false;
 }
+
+/********************************
+/**  modification (DEBUT)*/
+
+std::string CCavalier::type_piece()
+{
+	return "CCavalier";
+}
+
+/**  modification (FIN)
+/********************************/

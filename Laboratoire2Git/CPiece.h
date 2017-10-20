@@ -2,7 +2,11 @@
 #define CPIECE_H
 
 #include "CCoul.h"
-
+/********************************
+/**  modification (DEBUT)*/
+#include <string>
+/**  modification (FIN)
+/********************************/
 
 class CPlateau;
 
@@ -87,6 +91,7 @@ public:
 	/**  modification (DEBUT)*/
 	virtual bool priseEnPassant();
 	virtual bool Manger(int incX, int incY);
+	virtual std::string type_piece();
 	/**  modification (FIN)
 	/********************************/
 };

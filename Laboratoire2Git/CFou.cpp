@@ -25,3 +25,15 @@ bool CFou::Bouger (int incX, int incY)
 	else
 		return false;
 }
+
+/********************************
+/**  modification (DEBUT)*/
+
+std::string CFou::type_piece()
+{
+	return "CFou";
+}
+
+/**  modification (FIN)
+/********************************/
+

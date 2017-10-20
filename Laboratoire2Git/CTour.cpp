@@ -26,3 +26,12 @@ bool CTour::Bouger (int incX, int incY)
 	else
 		return false;
 }
+
+/********************************
+/**  modification (DEBUT)*/
+std::string CTour::type_piece()
+{
+	return "CTour";
+}
+/**  modification (FIN)
+/********************************/

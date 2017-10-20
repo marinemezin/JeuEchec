@@ -64,6 +64,15 @@ CPlateau::CPlateau(CPlateau const& P)
 	for (int z = 0; z < T; z++)
 		Jeu[z] = new CPiece*[T];
 
+
+	for (int i = 0; i < T; i++)
+	{
+		for (int j = 0; j < T; j++)
+		{
+			P[i][j].type_piece();
+		}
+	}
+
 	//On ne peux pas faire directement Jeu[i][j] = P[i][j]
 	//Car je pense que dans ce cas les deux cases pointeront vers la même adresse mémoire
 	//Si par la suite on supprime Jeu alors on perdra des données de P

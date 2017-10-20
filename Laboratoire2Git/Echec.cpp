@@ -14,7 +14,7 @@ int main ()
 	CPlateau* P = new CPlateau(); 
 
 	int nbrCoup = 0;
-	while (nbrCoup < 30)
+	while (nbrCoup < 10)
 	{
 		nbrCoup++;
 
