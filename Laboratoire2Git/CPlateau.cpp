@@ -66,7 +66,7 @@ void CPlateau::verifPriseEnPassant(CPiece*** plateau)
 		{
 			if ((*plateau)[i][j].type_piece() == "CPion")
 			{
-
+				
 			}
 		}
 	}

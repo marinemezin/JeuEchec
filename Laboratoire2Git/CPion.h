@@ -43,6 +43,9 @@ public:
 	/**  modification (DEBUT)*/
 	bool priseEnPassant();
 	std::string type_piece() override;
+	bool getViensDavancer2Cases() { return viensDavancer2Cases; }
+	int getTour() { return tour; }
+	int setTour(int value) { tour += value; }
 	/**  modification (FIN)
 	/********************************/
 };
