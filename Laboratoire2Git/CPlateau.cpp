@@ -69,7 +69,7 @@ void CPlateau::verifPriseEnPassant(CPlateau &plateau)
 	}
 }
 
-CPlateau::CPlateau(CPiece*** const plateau)
+CPlateau::CPlateau(CPlateau const& plateau)
 {
 	Jeu = new CPiece**[T];
 	for (int z = 0; z < T; z++)
@@ -79,34 +79,32 @@ CPlateau::CPlateau(CPiece*** const plateau)
 	{
 		for (int j = 0; j < T; j++)
 		{
-			if ((*plateau)[i][j].type_piece() == "CPion")
+			if (plateau.Case(i, j)->type_piece() == "CPion")
 			{
-				Jeu[i][j] = new CPion(this, i, j, (*plateau)[i][j].isCoulBlanc());
+				Jeu[i][j] = new CPion(this, i, j, plateau.Case(i, j)->isCoulBlanc());
 			}
-			if ((*plateau)[i][j].type_piece() == "CReine")
+			if (plateau.Case(i, j)->type_piece() == "CReine")
 			{
-				Jeu[i][j] = new CReine(this, i, j ,8, (*plateau)[i][j].isCoulBlanc());
+				Jeu[i][j] = new CReine(this, i, j ,8, plateau.Case(i, j)->isCoulBlanc());
 			}
-			if ((*plateau)[i][j].type_piece() == "CRoi")
+			if (plateau.Case(i, j)->type_piece() == "CRoi")
 			{
-				Jeu[i][j] = new CRoi(this, i, j, 5, (*plateau)[i][j].isCoulBlanc());
+				Jeu[i][j] = new CRoi(this, i, j, 5, plateau.Case(i, j)->isCoulBlanc());
 			}
-			if ((*plateau)[i][j].type_piece() == "CTour")
+			if (plateau.Case(i, j)->type_piece() == "CTour")
 			{
-				Jeu[i][j] = new CTour(this, i, j, (*plateau)[i][j].isCoulBlanc());
+				Jeu[i][j] = new CTour(this, i, j, plateau.Case(i, j)->isCoulBlanc());
 			}
-			if ((*plateau)[i][j].type_piece() == "CCavalier")
+			if (plateau.Case(i, j)->type_piece() == "CCavalier")
 			{
-				Jeu[i][j] = new CCavalier(this, i, j, (*plateau)[i][j].isCoulBlanc());
+				Jeu[i][j] = new CCavalier(this, i, j, plateau.Case(i, j)->isCoulBlanc());
 			}
-			if ((*plateau)[i][j].type_piece() == "CCasevide")
+			if (plateau.Case(i, j)->type_piece() == "CCasevide")
 			{
 				Jeu[i][j] = new CCaseVide(this, i, j);
 			}
 		}
 	}
-
-
 }
 
 
@@ -180,11 +178,12 @@ void CPlateau::Afficher()
 	CEcran::Gotoxy (1,25);
 }
 
-
-CPiece* CPlateau::Case(int y, int x)
+/*modicationnnnnnnnn*/
+CPiece* CPlateau::Case(int y, int x) const
 {
 	return Jeu[y][x]; 
 }
+/*fin modicationnnnnnnnn*/
 
 
 

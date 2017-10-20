@@ -33,7 +33,7 @@ bool CFou::Bouger (int incX, int incY)
 /********************************
 /**  modification (DEBUT)*/
 
-std::string CFou::type_piece()
+std::string CFou::type_piece() const
 {
 	return "CFou";
 }

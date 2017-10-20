@@ -39,7 +39,7 @@ bool CRoi::Bouger (int incX, int incY)
 
 /********************************
 /**  modification (DEBUT)*/
-std::string CRoi::type_piece()
+std::string CRoi::type_piece() const
 {
 	return "CRoi";
 }

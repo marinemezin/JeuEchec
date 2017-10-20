@@ -29,7 +29,7 @@ bool CTour::Bouger (int incX, int incY)
 
 /********************************
 /**  modification (DEBUT)*/
-std::string CTour::type_piece()
+std::string CTour::type_piece() const
 {
 	return "CTour";
 }

@@ -31,7 +31,7 @@ public:
 
 	/********************************
 	/**  modification (DEBUT)*/
-	std::string type_piece();
+	std::string type_piece() const override;
 	CReine(CPlateau* J, int PX, int PY, int Force, int Coul);
 	/**  modification (FIN)
 	/********************************/

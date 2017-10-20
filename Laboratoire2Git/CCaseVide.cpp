@@ -27,7 +27,7 @@ void CCaseVide::Afficher()
 /********************************
 /**  modification (DEBUT)*/
 
-std::string CCaseVide::type_piece()
+std::string CCaseVide::type_piece() const
 {
 	return "CCasevide";
 }

@@ -126,7 +126,7 @@ void CPion::Afficher()
 
 /********************************
 /**  modification (DEBUT)*/
-std::string CPion::type_piece()
+std::string CPion::type_piece() const
 {
 	return "CPion";
 }

@@ -42,7 +42,7 @@ public:
 	/********************************
 	/**  modification (DEBUT)*/
 	bool priseEnPassant() override;
-	std::string type_piece() override;
+	std::string type_piece() const override;
 	void modifPriseEnPassant() override;
 	/**  modification (FIN)
 	/********************************/

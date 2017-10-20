@@ -39,7 +39,7 @@ bool CReine::Bouger (int incX, int incY)
 
 /********************************
 /**  modification (DEBUT)*/
-std::string CReine::type_piece()
+std::string CReine::type_piece() const
 {
 	return "CReine";
 }

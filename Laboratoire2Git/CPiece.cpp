@@ -130,7 +130,7 @@ bool CPiece::Manger(int incX, int incY)
 	return false;
 }
 
-std::string CPiece::type_piece()
+std::string CPiece::type_piece() const
 {
 	return "CPiece";
 }
