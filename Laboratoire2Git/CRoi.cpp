@@ -1,5 +1,10 @@
 #include "CRoi.h"
 
+/********************************
+/**  modification (DEBUT)*/
+#include "CPlateau.h"
+/**  modification (FIN)
+/********************************/
 
 #include <iostream>
 using namespace std;
@@ -51,7 +56,9 @@ bool echec(CPlateau const&plateau, int posX, int posY)
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			//CPlateau* copieplateau = new CPlateau(*plateau);
+			CPlateau* copieplateau = new CPlateau(plateau);
+			echec=(copieplateau->Case(i, j))->Bouger(posX,posY);
+			delete copieplateau;
 		}
 	}
 
