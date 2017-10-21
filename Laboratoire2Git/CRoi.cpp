@@ -43,5 +43,11 @@ std::string CRoi::type_piece()
 {
 	return "CRoi";
 }
+
+bool echec(CPlateau plateau, int posX, int posY)
+{
+	bool echec = false; 
+	return echec; 
+}
 /**  modification (FIN)
 /********************************/
