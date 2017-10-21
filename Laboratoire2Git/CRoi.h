@@ -11,6 +11,11 @@ class CPlateau;
   */
 class CRoi : public CReine
 {
+	/********************************
+	/**  modification (DEBUT)*/
+	bool aRoque; //le joueur ne peut roquer qu'une fois par partie
+	/**  modification (FIN)
+	/********************************/
 public:
 	CRoi (CPlateau* J, int Coul);
 	/********************************
