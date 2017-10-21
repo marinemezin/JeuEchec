@@ -63,7 +63,7 @@ bool echec(CPlateau const&plateau, int posX, int posY, int couleur)
 					CPlateau* copieplateau = new CPlateau(plateau);
 					if ((copieplateau->Case(i, j))->Bouger(posX, posY))
 					{
-						echec=(copieplateau->Case(i, j))->Bouger(posX,posY);
+						echec=true;
 					}
 					delete copieplateau;
 				}
