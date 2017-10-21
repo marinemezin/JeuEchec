@@ -20,8 +20,8 @@ int main ()
 	CPlateau* P = new CPlateau(); 
 
 	int nbrCoup = 0;
-		/********************************
-		/**  modification (DEBUT)*/	
+	/********************************
+	/**  modification (DEBUT)*/	
 	while (nbrCoup < 30)
 	{
 
