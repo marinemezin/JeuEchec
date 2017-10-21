@@ -12,6 +12,7 @@ using namespace std;
 
 // Prototypes
 char Lire();
+bool echectest(CPlateau plateau);
 
 
 int main ()
@@ -19,24 +20,31 @@ int main ()
 	CPlateau* P = new CPlateau(); 
 
 	int nbrCoup = 0;
-	while (nbrCoup < 10)
+		/********************************
+		/**  modification (DEBUT)*/	
+	while (nbrCoup < 30)
 	{
-		nbrCoup++;
-		CPlateau::verifPriseEnPassant(*P);
-		P->Afficher();
 
-		char initialX = Lire();
-		char initialY = Lire();
+		if (!echectest(*P))
+		{
+			nbrCoup++;
+			CPlateau::verifPriseEnPassant(*P);
+			P->Afficher();
+
+			char initialX = Lire();
+			char initialY = Lire();
 	
-		char finalX = Lire();
-		char finalY = Lire();
+			char finalX = Lire();
+			char finalY = Lire();
 
-		CEcran::ClrScr();
-		if (P->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1'));
-		else
-			cout << ("Ca marche pas!!!") << endl;
+			CEcran::ClrScr();
+			if (P->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1'));
+			else
+				cout << ("Ca marche pas!!!") << endl;
+		}
 	}
-
+	/**  modification (FIN)
+	/********************************/
 	/*CPlateau* P2 = new CPlateau(*P);
 	delete P2;
 	cout << endl;
@@ -56,7 +64,7 @@ char Lire()
 
 /********************************
 /**  modification (DEBUT)*/
-bool echec(CPlateau plateau)
+bool echectest(CPlateau plateau)
 {
 	int posX = 0;
 	int posY = 0;
@@ -71,7 +79,7 @@ bool echec(CPlateau plateau)
 			}
 		}
 	}
-	//return (plateau.Case(posX, posY))->echec(plateau, posX, posY);
+	return (plateau.Case(posX, posY))->echec(plateau, posX, posY, plateau.Case(posX,posY)->isCoulBlanc());
 	return false;
 }
 /**  modification (FIN)
