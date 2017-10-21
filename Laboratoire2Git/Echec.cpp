@@ -71,7 +71,8 @@ bool echec(CPlateau plateau)
 			}
 		}
 	}
-	return (plateau.Case(posX, posY))->echec(plateau, posX, posY);
+	//return (plateau.Case(posX, posY))->echec(plateau, posX, posY);
+	return false;
 }
 /**  modification (FIN)
 /********************************/
