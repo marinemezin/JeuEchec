@@ -112,35 +112,6 @@ CPlateau::CPlateau(CPlateau const& plateau)
 }
 
 
-	//On ne peux pas faire directement Jeu[i][j] = P[i][j]
-	//Car je pense que dans ce cas les deux cases pointeront vers la même adresse mémoire
-	//Si par la suite on supprime Jeu alors on perdra des données de P
-
-	//Méthode 1 : on récupère le type de la pièce qui arrive
-	/*for(int i = 0; i < T; i++)
-	{
-		for(int j = 0; j < T; j++)
-		{
-			Jeu[i][j] = new typeid(P[i][j])(P[i][j]);
-		}
-	}*/
-	//Méthode 2 : on créé une méthode virtuel "construire()" appelant le bon constructeur
-	/*for(int i = 0; i < T; i++)
-	{
-		for(int j = 0; j < T; j++)
-		{
-			Jeu[i][j] = P[i][j].construire();
-		}
-	}
-	Dans chaque classe de fou, roi, dame, etc.. on aurai par exemple dans CDame
-	CDame construire()
-	{
-		return new CDame();
-	}
-	Il faudrai peut-être créer la méthode virtuelle pure dans CPièce, et la redéfinir dans toutes les classes des autres pièces
-	*/
-	
-
 /**  modification (FIN)
 /********************************/
 

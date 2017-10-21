@@ -44,10 +44,20 @@ std::string CRoi::type_piece() const
 	return "CRoi";
 }
 
-bool echec(CPlateau plateau, int posX, int posY)
+bool echec(CPlateau const&plateau, int posX, int posY)
 {
 	bool echec = false; 
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			//CPlateau* copieplateau = new CPlateau(*plateau);
+		}
+	}
+
 	return echec; 
 }
+
+
 /**  modification (FIN)
 /********************************/
