@@ -49,16 +49,25 @@ std::string CRoi::type_piece() const
 	return "CRoi";
 }
 
-bool echec(CPlateau const&plateau, int posX, int posY)
+bool echec(CPlateau const&plateau, int posX, int posY, int couleur)
 {
 	bool echec = false; 
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			CPlateau* copieplateau = new CPlateau(plateau);
-			echec=(copieplateau->Case(i, j))->Bouger(posX,posY);
-			delete copieplateau;
+			if (plateau.Case(i, j)->type_piece() != "CCasevide")
+			{
+				if (plateau.Case(i,j)->isCoulBlanc() != plateau.Case(posX, posY)->isCoulBlanc())
+				{
+					CPlateau* copieplateau = new CPlateau(plateau);
+					if ((copieplateau->Case(i, j))->Bouger(posX, posY))
+					{
+						echec=(copieplateau->Case(i, j))->Bouger(posX,posY);
+					}
+					delete copieplateau;
+				}
+			}
 		}
 	}
 
