@@ -4,6 +4,11 @@ using namespace std;
 #include "CEcran.h"
 #include "CPlateau.h"
 #include "CCaseVide.h"
+/********************************
+/**  modification (DEBUT)*/
+#include "CRoi.h"
+/**  modification (FIN)
+/********************************/
 
 // Prototypes
 char Lire();
@@ -49,4 +54,25 @@ char Lire()
 	return C;
 }
 
+/********************************
+/**  modification (DEBUT)*/
+bool echec(CPlateau plateau)
+{
+	int posX = 0;
+	int posY = 0;
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			if (plateau.Case(i, j)->type_piece() == "CRoi")
+			{
+				posX = i;
+				posY = j;
+			}
+		}
+	}
+	return (plateau.Case(posX, posY))->echec(plateau, posX, posY);
+}
+/**  modification (FIN)
+/********************************/
 
