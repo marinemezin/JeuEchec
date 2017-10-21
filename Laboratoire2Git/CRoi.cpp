@@ -46,6 +46,9 @@ bool CRoi::Bouger (int incX, int incY)
 	else
 		return false;
 	//le roi peut bouger en roquant
+	//le roi ne doit pas être menacé
+	//les deux cases qu'il traverse ne doivent pas être en echec
+	//la tour peut être en echec (la case adjacente aussi en cas de grand roque)
 	//...
 	//
 }
