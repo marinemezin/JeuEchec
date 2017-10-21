@@ -34,7 +34,7 @@ public:
 
 	/********************************
 	/**  modification (DEBUT)*/
-	std::string type_piece() override;
+	std::string type_piece() const override;
 	/**  modification (FIN)
 	/********************************/
 };

@@ -23,7 +23,7 @@ public:
 
 	/********************************
 	/**  modification (DEBUT)*/
-	CPlateau(CPiece*** const P); //constructeur par copie
+	CPlateau(CPlateau const& P); //constructeur par copie
 	static void verifPriseEnPassant(CPlateau &plateau);
 	/**  modification (FIN)
 	/********************************/
@@ -38,7 +38,9 @@ public:
 /**
   * Encapsuleur du tableau de CPiece.
   */
-	CPiece* Case(int y, int x);
+	/* modificationnnnnnnn*/
+	CPiece* Case(int y, int x) const;
+	/*fin modicationnnnnnnnn*/
 
 	
 /**

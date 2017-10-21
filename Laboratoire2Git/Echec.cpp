@@ -32,8 +32,12 @@ int main ()
 			cout << ("Ca marche pas!!!") << endl;
 	}
 
+	/*CPlateau* P2 = new CPlateau(*P);
+	delete P2;
+	cout << endl;
 	delete P;
 
+	system("PAUSE");*/
 	return 0;
 }
 

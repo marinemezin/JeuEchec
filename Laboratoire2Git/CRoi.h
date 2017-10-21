@@ -17,7 +17,6 @@ public:
 	/**  modification (DEBUT)*/
 	CRoi::CRoi(CPlateau* J, int PX, int PY, int Force, int Coul);
 	/**  modification (FIN)
-	/********************************/
 
 /**
   * Dessine un Carre de la bonne taille et y mets le bon caractère pour la pièce,
@@ -35,8 +34,7 @@ public:
 
 	/********************************
 	/**  modification (DEBUT)*/
-	std::string type_piece();
-	bool echec(CPlateau plateau, int posX, int posY);
+	std::string type_piece() const override;
 	/**  modification (FIN)
 	/********************************/
 };
