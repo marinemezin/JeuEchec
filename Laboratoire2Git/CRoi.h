@@ -35,7 +35,7 @@ public:
 	/********************************
 	/**  modification (DEBUT)*/
 	std::string type_piece() const override;
-	bool echec(CPlateau &plateau, int posX, int posY);
+	bool echec(CPlateau const&plateau, int posX, int posY, int couleur) override;
 	/**  modification (FIN)
 	/********************************/
 };
