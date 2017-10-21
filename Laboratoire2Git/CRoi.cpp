@@ -49,7 +49,7 @@ std::string CRoi::type_piece() const
 	return "CRoi";
 }
 
-bool echec(CPlateau const&plateau, int posX, int posY, int couleur)
+bool CRoi::echec(CPlateau const&plateau, int posX, int posY, int couleur)
 {
 	bool echec = false; 
 	for (int i = 0; i < 8; i++)
