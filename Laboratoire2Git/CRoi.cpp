@@ -46,12 +46,15 @@ bool CRoi::Bouger (int incX, int incY)
 		return CPiece::Bouger(incX, incY);
 	//le roi peut bouger en roquant
 
-	//le roi ne doit pas être menacé
+	//le roi ne doit pas être menacé et doit être à sa position initiale
 	//les deux cases qu'il traverse ne doivent pas être en echec
 	//la tour peut être en echec (la case adjacente aussi en cas de grand roque)
 	//le roi commence à jouer en premier
-	//...
-	//
+	//bouger le roi... puis la tour
+	//Vérifier que c'est une tour et qu'elle est a sa position initiale
+	//Vérifier avec les valeurs envoyées par l'utilisateur
+
+
 	return retour;
 }
 /**  modification (FIN)
