@@ -89,7 +89,10 @@ bool echectest(CPlateau plateau)
 }
 /**  modification (FIN)
 /********************************/
-/* Test de l'echec !!! 
+
+/********************************
+/**  modification (DEBUT)*/
+/*Test de l'echec !!! 
 e7e5
 h2h4
 e8e7
@@ -99,3 +102,5 @@ h3e3
 h6h5
 e3e5
 */
+/**  modification (FIN)
+/********************************/
