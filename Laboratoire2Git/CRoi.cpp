@@ -102,7 +102,7 @@ bool CRoi::Bouger (int incX, int incY)
 		return CPiece::Bouger(incX, incY);
 
 	//le roi peut bouger en roquant
-	if ((abs(incX) == 2) && (abs(incY) == 0)) { //si le roi veux se déplacer de deux cases en horizontal
+	if ((abs(incX) == 2) && (abs(incY) == 0) && aRoque == false) { //si le roi veux se déplacer de deux cases en horizontal et qu'il n'a jamais roqué
 		if (casesDeplacementNonEchec(PosX + incX, PosY + incY)) {
 			if (valideRoiRoque(PosX, PosY, 4, 0)) { //Roi Blanc
 				//Petit roque
