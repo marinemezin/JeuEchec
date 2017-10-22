@@ -69,15 +69,47 @@ bool CRoi::valideRoiRoque(int PosX, int PosY, int posXAttendue, int posYAttendue
 	return ok;
 }
 
+bool CRoi::casesEnEchec(int X, int Y, int couleur)
+{
+	bool ok = false;
+	bool test1 = false;
+	bool test2 = false;
+	int valeurMultiplication = X / abs(X);
+
+	/*Copier plateau et tester sur la copie*/
+	CPlateau * test = new CPlateau(*Jeu);
+	CRoi* testRoi = new CRoi(test, X, Y, 3, couleur);
+	test->deposerPiece(X, Y, testRoi);
+	if (!echec((*test), X, Y, couleur)) //si la case la plus loin n'est pas en echec
+	{
+		test1 = true;
+	}
+
+	test->prendrePiece(X, Y);
+	test->deposerPiece(X - valeurMultiplication, Y, testRoi);
+	if (!echec((*test), X - valeurMultiplication, Y, couleur)) //si la case du milieu n'est pas en echec
+	{
+		test2 = true;
+	}
+	delete test;
+
+	if (test1 && test2)
+	{
+		ok = true;
+	}
+	return ok;
+}
+//casesEnEchec(positionX, positionY, Jeu->Case(positionY, positionX)->isCoulBlanc())
+
 bool CRoi::casesDeplacementNonEchec(int positionX, int positionY)
 {
 	bool ok = false;
 	int valeurMultiplication = positionX / abs(positionX);
 	if (Jeu->Case(positionY, positionX)->isCaseVide() && Jeu->Case(positionY, positionX - valeurMultiplication)->isCaseVide()) //si les cases que le roi veux traverser sont libres
 	{
-		if (!echec((*this->Jeu), positionX, positionY, this->Jeu->Case(positionY, positionX)->isCoulBlanc())) //si la case la plus loin n'est pas en echec
+		if (!echec((*this->Jeu), positionX, positionY, this->Jeu->Case(positionY, positionX)->isCoulBlanc()))
 		{
-			if (!echec((*this->Jeu), positionX, positionY, this->Jeu->Case(positionY, positionX - valeurMultiplication)->isCoulBlanc())) //si la case du milieu n'est pas en echec
+			if (!echec((*this->Jeu), positionX - valeurMultiplication, positionY, this->Jeu->Case(positionY, positionX - valeurMultiplication)->isCoulBlanc()))
 			{
 				ok = true;
 			}

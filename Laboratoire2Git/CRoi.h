@@ -19,6 +19,7 @@ class CRoi : public CReine
 	bool mouvementRoque(int incX, int incY, int xTour, int yTour, int positionXTour, int positionYTour);
 	bool casesDeplacementNonEchec(int incX, int incY);
 	bool aBouger;
+	bool casesEnEchec(int X, int Y, int couleur);
 	/**  modification (FIN)
 	/********************************/
 public:
