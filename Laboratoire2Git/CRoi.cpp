@@ -71,12 +71,12 @@ bool CRoi::valideRoiRoque(int PosX, int PosY, int posXAttendue, int posYAttendue
 
 bool CRoi::casesEnEchec(int X, int Y, int couleur)
 {
-	bool ok = false;
+	/*bool ok = false;
 	bool test1 = false;
 	bool test2 = false;
 	int valeurMultiplication = X / abs(X);
 
-	/*Copier plateau et tester sur la copie*/
+	//Copier plateau et tester sur la copie
 	CPlateau * test = new CPlateau(*Jeu);
 	CRoi* testRoi = new CRoi(test, X, Y, 3, couleur);
 	test->deposerPiece(X, Y, testRoi);
@@ -97,7 +97,8 @@ bool CRoi::casesEnEchec(int X, int Y, int couleur)
 	{
 		ok = true;
 	}
-	return ok;
+	return ok;*/
+	return true;
 }
 //casesEnEchec(positionX, positionY, Jeu->Case(positionY, positionX)->isCoulBlanc())
 
@@ -192,7 +193,7 @@ bool CRoi::echec(CPlateau const&plateau, int posX, int posY, int couleur)
 		{
 			if (plateau.Case(i, j)->type_piece() != "CCasevide")
 			{
-				if (plateau.Case(i,j)->isCoulBlanc() != plateau.Case(posX, posY)->isCoulBlanc())
+				if (plateau.Case(i,j)->isCoulBlanc() != plateau.Case(posY, posX)->isCoulBlanc())
 				{
 					CPlateau* copieplateau = new CPlateau(plateau);
 					if (copieplateau->Bouger(i, j, posX, posY))

@@ -127,8 +127,8 @@ bool echectest(CPlateau plateau)
 			}
 		}
 	}
-	return (plateau.Case(posX, posY))->echec(plateau, posX, posY, plateau.Case(posX,posY)->isCoulBlanc());
-	return false;
+	return (plateau.Case(posY, posX))->echec(plateau, posX, posY, plateau.Case(posY,posX)->isCoulBlanc());
+	//return false;
 }
 /**  modification (FIN)
 /********************************/
