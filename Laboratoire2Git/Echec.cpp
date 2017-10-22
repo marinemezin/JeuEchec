@@ -45,10 +45,10 @@ int main ()
 		}
 		else
 		{
-			exit(0); //on sort on a fini
+			cout<<"ECHEC"<<endl;
 		}
 
-		//IA
+		/*//IA BUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (!echectest(*P))
 		{
 			nbrCoup++;
@@ -77,8 +77,8 @@ int main ()
 		}
 		else
 		{
-			exit(0); //on sort on a fini
-		}
+			cout << "ECHEC" << endl;
+		}*/
 	}
 	/**  modification (FIN)
 	/********************************/
