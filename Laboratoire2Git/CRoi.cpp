@@ -87,9 +87,11 @@ bool CRoi::mouvementRoque(int incX, int incY, int xTour, int yTour, int position
 	bool ok = false;
 	if (CPiece::Bouger(incX, incY)) //on bouge le roi et la tour apres
 	{
-		if (Jeu->Case)
-		this->aRoque = true;
-		ok = true;
+		if (Jeu->CaseModif(positionYTour, positionXTour)->Bouger(positionXTour - xTour, positionYTour - yTour))
+		{
+			this->aRoque = true;
+			ok = true;
+		}
 	}
 	return ok;
 }
