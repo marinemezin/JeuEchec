@@ -44,7 +44,7 @@ int main ()
 		}
 		else
 		{
-			cout << "Echec" << endl;
+			exit(0); //on sort on a fini
 		}
 		//system("Pause");
 	}
@@ -89,4 +89,13 @@ bool echectest(CPlateau plateau)
 }
 /**  modification (FIN)
 /********************************/
-
+/* Test de l'echec !!! 
+e7e5
+h2h4
+e8e7
+h1h3
+h7h6
+h3e3
+h6h5
+e3e5
+*/
