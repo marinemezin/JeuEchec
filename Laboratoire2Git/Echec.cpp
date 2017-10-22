@@ -7,6 +7,7 @@ using namespace std;
 /********************************
 /**  modification (DEBUT)*/
 #include "CRoi.h"
+#include <time.h>
 /**  modification (FIN)
 /********************************/
 
@@ -46,7 +47,38 @@ int main ()
 		{
 			exit(0); //on sort on a fini
 		}
-		//system("Pause");
+
+		//IA
+		if (!echectest(*P))
+		{
+			nbrCoup++;
+			CPlateau::verifPriseEnPassant(*P);
+			P->Afficher();
+
+			char initialX = rand() % 8 + 1;
+			char initialY = rand() % 8 + 1;
+
+			char finalX = rand() % 8 + 1;
+			char finalY = rand() % 8 + 1;
+
+			CEcran::ClrScr();
+
+			bool ok = P->Bouger(initialX, initialY, finalX, finalY);
+			while (!ok)
+			{
+				char initialX = rand() % 8 + 1;
+				char initialY = rand() % 8 + 1;
+
+				char finalX = rand() % 8 + 1;
+				char finalY = rand() % 8 + 1;
+
+				ok = P->Bouger(initialX, initialY, finalX, finalY);
+			}
+		}
+		else
+		{
+			exit(0); //on sort on a fini
+		}
 	}
 	/**  modification (FIN)
 	/********************************/
