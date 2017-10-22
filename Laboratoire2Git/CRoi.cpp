@@ -79,9 +79,9 @@ bool CRoi::echec(CPlateau const&plateau, int posX, int posY, int couleur)
 				if (plateau.Case(i,j)->isCoulBlanc() != plateau.Case(posX, posY)->isCoulBlanc())
 				{
 					CPlateau* copieplateau = new CPlateau(plateau);
-					if ((copieplateau->Case(i, j))->Bouger(posX, posY))
+					if (copieplateau->Bouger(i, j, posX, posY))
 					{
-						echec=true;
+						echec=true; 
 					}
 					delete copieplateau;
 				}

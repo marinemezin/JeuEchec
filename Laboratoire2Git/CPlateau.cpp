@@ -153,12 +153,14 @@ void CPlateau::Afficher()
 	CEcran::Gotoxy (1,25);
 }
 
-/*modicationnnnnnnnn*/
+/********************************
+/**  modification (DEBUT)*/
 CPiece* CPlateau::Case(int y, int x) const
 {
 	return Jeu[y][x]; 
 }
-/*fin modicationnnnnnnnn*/
+/**  modification (FIN)
+/********************************/
 
 
 
