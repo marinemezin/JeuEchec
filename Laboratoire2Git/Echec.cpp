@@ -42,6 +42,11 @@ int main ()
 			else
 				cout << ("Ca marche pas!!!") << endl;
 		}
+		else
+		{
+			cout << "Echec" << endl;
+		}
+		//system("Pause");
 	}
 	/**  modification (FIN)
 	/********************************/
