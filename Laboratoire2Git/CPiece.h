@@ -96,6 +96,7 @@ public:
 	virtual bool echec(CPlateau const&plateau, int posX, int posY, int couleur) { return false; };
 	int getPosX() const { return PosX; }
 	int getPosY() const { return PosY; }
+	virtual bool getABouger() const { return false; }
 	/**  modification (FIN)
 	/********************************/
 };

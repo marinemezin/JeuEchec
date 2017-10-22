@@ -7,7 +7,11 @@ using namespace std;
 
 CTour::CTour(CPlateau* J, int PX, int PY, int Coul) : CPiece(J, PX, PY, 5, Coul)
 {
-	// rien
+	/********************************
+	/**  modification (DEBUT)*/
+	aBouger = false;
+	/**  modification (FIN)
+	/********************************/
 }
 
 
@@ -21,8 +25,17 @@ void CTour::Afficher()
 
 bool CTour::Bouger (int incX, int incY)
 {
-	if ((incY == 0 || incX  == 0))
-		return CPiece::Bouger(incX, incY);
+	/********************************
+	/**  modification (DEBUT)*/
+	if ((incY == 0 || incX == 0))
+	{
+		if (CPiece::Bouger(incX, incY)) {
+			aBouger = true;
+			return true;
+		}
+	}
+	/**  modification (FIN)
+	/********************************/
 	else
 		return false;
 }
@@ -32,6 +45,10 @@ bool CTour::Bouger (int incX, int incY)
 std::string CTour::type_piece() const
 {
 	return "CTour";
+}
+bool CTour::getABouger() const
+{
+	return aBouger;
 }
 /**  modification (FIN)
 /********************************/

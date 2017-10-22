@@ -13,6 +13,12 @@ class CPlateau;
   */
 class CTour : public CPiece
 {
+	/********************************
+	/**  modification (DEBUT)*/
+private:
+	bool aBouger;
+	/**  modification (FIN)
+	/********************************/
 public:
 /**
   * Constructeur standard.
@@ -36,6 +42,7 @@ public:
 	/********************************
 	/**  modification (DEBUT)*/
 	std::string type_piece() const override;
+	bool getABouger() const override;
 	/**  modification (FIN)
 	/********************************/
 };

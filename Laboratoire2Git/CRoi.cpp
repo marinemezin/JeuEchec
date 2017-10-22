@@ -16,6 +16,7 @@ CRoi::CRoi (CPlateau* J, int Coul) :
 	/********************************
 	/**  modification (DEBUT)*/
 	aRoque = false;
+	aBouger = false;
 	/**  modification (FIN)
 	/********************************/
 }
@@ -26,6 +27,7 @@ CRoi::CRoi(CPlateau* J, int PX, int PY, int Force, int Coul)
 	: CReine(J, PX, PY, Force, Coul)
 {
 	aRoque = false;
+	aBouger = false;
 }
 /**  modification (FIN)
 /********************************/
@@ -46,7 +48,9 @@ bool CRoi::valideTourRoque(int ajustCase, int positionY, int positionX, int posX
 	{
 		if ((Jeu->Case(positionY, positionX + ajustCase)->getPosX() == posXAttendue) && (Jeu->Case(positionY, positionX + ajustCase)->getPosY() == posYAttendue))
 		{
-			ok = true;
+			if (Jeu->Case(positionY, positionX + ajustCase)->getABouger() == false) {
+				ok = true;
+			}
 		}
 	}
 	return ok;
@@ -98,27 +102,39 @@ bool CRoi::mouvementRoque(int incX, int incY, int xTour, int yTour, int position
 
 bool CRoi::Bouger (int incX, int incY)
 {
-	if (abs(incX) <= 1 && + abs(incY) <= 1 )
-		return CPiece::Bouger(incX, incY);
+	if (abs(incX) <= 1 && +abs(incY) <= 1) {
+		if (CPiece::Bouger(incX, incY)){
+			aBouger = true;
+			return true;
+		}
+	}
 
 	//le roi peut bouger en roquant
-	if ((abs(incX) == 2) && (abs(incY) == 0) && aRoque == false) { //si le roi veux se déplacer de deux cases en horizontal et qu'il n'a jamais roqué
+	if ((abs(incX) == 2) && (abs(incY) == 0) && aRoque == false && aBouger == false) { //si le roi veux se déplacer de deux cases en horizontal et qu'il n'a jamais roqué, ni bougé
 		if (casesDeplacementNonEchec(PosX + incX, PosY + incY)) {
 			if (valideRoiRoque(PosX, PosY, 4, 0)) { //Roi Blanc
 				//Petit roque
-				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 0)) && (mouvementRoque(incX, incY, -2, 0, 7, 0)))
+				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 0)) && (mouvementRoque(incX, incY, -2, 0, 7, 0))) {
+					aBouger = true;
 					return true;
+				}
 				//Grand roque
-				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 0)) && (mouvementRoque(incX, incY, 3, 0, 0, 0)))
+				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 0)) && (mouvementRoque(incX, incY, 3, 0, 0, 0))) {
+					aBouger = true;
 					return true;
+				}
 			}
 			if (valideRoiRoque(PosX, PosY, 4, 7)) { //Roi Noir
 				//Petit roque
-				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 7)) && (mouvementRoque(incX, incY, -2, 0, 7, 7)))
+				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 7)) && (mouvementRoque(incX, incY, -2, 0, 7, 7))) {
+					aBouger = true;
 					return true;
+				}
 				//Grand roque
-				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 7)) && (mouvementRoque(incX, incY, 3, 0, 0, 7)))
+				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 7)) && (mouvementRoque(incX, incY, 3, 0, 0, 7))) {
+					aBouger = true;
 					return true;
+				}
 			}
 		}
 	}
