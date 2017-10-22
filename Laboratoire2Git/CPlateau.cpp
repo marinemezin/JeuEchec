@@ -159,6 +159,11 @@ CPiece* CPlateau::Case(int y, int x) const
 {
 	return Jeu[y][x]; 
 }
+CPiece* CPlateau::CaseModif(int y, int x)
+{
+	return Jeu[y][x];
+}
+
 /**  modification (FIN)
 /********************************/
 
