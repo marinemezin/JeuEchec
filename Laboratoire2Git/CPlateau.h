@@ -40,6 +40,7 @@ public:
   */
 	/* modificationnnnnnnn*/
 	CPiece* Case(int y, int x) const;
+	CPiece * modificationCase(int y, int x);
 	/*fin modicationnnnnnnnn*/
 
 	

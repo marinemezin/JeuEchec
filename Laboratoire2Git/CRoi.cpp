@@ -39,12 +39,12 @@ void CRoi::Afficher()
 
 /********************************
 /**  modification (DEBUT)*/
-bool CRoi::valideTourRoque(int ajustCase, int incY, int incX, int posXAttendue, int posYAttendue)
+bool CRoi::valideTourRoque(int ajustCase, int positionY, int positionX, int posXAttendue, int posYAttendue)
 {
 	bool ok = false;
-	if ((Jeu->Case(incY, incX + ajustCase)->type_piece() == "CTour") && (Jeu->Case(incY, incX + ajustCase)->isCoulBlanc() == this->isCoulBlanc()))
+	if ((Jeu->Case(positionY, positionX + ajustCase)->type_piece() == "CTour") && (Jeu->Case(positionY, positionX + ajustCase)->isCoulBlanc() == this->isCoulBlanc()))
 	{
-		if ((Jeu->Case(incY, incX + ajustCase)->getPosX() == posXAttendue) && (Jeu->Case(incY, incX + ajustCase)->getPosY() == posYAttendue))
+		if ((Jeu->Case(positionY, positionX + ajustCase)->getPosX() == posXAttendue) && (Jeu->Case(positionY, positionX + ajustCase)->getPosY() == posYAttendue))
 		{
 			ok = true;
 		}
@@ -65,15 +65,15 @@ bool CRoi::valideRoiRoque(int PosX, int PosY, int posXAttendue, int posYAttendue
 	return ok;
 }
 
-bool CRoi::casesDeplacementNonEchec(int incX, int incY)
+bool CRoi::casesDeplacementNonEchec(int positionX, int positionY)
 {
 	bool ok = false;
-	int valeurMultiplication = incX / abs(incX);
-	if (Jeu->Case(incY, incX)->isCaseVide() && Jeu->Case(incY, incX - valeurMultiplication)->isCaseVide()) //si les cases que le roi veux traverser sont libres
+	int valeurMultiplication = positionX / abs(positionX);
+	if (Jeu->Case(positionY, positionX)->isCaseVide() && Jeu->Case(positionY, positionX - valeurMultiplication)->isCaseVide()) //si les cases que le roi veux traverser sont libres
 	{
-		if (!echec((*this->Jeu), incX, incY, this->Jeu->Case(incY, incX)->isCoulBlanc())) //si la case la plus loin n'est pas en echec
+		if (!echec((*this->Jeu), positionX, positionY, this->Jeu->Case(positionY, positionX)->isCoulBlanc())) //si la case la plus loin n'est pas en echec
 		{
-			if (!echec((*this->Jeu), incX, incY, this->Jeu->Case(incY, incX - valeurMultiplication)->isCoulBlanc())) //si la case du milieu n'est pas en echec
+			if (!echec((*this->Jeu), positionX, positionY, this->Jeu->Case(positionY, positionX - valeurMultiplication)->isCoulBlanc())) //si la case du milieu n'est pas en echec
 			{
 				ok = true;
 			}
@@ -85,8 +85,9 @@ bool CRoi::casesDeplacementNonEchec(int incX, int incY)
 bool CRoi::mouvementRoque(int incX, int incY, int xTour, int yTour)
 {
 	bool ok = false;
-	if (CPiece::Bouger(incX, incY) && CPiece::Bouger(xTour, yTour)) //on bouge le roi et la tour apres
+	if (CPiece::Bouger(incX, incY)) //on bouge le roi et la tour apres
 	{
+		
 		this->aRoque = true;
 		ok = true;
 	}
@@ -100,21 +101,21 @@ bool CRoi::Bouger (int incX, int incY)
 
 	//le roi peut bouger en roquant
 	if ((abs(incX) == 2) && (abs(incY) == 0)) { //si le roi veux se déplacer de deux cases en horizontal
-		if (casesDeplacementNonEchec(incX, incY)) {
+		if (casesDeplacementNonEchec(PosX + incX, PosY + incY)) {
 			if (valideRoiRoque(PosX, PosY, 4, 0)) { //Roi Blanc
 				//Petit roque
-				if ((valideTourRoque(1, incY, incX, 7, 0)) && (mouvementRoque(incX, incY, 7, 0)))
+				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 0)) && (mouvementRoque(incX, incY, -2, 0)))
 					return true;
 				//Grand roque
-				if ((valideTourRoque(-2, incY, incX, 0, 0)) && (mouvementRoque(incX, incY, 0, 0)))
+				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 0)) && (mouvementRoque(incX, incY, 3, 0)))
 					return true;
 			}
 			if (valideRoiRoque(PosX, PosY, 4, 7)) { //Roi Noir
 				//Petit roque
-				if ((valideTourRoque(1, incY, incX, 7, 7)) && (mouvementRoque(incX, incY, 7, 7)))
+				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 7)) && (mouvementRoque(incX, incY, -2, 0)))
 					return true;
 				//Grand roque
-				if ((valideTourRoque(-2, incY, incX, 0, 7)) && (mouvementRoque(incX, incY, 0, 7)))
+				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 7)) && (mouvementRoque(incX, incY, 3, 0)))
 					return true;
 			}
 		}
