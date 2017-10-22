@@ -82,12 +82,12 @@ bool CRoi::casesDeplacementNonEchec(int positionX, int positionY)
 	return ok;
 }
 
-bool CRoi::mouvementRoque(int incX, int incY, int xTour, int yTour)
+bool CRoi::mouvementRoque(int incX, int incY, int xTour, int yTour, int positionXTour, int positionYTour)
 {
 	bool ok = false;
 	if (CPiece::Bouger(incX, incY)) //on bouge le roi et la tour apres
 	{
-		
+		if (Jeu->Case)
 		this->aRoque = true;
 		ok = true;
 	}
@@ -104,18 +104,18 @@ bool CRoi::Bouger (int incX, int incY)
 		if (casesDeplacementNonEchec(PosX + incX, PosY + incY)) {
 			if (valideRoiRoque(PosX, PosY, 4, 0)) { //Roi Blanc
 				//Petit roque
-				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 0)) && (mouvementRoque(incX, incY, -2, 0)))
+				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 0)) && (mouvementRoque(incX, incY, 5, 0, 7, 0)))
 					return true;
 				//Grand roque
-				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 0)) && (mouvementRoque(incX, incY, 3, 0)))
+				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 0)) && (mouvementRoque(incX, incY, 3, 0, 0, 0)))
 					return true;
 			}
 			if (valideRoiRoque(PosX, PosY, 4, 7)) { //Roi Noir
 				//Petit roque
-				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 7)) && (mouvementRoque(incX, incY, -2, 0)))
+				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 7)) && (mouvementRoque(incX, incY, 5, 7, 7, 7)))
 					return true;
 				//Grand roque
-				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 7)) && (mouvementRoque(incX, incY, 3, 0)))
+				if ((valideTourRoque(-2, PosY + incY, PosX + incX, 0, 7)) && (mouvementRoque(incX, incY, 3, 7, 0, 7)))
 					return true;
 			}
 		}
