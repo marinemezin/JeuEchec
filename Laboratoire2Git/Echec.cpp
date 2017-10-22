@@ -18,6 +18,7 @@ bool echectest(CPlateau plateau);
 
 int main ()
 {
+
 	CPlateau* P = new CPlateau(); 
 
 	int nbrCoup = 0;
@@ -48,53 +49,47 @@ int main ()
 			cout<<"ECHEC"<<endl;
 		}
 
-		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 		if (!echectest(*P))
 		{
 			nbrCoup++;
 			CPlateau::verifPriseEnPassant(*P);
 			P->Afficher();
 
-			char initialX = rand() % 8 + 1;
-			char initialY = rand() % 8 + 1;
-			while (P->Case(initialX, initialY)->isCoulBlanc != 3)
+			int initialX = rand() % 8 + 1;
+			int initialY = rand() % 8 + 1;
+			while (P->Case(initialX, initialY)->isCoulBlanc() != -1)
 			{
 				initialX = rand() % 8 + 1;
 				initialY = rand() % 8 + 1;
 			}
-			char finalX = rand() % 8 + 1;
-			char finalY = rand() % 8 + 1;
-
-			while (P->Case(finalX, finalX)->isCoulBlanc != 3)
-			{
-				finalX = rand() % 8 + 1;
-				finalY = rand() % 8 + 1;
-			}
-
-			CEcran::ClrScr();
+			int finalX = rand() % 8 + 1;
+			int finalY = rand() % 8 + 1;
+			cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
 
 			bool ok = P->Bouger(initialX, initialY, finalX, finalY);
 			while (!ok)
 			{
-				while (P->Case(initialX, initialY)->isCoulBlanc != 3)
+				while (P->Case(initialX, initialY)->isCoulBlanc() != -1)
 				{
 					initialX = rand() % 8 + 1;
 					initialY = rand() % 8 + 1;
 				}
 
-				while (P->Case(finalX, finalX)->isCoulBlanc != 3)
-				{
-					finalX = rand() % 8 + 1;
-					finalY = rand() % 8 + 1;
-				}
+				finalX = initialX + rand() % 3;
+				finalY = initialY + rand() % 3;
+
+				cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
 
 				ok = P->Bouger(initialX, initialY, finalX, finalY);
+				cout << "newok" << endl;
 			}
+			CEcran::ClrScr();
 		}
 		else
 		{
 			cout << "ECHEC" << endl;
-		}*/
+		}/**/
 	}
 	/**  modification (FIN)
 	/********************************/
