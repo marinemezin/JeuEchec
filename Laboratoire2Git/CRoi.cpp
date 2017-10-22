@@ -41,16 +41,18 @@ void CRoi::Afficher()
 /**  modification (DEBUT)*/
 bool CRoi::Bouger (int incX, int incY)
 {
+	bool retour = false;
 	if (abs(incX) <= 1 && + abs(incY) <= 1 )
 		return CPiece::Bouger(incX, incY);
-	else
-		return false;
 	//le roi peut bouger en roquant
+
 	//le roi ne doit pas être menacé
 	//les deux cases qu'il traverse ne doivent pas être en echec
 	//la tour peut être en echec (la case adjacente aussi en cas de grand roque)
+	//le roi commence à jouer en premier
 	//...
 	//
+	return retour;
 }
 /**  modification (FIN)
 /********************************/
