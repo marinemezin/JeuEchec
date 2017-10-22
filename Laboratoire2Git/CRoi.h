@@ -14,6 +14,10 @@ class CRoi : public CReine
 	/********************************
 	/**  modification (DEBUT)*/
 	bool aRoque; //le joueur ne peut roquer qu'une fois par partie
+	bool valideTourRoque(int ajustCase, int incY, int incX, int posXAttendue, int posYAttendue);
+	bool valideRoiRoque(int PosX, int PosY, int posXAttendue, int posYAttendue);
+	bool mouvementRoque(int incX, int incY, int xTour, int yTour);
+	bool casesDeplacementNonEchec(int incX, int incY);
 	/**  modification (FIN)
 	/********************************/
 public:
