@@ -48,7 +48,7 @@ int main ()
 			cout<<"ECHEC"<<endl;
 		}
 
-		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (!echectest(*P))
 		{
 			nbrCoup++;
@@ -57,20 +57,36 @@ int main ()
 
 			char initialX = rand() % 8 + 1;
 			char initialY = rand() % 8 + 1;
-
+			while (P->Case(initialX, initialY)->isCoulBlanc != 3)
+			{
+				initialX = rand() % 8 + 1;
+				initialY = rand() % 8 + 1;
+			}
 			char finalX = rand() % 8 + 1;
 			char finalY = rand() % 8 + 1;
+
+			while (P->Case(finalX, finalX)->isCoulBlanc != 3)
+			{
+				finalX = rand() % 8 + 1;
+				finalY = rand() % 8 + 1;
+			}
 
 			CEcran::ClrScr();
 
 			bool ok = P->Bouger(initialX, initialY, finalX, finalY);
 			while (!ok)
 			{
-				char initialX = rand() % 8 + 1;
-				char initialY = rand() % 8 + 1;
+				while (P->Case(initialX, initialY)->isCoulBlanc != 3)
+				{
+					initialX = rand() % 8 + 1;
+					initialY = rand() % 8 + 1;
+				}
 
-				char finalX = rand() % 8 + 1;
-				char finalY = rand() % 8 + 1;
+				while (P->Case(finalX, finalX)->isCoulBlanc != 3)
+				{
+					finalX = rand() % 8 + 1;
+					finalY = rand() % 8 + 1;
+				}
 
 				ok = P->Bouger(initialX, initialY, finalX, finalY);
 			}
