@@ -20,7 +20,7 @@ int main ()
 {
 
 	CPlateau* P = new CPlateau(); 
-
+	srand(time(NULL));
 	int nbrCoup = 0;
 	/********************************
 	/**  modification (DEBUT)*/	
