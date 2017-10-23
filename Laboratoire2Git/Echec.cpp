@@ -18,7 +18,7 @@ bool echectest(CPlateau plateau);
 
 int main ()
 {
-
+	srand(time(NULL));
 	CPlateau* P = new CPlateau(); 
 
 	int nbrCoup = 0;
@@ -49,7 +49,7 @@ int main ()
 			cout<<"ECHEC"<<endl;
 		}
 
-		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 		if (!echectest(*P))
 		{
 			nbrCoup++;
@@ -88,7 +88,7 @@ int main ()
 		else
 		{
 			cout << "ECHEC" << endl;
-		}*/
+		}/**/
 	}
 	/**  modification (FIN)
 	/********************************/
