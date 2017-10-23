@@ -238,7 +238,7 @@ bool echecetmat(CPlateau &P)
 			{
 				if (P.Case(y, x)->type_piece() == "CRoi")
 				{
-					posXRoi = x;
+					posXRoi = x; //attention à la fin des boucles il retournera le dernier roi qu'il a rencontré et ne vérifiera pas les deux rois
 					posYRoi = y;
 				}
 			}
