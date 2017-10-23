@@ -49,7 +49,7 @@ int main ()
 			cout<<"ECHEC"<<endl;
 		}
 
-		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (!echectest(*P))
 		{
 			nbrCoup++;
@@ -88,7 +88,7 @@ int main ()
 		else
 		{
 			cout << "ECHEC" << endl;
-		}/**/
+		}*/
 	}
 	/**  modification (FIN)
 	/********************************/
