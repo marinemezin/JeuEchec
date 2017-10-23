@@ -14,6 +14,8 @@ using namespace std;
 // Prototypes
 char Lire();
 bool echectest(CPlateau plateau);
+bool tourJoueur(CPlateau P);
+bool tourIA(CPlateau P);
 
 
 int main ()
@@ -34,10 +36,10 @@ int main ()
 			CPlateau::verifPriseEnPassant(*P);
 			P->Afficher();
 			if (noJoueur == 1) {
-				if (tourJoueur(P)) { noJoueur = -1; }
+				if (tourJoueur(*P)) { noJoueur = -1; }
 			}
 			else {
-				if (tourIA(P)) { noJoueur = 1; }
+				if (tourIA(*P)) { noJoueur = 1; }
 			}
 			
 		}
