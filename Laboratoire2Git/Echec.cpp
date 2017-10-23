@@ -49,7 +49,7 @@ int main ()
 			cout<<"ECHEC"<<endl;
 		}
 
-		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 		if (!echectest(*P))
 		{
 			nbrCoup++;
@@ -65,7 +65,6 @@ int main ()
 			}
 			int finalX = rand() % 8 + 1;
 			int finalY = rand() % 8 + 1;
-			cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
 
 			bool ok = P->Bouger(initialX, initialY, finalX, finalY);
 			while (!ok)
@@ -76,8 +75,8 @@ int main ()
 					initialY = rand() % 8 + 1;
 				}
 
-				finalX = initialX + rand() % 3;
-				finalY = initialY + rand() % 3;
+				finalX = rand() % 8 + 1;
+				finalY = rand() % 8 + 1;
 
 				cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
 
@@ -89,7 +88,7 @@ int main ()
 		else
 		{
 			cout << "ECHEC" << endl;
-		}*/
+		}/**/
 	}
 	/**  modification (FIN)
 	/********************************/
