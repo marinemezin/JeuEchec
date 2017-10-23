@@ -27,7 +27,7 @@ int main ()
 	while (nbrCoup < 30)
 	{
 
-		if (!echectest(*P))
+		/*if (!echectest(*P))
 		{
 			nbrCoup++;
 			CPlateau::verifPriseEnPassant(*P);
@@ -47,9 +47,9 @@ int main ()
 		else
 		{
 			cout<<"ECHEC"<<endl;
-		}
+		}*/
 
-		/*//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (!echectest(*P))
 		{
 			nbrCoup++;
@@ -88,7 +88,7 @@ int main ()
 		else
 		{
 			cout << "ECHEC" << endl;
-		}*/
+		}
 	}
 	/**  modification (FIN)
 	/********************************/
