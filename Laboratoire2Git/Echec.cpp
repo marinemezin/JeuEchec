@@ -14,8 +14,8 @@ using namespace std;
 // Prototypes
 char Lire();
 bool echectest(CPlateau plateau);
-bool tourJoueur(CPlateau P);
-bool tourIA(CPlateau P);
+bool tourJoueur(CPlateau &P);
+bool tourIA(CPlateau &P);
 
 
 int main ()
@@ -35,13 +35,13 @@ int main ()
 			nbrCoup++;
 			CPlateau::verifPriseEnPassant(*P);
 			P->Afficher();
-			if (noJoueur == 1) {
+			
+			//if (noJoueur == 1) {
 				if (tourJoueur(*P)) { noJoueur = -1; }
-			}
+			/*}
 			else {
 				if (tourIA(*P)) { noJoueur = 1; }
-			}
-			
+			}*/
 		}
 		else
 		{
@@ -88,7 +88,7 @@ bool echectest(CPlateau plateau)
 	return echec;
 }
 
-bool tourJoueur(CPlateau P)
+bool tourJoueur(CPlateau &P)
 {
 	char initialX = Lire();
 	char initialY = Lire();
@@ -97,23 +97,36 @@ bool tourJoueur(CPlateau P)
 	char finalY = Lire();
 
 	CEcran::ClrScr();
-	if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1'))
+	if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
 		return true;
+	}
 	return false;
 }
 
-bool tourIA(CPlateau P) {
+bool tourIA(CPlateau &P) {
+	//Choisir un pion viable = qu'on peut déplacer par au moins un chemin
+	//Faire une méthode séparée (ou virtuelle dans chaque classe)
+	//Qui retrouve true ou false si le pion choisi peut se déplacer dans au moins une position autour de lui
 	int initialX = (rand() % 8) + 1;
 	int initialY = (rand() % 8) + 1;
-	while (P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
+	while (P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1) //ajout la vérification de la viabilité
 	{
 		initialX = (rand() % 8) + 1;
 		initialY = (rand() % 8) + 1;
 	}
+
+	//Choisir des valeurs au hasard en fonction du pion sélectionné
+	//Si c'est un pion n'augmenter ou diminuer que la valeur Y
+	//Si il y a une pièce dans telle ou telle direction alors il mange
+	//Same pour toutes les autres pièces
 	int finalX = (rand() % 8) + 1;
 	int finalY = (rand() % 8) + 1;
 
+	//Tenter de bouger le pion
 	bool ok = P.Bouger(initialX, initialY, finalX, finalY);
+
+	//Tant que le pion n'a pas bougé refaire toutes les opérations en sélectionnant un autre pion
+	//Ou en gardant le meme
 	while (!ok)
 	{
 		while (P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
@@ -131,7 +144,7 @@ bool tourIA(CPlateau P) {
 		cout << "newok" << endl;
 	}
 	CEcran::ClrScr();
-	system("PAUSE");
+	//system("PAUSE");
 	return ok;
 }
 /**  modification (FIN)
