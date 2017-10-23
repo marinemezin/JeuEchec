@@ -8,13 +8,11 @@
 #include <iostream>
 using namespace std;
 
-/********************************
-/**  modification (DEBUT)*/
-CFou::CFou (CPlateau* J, int PX, int PY, int Coul) : CPiece(J, PX, PY, 4, Coul)
+
+CFou::CFou (CPlateau* J, int PX, int PY, int Coul) : CPiece(J, PX, PY, 3, Coul)
 {
 }
-/**  modification (FIN)
-/********************************/
+
 
 
 
