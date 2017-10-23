@@ -211,7 +211,7 @@ bool CRoi::echec(CPlateau const&plateau, int posX, int posY, int couleur)
 
 bool CRoi::deplacable(int x, int y) const
 {
-	CPiece::deplacable(x, y);
+	return CPiece::deplacable(x, y);
 }
 /**  modification (FIN)
 /********************************/

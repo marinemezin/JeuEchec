@@ -44,7 +44,7 @@ std::string CReine::type_piece() const
 }
 bool CReine::deplacable(int x, int y) const
 {
-	CPiece::deplacable(x, y);
+	return CPiece::deplacable(x, y);
 }
 /**  modification (FIN)
 /********************************/

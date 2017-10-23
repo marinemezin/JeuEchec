@@ -37,11 +37,11 @@ int main ()
 			P->Afficher();
 			
 			//if (noJoueur == 1) {
-				if (tourJoueur(*P)) { noJoueur = -1; }
-			/*}
-			else {
+				//if (tourJoueur(*P)) { noJoueur = -1; }
+			//}
+			//else {
 				if (tourIA(*P)) { noJoueur = 1; }
-			}*/
+			//}
 		}
 		else
 		{
