@@ -69,20 +69,21 @@ int main ()
 			bool ok = P->Bouger(initialX, initialY, finalX, finalY);
 			while (!ok)
 			{
-				while (P->Case(initialY, initialX)->isCoulBlanc() != -1)
+				while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
 				{
-					initialX = rand() % 8 + 1;
-					initialY = rand() % 8 + 1;
+					initialX = (rand() % 8) + 1;
+					initialY = (rand() % 8) + 1;
 				}
 
-				finalX = rand() % 8 + 1;
-				finalY = rand() % 8 + 1;
+				finalX = (rand() % 8) + 1;
+				finalY = (rand() % 8) + 1;
 
 				cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
 
 				ok = P->Bouger(initialX, initialY, finalX, finalY);
 				cout << "newok" << endl;
 			}
+			system("PAUSE");
 			CEcran::ClrScr();
 		}
 		else
