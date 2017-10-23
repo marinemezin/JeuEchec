@@ -58,7 +58,7 @@ int main ()
 
 			int initialX = rand() % 8 + 1;
 			int initialY = rand() % 8 + 1;
-			while (P->Case(initialX, initialY)->isCoulBlanc() != -1)
+			while (P->Case(initialY, initialX)->isCoulBlanc() != -1)
 			{
 				initialX = rand() % 8 + 1;
 				initialY = rand() % 8 + 1;
@@ -69,7 +69,7 @@ int main ()
 			bool ok = P->Bouger(initialX, initialY, finalX, finalY);
 			while (!ok)
 			{
-				while (P->Case(initialX, initialY)->isCoulBlanc() != -1)
+				while (P->Case(initialY, initialX)->isCoulBlanc() != -1)
 				{
 					initialX = rand() % 8 + 1;
 					initialY = rand() % 8 + 1;
