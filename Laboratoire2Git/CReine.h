@@ -33,6 +33,7 @@ public:
 	/**  modification (DEBUT)*/
 	std::string type_piece() const override;
 	CReine(CPlateau* J, int PX, int PY, int Force, int Coul);
+	bool deplacable(int x, int y) const override;
 	/**  modification (FIN)
 	/********************************/
 };

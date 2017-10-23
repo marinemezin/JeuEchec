@@ -44,6 +44,7 @@ public:
 	bool priseEnPassant() override;
 	std::string type_piece() const override;
 	void modifPriseEnPassant() override;
+	bool deplacable(int x, int y) const override;
 	/**  modification (FIN)
 	/********************************/
 };

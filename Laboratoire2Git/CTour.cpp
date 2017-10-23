@@ -1,5 +1,7 @@
 #include "CTour.h"
-
+/*modifcationnnnnnnnnnnnnnn*/
+#include "CPlateau.h"
+/*fin modifcationnnnnnnnnnnnnnn*/
 
 #include <iostream>
 using namespace std;
@@ -49,6 +51,32 @@ std::string CTour::type_piece() const
 bool CTour::getABouger() const
 {
 	return aBouger;
+}
+bool CTour::deplacable(int x, int y) const
+{
+	//On observe les 4 cases (non diago) autour de la tour
+	bool possible = false;
+	if((x - 1) >= 0 && (x - 1) <= 7) {
+		if (Jeu->Case(y, x - 1)->isCaseVide()) {
+			possible = true;
+		}
+	}
+	if ((x + 1) >= 0 && (x + 1) <= 7) {
+		if (Jeu->Case(y, x + 1)->isCaseVide()) {
+			possible = true;
+		}
+	}
+	if ((y - 1) >= 0 && (y - 1) <= 7) {
+		if (Jeu->Case(y - 1, x)->isCaseVide()) {
+			possible = true;
+		}
+	}
+	if ((y + 1) >= 0 && (y + 1) <= 7) {
+		if (Jeu->Case(y + 1, x)->isCaseVide()) {
+			possible = true;
+		}
+	}
+	return possible;
 }
 /**  modification (FIN)
 /********************************/

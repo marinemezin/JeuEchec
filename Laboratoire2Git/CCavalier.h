@@ -34,6 +34,7 @@ public:
 	/********************************
 	/**  modification (DEBUT)*/
 	std::string type_piece() const override;
+	bool deplacable(int x, int y) const override;
 	/**  modification (FIN)
 	/********************************/
 };

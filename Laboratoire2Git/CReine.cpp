@@ -1,6 +1,5 @@
 #include "CReine.h"
 
-
 #include <iostream>
 using namespace std;
 
@@ -42,6 +41,10 @@ bool CReine::Bouger (int incX, int incY)
 std::string CReine::type_piece() const
 {
 	return "CReine";
+}
+bool CReine::deplacable(int x, int y) const
+{
+	CPiece::deplacable(x, y);
 }
 /**  modification (FIN)
 /********************************/

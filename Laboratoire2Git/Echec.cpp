@@ -103,13 +103,12 @@ bool tourJoueur(CPlateau &P)
 	return false;
 }
 
+//IA joue les pions noirs
 bool tourIA(CPlateau &P) {
-	//Choisir un pion viable = qu'on peut déplacer par au moins un chemin
-	//Faire une méthode séparée (ou virtuelle dans chaque classe)
-	//Qui retrouve true ou false si le pion choisi peut se déplacer dans au moins une position autour de lui
 	int initialX = (rand() % 8) + 1;
 	int initialY = (rand() % 8) + 1;
-	while (P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1) //ajout la vérification de la viabilité
+	//tant que le pion trouvé n'est pas un pion noir ni un pion déplacable on cherche un autre pion
+	while ((P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1) && (!P.Case(initialY - 1, initialX - 1)->deplacable(initialX - 1, initialY - 1)))
 	{
 		initialX = (rand() % 8) + 1;
 		initialY = (rand() % 8) + 1;

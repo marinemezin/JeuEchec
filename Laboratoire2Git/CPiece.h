@@ -97,6 +97,7 @@ public:
 	int getPosX() const { return PosX; }
 	int getPosY() const { return PosY; }
 	virtual bool getABouger() const { return false; }
+	virtual bool deplacable(int x, int y) const;
 	/**  modification (FIN)
 	/********************************/
 };
