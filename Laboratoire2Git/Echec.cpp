@@ -115,13 +115,13 @@ char Lire()
 bool echectest(CPlateau plateau)
 {
 	bool echec = false;
-	for (int i = 0; i < 8; i++)
+	for (int y = 0; y < 8; y++)
 	{
-		for (int j = 0; j < 8; j++)
+		for (int x = 0; x < 8; x++)
 		{
-			if (plateau.Case(j, i)->type_piece() == "CRoi")
+			if (plateau.Case(y, x)->type_piece() == "CRoi")
 			{
-				if ((!echec) && (plateau.Case(j, i))->echec(plateau, i, j, plateau.Case(j, i)->isCoulBlanc()))
+				if ((!echec) && (plateau.Case(y, x))->echec(plateau, x, y, plateau.Case(y, x)->isCoulBlanc()))
 				{
 					echec = true;
 				}
