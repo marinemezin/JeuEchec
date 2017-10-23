@@ -88,7 +88,8 @@ bool echectest(CPlateau plateau)
 	return echec;
 }
 
-bool tourJoueur(CPlateau* P) {
+bool tourJoueur(CPlateau P)
+{
 	char initialX = Lire();
 	char initialY = Lire();
 
@@ -96,16 +97,15 @@ bool tourJoueur(CPlateau* P) {
 	char finalY = Lire();
 
 	CEcran::ClrScr();
-	if (P->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1'))
+	if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1'))
 		return true;
-	else 
-		return false;
+	return false;
 }
 
-bool tourIA(CPlateau* P) {
+bool tourIA(CPlateau P) {
 	int initialX = (rand() % 8) + 1;
 	int initialY = (rand() % 8) + 1;
-	while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
+	while (P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
 	{
 		initialX = (rand() % 8) + 1;
 		initialY = (rand() % 8) + 1;
@@ -113,10 +113,10 @@ bool tourIA(CPlateau* P) {
 	int finalX = (rand() % 8) + 1;
 	int finalY = (rand() % 8) + 1;
 
-	bool ok = P->Bouger(initialX, initialY, finalX, finalY);
+	bool ok = P.Bouger(initialX, initialY, finalX, finalY);
 	while (!ok)
 	{
-		while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
+		while (P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
 		{
 			initialX = (rand() % 8) + 1;
 			initialY = (rand() % 8) + 1;
@@ -127,7 +127,7 @@ bool tourIA(CPlateau* P) {
 
 		cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
 
-		ok = P->Bouger(initialX, initialY, finalX, finalY);
+		ok = P.Bouger(initialX, initialY, finalX, finalY);
 		cout << "newok" << endl;
 	}
 	CEcran::ClrScr();
