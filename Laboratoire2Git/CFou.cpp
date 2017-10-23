@@ -45,7 +45,7 @@ bool CFou::deplacable(int x, int y) const
 {
 	//Les cases diago sont vérifiées
 	bool possible = false;
-	if ((y - 1) >= 0 && (y - 1) >= 7)
+	if ((y - 1) >= 0 && (y - 1) <= 7)
 	{
 		if ((x - 1) >= 0 && (x - 1) <= 7) {
 			if (Jeu->Case(y - 1, x - 1)->isCaseVide()) {
@@ -58,7 +58,7 @@ bool CFou::deplacable(int x, int y) const
 			}
 		}
 	}
-	if ((y + 1) >= 0 && (y + 1) >= 7)
+	if ((y + 1) >= 0 && (y + 1) <= 7)
 	{
 		if ((x - 1) >= 0 && (x - 1) <= 7) {
 			if (Jeu->Case(y + 1, x - 1)->isCaseVide()) {

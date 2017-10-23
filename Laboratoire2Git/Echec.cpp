@@ -16,6 +16,7 @@ char Lire();
 bool echectest(CPlateau plateau);
 bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
+void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 
 
 int main ()
@@ -103,44 +104,119 @@ bool tourJoueur(CPlateau &P)
 	return false;
 }
 
+void finalValue(CPiece* piece, CPlateau &P, int tab[])
+{
+	if (piece->type_piece() == "CPion")
+	{
+		tab[0] = (rand() % 3) - 1;
+		tab[1] = -1; //ne peut pas avancer de deux cases au premier coup
+	}
+	if (piece->type_piece() == "CReine")
+	{
+		int choix = rand() % 4;
+		if (choix == 0) //déplacement en ligne
+		{
+			tab[0] = (rand() % 15) - 7;
+			tab[1] = 0;
+		}
+		if (choix == 1) //déplacement en colonne
+		{
+			tab[0] = 0;
+			tab[1] = (rand() % 15) - 7;
+		}
+		if (choix == 2 || choix == 3) //déplacements diago
+		{
+			tab[0] = (rand() % 15) - 7;
+			if (choix == 2) { tab[1] = tab[0] * (-1); }
+			if (choix == 3) { tab[1] = tab[0]; }
+		}
+	}
+	if (piece->type_piece() == "CRoi")
+	{
+		tab[0] = (rand() % 3) - 1;
+		tab[1] = (rand() % 3) - 1;
+	}
+	if (piece->type_piece() == "CTour")
+	{
+		int choix = rand() % 2;
+		if (choix == 0) //déplacement en ligne
+		{
+			tab[0] = (rand() % 15) - 7;
+			tab[1] = 0;
+		}
+		if (choix == 1) //déplacement en colonne
+		{
+			tab[0] = 0;
+			tab[1] = (rand() % 15) - 7;
+		}
+	}
+	if (piece->type_piece() == "CCavalier")
+	{
+		//Choix du x : +1, -1, +2, -2 et choix du y en fonction
+		int choix = rand() % 4;
+		if (choix == 0) {
+			tab[0] = 1;
+			choix = rand() % 2;
+			if (choix == 0) { tab[1] = -2; }
+			if (choix == 1) { tab[1] = 2; }
+		}
+		if (choix == 1) {
+			tab[0] = -1;
+			choix = rand() % 2;
+			if (choix == 0) { tab[1] = -2; }
+			if (choix == 1) { tab[1] = 2; }
+		}
+		if (choix == 2) {
+			tab[0] = 2;
+			choix = rand() % 2;
+			if (choix == 0) { tab[1] = -1; }
+			if (choix == 1) { tab[1] = 1; }
+		}
+		if (choix == 3) {
+			tab[0] = -2;
+			choix = rand() % 2;
+			if (choix == 0) { tab[1] = -1; }
+			if (choix == 1) { tab[1] = 1; }
+		}
+	}
+	if (piece->type_piece() == "CFou")
+	{
+		int choix = rand() % 2;
+		tab[0] = (rand() % 15) - 7;
+		if (choix == 0) { tab[1] = tab[0] * (-1); }
+		if (choix == 1) { tab[1] = tab[0]; }
+	}
+}
+
 //IA joue les pions noirs
 bool tourIA(CPlateau &P) {
-	int initialX = (rand() % 8) + 1;
-	int initialY = (rand() % 8) + 1;
+	int initialX = (rand() % 8);
+	int initialY = (rand() % 8);
 	//tant que le pion trouvé n'est pas un pion noir ni un pion déplacable on cherche un autre pion
-	while ((P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1) && (!P.Case(initialY - 1, initialX - 1)->deplacable(initialX - 1, initialY - 1)))
+	while ((P.Case(initialY, initialX)->isCoulBlanc() != -1) || (!P.Case(initialY, initialX)->deplacable(initialX, initialY)))
 	{
-		initialX = (rand() % 8) + 1;
-		initialY = (rand() % 8) + 1;
+		initialX = (rand() % 8);
+		initialY = (rand() % 8);
 	}
 
 	//Choisir des valeurs au hasard en fonction du pion sélectionné
-	//Si c'est un pion n'augmenter ou diminuer que la valeur Y
-	//Si il y a une pièce dans telle ou telle direction alors il mange
-	//Same pour toutes les autres pièces
-	int finalX = (rand() % 8) + 1;
-	int finalY = (rand() % 8) + 1;
+	int finalValeur[2];
+	finalValue(P.Case(initialY, initialX), P, finalValeur);
+	int finalX = initialX + finalValeur[0];
+	int finalY = initialY + finalValeur[1];
 
 	//Tenter de bouger le pion
 	bool ok = P.Bouger(initialX, initialY, finalX, finalY);
 
-	//Tant que le pion n'a pas bougé refaire toutes les opérations en sélectionnant un autre pion
-	//Ou en gardant le meme
+	//Tant que le pion n'a pas bougé recalculer une variation
 	while (!ok)
 	{
-		while (P.Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
-		{
-			initialX = (rand() % 8) + 1;
-			initialY = (rand() % 8) + 1;
-		}
+		finalValue(P.Case(initialY , initialX), P, finalValeur);
+		finalX = initialX + finalValeur[0];
+		finalY = initialY + finalValeur[1];
 
-		finalX = (rand() % 8) + 1;
-		finalY = (rand() % 8) + 1;
-
-		cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
-
+		//Tenter de bouger le pion
 		ok = P.Bouger(initialX, initialY, finalX, finalY);
-		cout << "newok" << endl;
 	}
 	CEcran::ClrScr();
 	//system("PAUSE");
