@@ -22,6 +22,7 @@ int main ()
 	CPlateau* P = new CPlateau(); 
 	srand(time(NULL));
 	int nbrCoup = 0;
+	int noJoueur = 1;
 	/********************************
 	/**  modification (DEBUT)*/	
 	while (nbrCoup < 30)
@@ -32,9 +33,12 @@ int main ()
 			nbrCoup++;
 			CPlateau::verifPriseEnPassant(*P);
 			P->Afficher();
-
-			tourJoueur(P);
-			tourIA(P);
+			if (noJoueur == 1) {
+				if (tourJoueur(P)) { noJoueur = -1; }
+			}
+			else {
+				if (tourIA(P)) { noJoueur = 1; }
+			}
 			
 		}
 		else
@@ -96,7 +100,7 @@ bool tourJoueur(CPlateau* P) {
 		return false;
 }
 
-void tourIA(CPlateau* P) {
+bool tourIA(CPlateau* P) {
 	int initialX = (rand() % 8) + 1;
 	int initialY = (rand() % 8) + 1;
 	while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
@@ -126,6 +130,7 @@ void tourIA(CPlateau* P) {
 	}
 	CEcran::ClrScr();
 	system("PAUSE");
+	return ok;
 }
 /**  modification (FIN)
 /********************************/
