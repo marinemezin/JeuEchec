@@ -27,68 +27,19 @@ int main ()
 	while (nbrCoup < 30)
 	{
 
-		/*if (!echectest(*P))
-		{
-			nbrCoup++;
-			CPlateau::verifPriseEnPassant(*P);
-			P->Afficher();
-
-			char initialX = Lire();
-			char initialY = Lire();
-	
-			char finalX = Lire();
-			char finalY = Lire();
-
-			CEcran::ClrScr();
-			if (P->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1'));
-			else
-				cout << ("Ca marche pas!!!") << endl;
-		}
-		else
-		{
-			cout<<"ECHEC"<<endl;
-		}*/
-
-		//IA BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (!echectest(*P))
 		{
 			nbrCoup++;
 			CPlateau::verifPriseEnPassant(*P);
 			P->Afficher();
 
-			int initialX = (rand() % 8) + 1;
-			int initialY = (rand() % 8) + 1;
-			while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
-			{
-				initialX = (rand() % 8) + 1;
-				initialY = (rand() % 8) + 1;
-			}
-			int finalX = (rand() % 8) + 1;
-			int finalY = (rand() % 8) + 1;
-
-			bool ok = P->Bouger(initialX, initialY, finalX, finalY);
-			while (!ok)
-			{
-				while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
-				{
-					initialX = (rand() % 8) + 1;
-					initialY = (rand() % 8) + 1;
-				}
-
-				finalX = (rand() % 8) + 1;
-				finalY = (rand() % 8) + 1;
-
-				cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
-
-				ok = P->Bouger(initialX, initialY, finalX, finalY);
-				cout << "newok" << endl;
-			}
-			system("PAUSE");
-			CEcran::ClrScr();
+			tourJoueur(*P);
+			tourIA(*P);
+			
 		}
 		else
 		{
-			cout << "ECHEC" << endl;
+			cout<<"ECHEC"<<endl;
 		}
 	}
 	/**  modification (FIN)
@@ -129,7 +80,52 @@ bool echectest(CPlateau plateau)
 		}
 	}
 	return echec;
-	//return false;
+}
+
+bool tourJoueur(CPlateau* P) {
+	char initialX = Lire();
+	char initialY = Lire();
+
+	char finalX = Lire();
+	char finalY = Lire();
+
+	CEcran::ClrScr();
+	if (P->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1'))
+		return true;
+	else 
+		return false;
+}
+
+void tourIA(CPlateau* P) {
+	int initialX = (rand() % 8) + 1;
+	int initialY = (rand() % 8) + 1;
+	while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
+	{
+		initialX = (rand() % 8) + 1;
+		initialY = (rand() % 8) + 1;
+	}
+	int finalX = (rand() % 8) + 1;
+	int finalY = (rand() % 8) + 1;
+
+	bool ok = P->Bouger(initialX, initialY, finalX, finalY);
+	while (!ok)
+	{
+		while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
+		{
+			initialX = (rand() % 8) + 1;
+			initialY = (rand() % 8) + 1;
+		}
+
+		finalX = (rand() % 8) + 1;
+		finalY = (rand() % 8) + 1;
+
+		cout << initialX << " " << initialY << " " << finalX << " " << finalY << endl;
+
+		ok = P->Bouger(initialX, initialY, finalX, finalY);
+		cout << "newok" << endl;
+	}
+	CEcran::ClrScr();
+	system("PAUSE");
 }
 /**  modification (FIN)
 /********************************/
