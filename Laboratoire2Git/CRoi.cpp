@@ -144,7 +144,7 @@ bool CRoi::Bouger (int incX, int incY)
 
 	//le roi peut bouger en roquant
 	if ((abs(incX) == 2) && (abs(incY) == 0) && aRoque == false && aBouger == false) { //si le roi veux se déplacer de deux cases en horizontal et qu'il n'a jamais roqué, ni bougé
-		if (casesDeplacementNonEchec(PosX + incX, PosY + incY, /*modif avec couleur du roi*/1)) {
+		if (casesDeplacementNonEchec(PosX + incX, PosY + incY, IsCoulBlanc)) {
 			if (valideRoiRoque(PosX, PosY, 4, 0)) { //Roi Blanc
 				//Petit roque
 				if ((valideTourRoque(1, PosY + incY, PosX + incX, 7, 0)) && (mouvementRoque(incX, incY, -2, 0, 7, 0))) {
