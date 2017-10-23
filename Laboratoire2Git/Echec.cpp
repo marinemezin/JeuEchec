@@ -17,6 +17,8 @@ bool echectest(CPlateau plateau);
 bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
 void finalValue(CPiece* piece, CPlateau &P, int tab[]);
+bool echecetmat(CPlateau &P);
+bool rendenechec(CPlateau &P, int posdepX, int posdepY, int posfinX, int posfinY);
 
 
 int main ()
@@ -221,6 +223,59 @@ bool tourIA(CPlateau &P) {
 	CEcran::ClrScr();
 	//system("PAUSE");
 	return ok;
+
+
+}	
+bool echecetmat(CPlateau &P)
+	{
+		bool echecetmat = false;
+		bool ok[9];
+		int posXRoi = -1;
+		int posYRoi = -1;
+		for (int y = 0; y < 8; y++)
+		{
+			for (int x = 0; x < 8; x++)
+			{
+				if (P.Case(y, x)->type_piece() == "CRoi")
+				{
+					posXRoi = x;
+					posYRoi = y;
+				}
+			}
+		}
+		if (P.Case(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc()))
+		{
+			int k = 0;
+			for (int i = -1; i < 2; i++)
+			{
+				for (int j = -1; j < 2; j++)
+				{
+					ok[k] = rendenechec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j);
+					k++;
+				}
+			}
+		}
+		for (int i = 0; i < 9; i++)
+		{
+			if (ok[i] == false)
+			{
+				echecetmat = true;
+			}
+		}
+		return echecetmat;
+	}
+
+bool rendenechec(CPlateau &P, int posdepX, int posdepY, int posfinX, int posfinY)
+{
+	bool echec = false;
+	if (P.Case(posdepY, posdepX)->deplacable(posfinX, posdepY))
+	{
+		CPlateau* P2 = new CPlateau(P);
+		P2->Bouger(posdepX, posdepY, posfinX, posfinY);
+		echec = P2->Case(posfinY, posfinX)->echec(*P2, posfinX, posfinY, P.Case(posfinX, posfinY)->isCoulBlanc());
+		delete P2;
+	}
+	return echec;
 }
 /**  modification (FIN)
 /********************************/
