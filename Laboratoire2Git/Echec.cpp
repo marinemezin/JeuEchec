@@ -56,15 +56,15 @@ int main ()
 			CPlateau::verifPriseEnPassant(*P);
 			P->Afficher();
 
-			int initialX = rand() % 8 + 1;
-			int initialY = rand() % 8 + 1;
-			while (P->Case(initialY, initialX)->isCoulBlanc() != -1)
+			int initialX = (rand() % 8) + 1;
+			int initialY = (rand() % 8) + 1;
+			while (P->Case(initialY - 1, initialX - 1)->isCoulBlanc() != -1)
 			{
-				initialX = rand() % 8 + 1;
-				initialY = rand() % 8 + 1;
+				initialX = (rand() % 8) + 1;
+				initialY = (rand() % 8) + 1;
 			}
-			int finalX = rand() % 8 + 1;
-			int finalY = rand() % 8 + 1;
+			int finalX = (rand() % 8) + 1;
+			int finalY = (rand() % 8) + 1;
 
 			bool ok = P->Bouger(initialX, initialY, finalX, finalY);
 			while (!ok)
