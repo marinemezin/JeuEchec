@@ -33,8 +33,8 @@ int main ()
 			CPlateau::verifPriseEnPassant(*P);
 			P->Afficher();
 
-			tourJoueur(*P);
-			tourIA(*P);
+			tourJoueur(P);
+			tourIA(P);
 			
 		}
 		else
