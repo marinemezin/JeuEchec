@@ -29,27 +29,25 @@ int main ()
 {
 	CPlateau* P = new CPlateau(); 
 	srand(time(NULL));
-	int nbrCoup = 0;
 	int noJoueur = 1;
 	int echecJoueur = 0;
 	/********************************
 	/**  modification (DEBUT)*/	
 	while (!echecetmat(*P))
 	{
-		nbrCoup++;
 		CPlateau::verifPriseEnPassant(*P);
 		P->Afficher();
 			
-		//if (noJoueur == 1) {
+		if (noJoueur == 1) {
 			if (tourJoueur(*P)) {
 				noJoueur = -1;
-			}/*
+			}
 		}
 		else {
 			if (tourIA(*P)) {
 				noJoueur = 1;
 			}
-		}*/
+		}
 
 		if (roiEnEchec(*P, -1)) {
 			cout << "ECHEC joueur " << -1 << endl;
@@ -60,12 +58,6 @@ int main ()
 	}
 	/**  modification (FIN)
 	/********************************/
-	/*CPlateau* P2 = new CPlateau(*P);
-	delete P2;
-	cout << endl;
-	delete P;
-
-	system("PAUSE");*/
 	return 0;
 }
 
