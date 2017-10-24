@@ -109,8 +109,9 @@ bool tourJoueur(CPlateau &P)
 	//Si la case peut bouger
 	if (P.Case(initialY - '1', initialX - 'a')->deplacable(finalX - 'a', finalY - '1')) {
 		//Si le déplacement ne rendra pas en echec le joueur
-		//On prend la case à laquelle on veux aller
-		//On regarde si une pièce adverse peut aller sur notre case
+		//Cad ne met pas son roi en echec
+		//1) trouver les co du roi
+		//2) tester s'il sera en echec --->faire une méthode pour ça
 		//if (!P.Case(finalY - '1', finalX - 'a')->echec(P, finalX - 'a', finalY - '1', P.Case(initialY - '1', initialX - 'a')->isCoulBlanc())) {
 			//On fait le déplacement et si le déplacement s'est bien passé
 			if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
