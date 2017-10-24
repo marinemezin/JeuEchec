@@ -32,90 +32,82 @@ bool CPion::priseEnPassant() {
 /**  modification (FIN)
 /********************************/
 
-bool CPion::Bouger(int incX, int incY)
+/********************************
+/**  modification (DEBUT)*/
+bool CPion::avancerBouger(int incX, int incY)
 {
-	bool Retour = false;
-	/********************************
-	/**  modification (DEBUT)
-	Ajout d'accolade pour augmenter la portée
-	Ajout de if (premierTour == true) premierTour = false;
-	Ajout d'un else pour que le pion puisse avancer de deux cases
-	Ajout de la possibilité de prise en passant*/
-
-	if (incY == IsCoulBlanc) {			// Si c'est la bonne direction
-		if (incX == 0 && abs(incY) == 1)		// S'il avance
-		{
-			if (Jeu->Case(PosY + incY, PosX)->isCaseVide())
-			{
-				/********************************
-				/**  modification (DEBUT)*/
-				if (CPiece::Bouger(incX, incY)) {
-					if (premierTour == true) premierTour = false;
-					Retour = true;
-				}
-				/**  modification (FIN)
-				/********************************/
-			}
-		}
-		else {
-			if (abs(incX) == 1) {			//S'il mange normalement
-				if (!Jeu->Case(PosY + incY, PosX + incX)->isCaseVide())
-				{
-					if (CPiece::Manger(incX, incY)) {
-						if (premierTour == true) premierTour = false;
-						Retour = true;//on mange
-					}
-				}
-				/********************************
-				/**  modification (DEBUT)
-				Prise en passant*/
-				else {
-					//Si c'est prise en passant
-					int valeurCaseAManger = IsCoulBlanc == 1 ? -1 : 1;
-					//Si la case ou je veux aller -1 ou +1 est prise par un pion venant d'avancer de deux cases
-					if (!Jeu->Case(PosY + incY + valeurCaseAManger, PosX + incX)->isCaseVide() && Jeu->Case(PosY + incY + valeurCaseAManger, PosX + incX)->priseEnPassant())
-					{
-						if (CPiece::Bouger(incX, incY))
-						{
-							Jeu->prendrePiece(PosX, PosY + valeurCaseAManger);
-							if (premierTour == true) premierTour = false;
-							Retour = true;//on mange en passant
-						}
-					}
-				}
-				/**  modification (FIN)
-				/********************************/
+	bool retour = false;
+	if (incX == 0 && abs(incY) == 1) {		// S'il avance
+		if (Jeu->Case(PosY + incY, PosX)->isCaseVide()) {
+			if (CPiece::Bouger(incX, incY)) {
+				if (premierTour == true) premierTour = false;
+				retour = true;
 			}
 		}
 	}
-	/********************************
-	/**  modification (DEBUT)
-	S'il souhaite avancer de deux cases*/
+	return retour;
+}
+bool CPion::mangerBouger(int incX, int incY)
+{
+	bool retour = false;
+	if (!Jeu->Case(PosY + incY, PosX + incX)->isCaseVide()) {
+		if (CPiece::Manger(incX, incY)) {
+			if (premierTour == true) premierTour = false;
+			retour = true;//on mange
+		}
+	}
+	else { //prise en passant
+		int valeurCaseAManger = IsCoulBlanc == 1 ? -1 : 1;
+		if (!Jeu->Case(PosY + incY + valeurCaseAManger, PosX + incX)->isCaseVide() && Jeu->Case(PosY + incY + valeurCaseAManger, PosX + incX)->priseEnPassant()) {
+			if (CPiece::Bouger(incX, incY)) {
+				Jeu->prendrePiece(PosX, PosY + valeurCaseAManger);
+				if (premierTour == true) { premierTour = false; }
+				retour = true;//on mange en passant
+			}
+		}
+	}
+	return retour;
+}
+bool CPion::avancer2casesBouger(int incX, int incY)
+{
+	bool retour = false;
 	int valeurSoustraire = IsCoulBlanc == 1 ? -1 : 1;
-
-	if((incY + valeurSoustraire == IsCoulBlanc) && (premierTour == true)) {
-		if (incX == 0 && abs(incY) == 2)		// S'il avance au premier tour
-		{
-			if ((Jeu->CaseModif(PosY + incY, PosX)->isCaseVide()) && (Jeu->CaseModif(PosY + incY + valeurSoustraire, PosX)->isCaseVide()))
-			{
-				if (CPiece::Bouger(incX, incY))
-				{
+	if ((incY + valeurSoustraire == IsCoulBlanc) && (premierTour == true)) {
+		if (incX == 0 && abs(incY) == 2) {		// S'il avance au premier tour
+			if ((Jeu->CaseModif(PosY + incY, PosX)->isCaseVide()) 
+				&& (Jeu->CaseModif(PosY + incY + valeurSoustraire, PosX)->isCaseVide())) {
+				if (CPiece::Bouger(incX, incY))	{
 					if (premierTour == true) {
 						premierTour = false;
 						viensDavancer2Cases = true;
 						tour++;
 					}
-					Retour = true;
+					retour = true;
 				}
 			}
 		}
 	}
-	/**  modification (FIN)
-	/********************************/
-	/**  modification (FIN)
-	/********************************/
-	return Retour;
+	return retour;
 }
+bool CPion::Bouger(int incX, int incY)
+{
+	bool retour = false;
+	if (incY == IsCoulBlanc) {			// Si c'est la bonne direction
+		if (incX == 0 && abs(incY) == 1) {		// S'il avance
+			retour = avancerBouger(incX, incY);
+		}
+		else {
+			if (abs(incX) == 1) {			//S'il mange normalement
+				retour = mangerBouger(incX, incY);
+			}
+		}
+	}
+	//S'il souhaite avancer de deux cases
+	retour = avancer2casesBouger(incX, incY);
+	return retour;
+}
+/**  modification (FIN)
+/********************************/
 
 void CPion::Afficher()
 {
@@ -126,12 +118,12 @@ void CPion::Afficher()
 
 /********************************
 /**  modification (DEBUT)*/
-std::string CPion::type_piece() const{
+std::string CPion::type_piece() const {
 	return "CPion";
 }
 
-void CPion::modifPriseEnPassant(){
-	if (tour == 2){
+void CPion::modifPriseEnPassant() {
+	if (tour == 2) {
 		tour = 0;
 		viensDavancer2Cases = false;
 	}
@@ -139,7 +131,7 @@ void CPion::modifPriseEnPassant(){
 }
 
 
-bool CPion::deplacable(int x, int y) const{
+bool CPion::deplacable(int x, int y) const {
 	//IA joue les pions noirs
 	bool possible = false;
 	if ((y - 1) >= 0 && (y - 1) <= 7) {
@@ -150,7 +142,7 @@ bool CPion::deplacable(int x, int y) const{
 	}
 	return possible;
 }
-void CPion::coordonneesIA(int tab[]) const{
+void CPion::coordonneesIA(int tab[]) const {
 	int choix = rand() % 2;
 	tab[0] = (rand() % 3) - 1;
 	if (choix == 0) { tab[1] = -1; }

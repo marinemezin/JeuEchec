@@ -18,7 +18,7 @@ bool tourIA(CPlateau &P);
 bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
-bool pat(CPlateau P);
+//bool pat(CPlateau P, int couleur);
 /**  modification (FIN)
 /********************************/
 
@@ -172,7 +172,7 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 	return ok;
 }
 
-bool pat(CPlateau P, int couleur)
+/*bool pat(CPlateau P, int couleur)
 {
 	//Si le roi n'est pas en echec
 	if (!roiEnEchec(P, couleur))
@@ -182,7 +182,7 @@ bool pat(CPlateau P, int couleur)
 	//Et si n'importe quel mouvement le rendrait en echec
 	//Alors il y a match nul
 	return true;
-}
+}*/
 /**  modification (FIN)
 /********************************/
 

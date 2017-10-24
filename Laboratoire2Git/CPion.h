@@ -16,6 +16,9 @@ private :
 	bool premierTour;
 	bool viensDavancer2Cases;
 	int tour; //pour compter le nommbre de tour passé depuis son premier tour
+	bool avancerBouger(int incX, int incY);
+	bool mangerBouger(int incX, int incY);
+	bool avancer2casesBouger(int incX, int incY);
 	/**  modification (FIN)
 	/********************************/
 public:
