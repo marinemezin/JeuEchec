@@ -11,6 +11,9 @@ using namespace std;
 /**  modification (FIN)
 /********************************/
 
+
+/********************************
+/**  modification (DEBUT)*/
 // Prototypes
 char Lire();
 int roiEnEchec(CPlateau plateau);
@@ -19,11 +22,12 @@ bool tourIA(CPlateau &P);
 void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
+/**  modification (FIN)
+/********************************/
 
 
 int main ()
 {
-
 	CPlateau* P = new CPlateau(); 
 	srand(time(NULL));
 	int nbrCoup = 0;
@@ -31,7 +35,8 @@ int main ()
 	int echecJoueur = 0;
 	/********************************
 	/**  modification (DEBUT)*/	
-	while (nbrCoup < 30)
+	//while (!echecetmat(*P))// case le jeu ...................................................................................
+	while(true)
 	{
 		nbrCoup++;
 		CPlateau::verifPriseEnPassant(*P);
@@ -252,11 +257,11 @@ bool echecetmat(CPlateau &P)
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				if (P.Case(y, x)->type_piece() == "CRoi")
+				if (P.CaseModif(y, x)->type_piece() == "CRoi")
 				{
-					posXRoi = x; //attention à la fin des boucles il retournera le dernier roi qu'il a rencontré et ne vérifiera pas les deux rois : ok on met dedans
+					posXRoi = x; 
 					posYRoi = y;
-					if (P.Case(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc()))
+					if (P.CaseModif(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.CaseModif(posYRoi, posXRoi)->isCoulBlanc()))
 					{
 						int k = 0;
 						for (int i = -1; i < 2; i++)
@@ -264,17 +269,23 @@ bool echecetmat(CPlateau &P)
 							for (int j = -1; j < 2; j++)
 							{
 								ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j); 
+
+								//Utiliser plutôt ça
+								//P.Case(finalX - 'a', finalY - '1')->echec(P, finalX - 'a', finalY - '1', P.Case(initialX - 'a', initialY - '1')->isCoulBlanc())
+								//Donnera true si tu va sur la case car tu sera en echec, false si tu vas sur la nouvelle et tu ne sera pas en echec
+								//Va prendre dans ton plateau la case où tu veux aller
+								//Va vérifier que ta case n'est pas en échec, cad qu'aucune pièce adverse ne peux venir te manger
+								//Dans la méthode echec, le plateau est recopié donc aucune perte de donnée
+
 								k++;
 							}
 						}
-					}
-					for (int i = 0; i < 9; i++)
-					{
-						if (ok[i] == false)
+						for (int i = 0; i < 9; i++)
 						{
-							echecetmat = true;
+							if (ok[i] == false)		echecetmat = true;
 						}
 					}
+					
 				}
 			}
 		}
@@ -288,7 +299,7 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 	CPlateau* P2 = new CPlateau(P);
 	if (P2->Bouger(posXdep, posYdep, posXfin, posYfin))
 	{
-		ok = P2->Case(posYfin, posXfin)->echec(*P2, posXfin, posYfin, P.Case(posYfin, posXfin)->isCoulBlanc());
+		ok = (P2->CaseModif(posYfin, posXfin))->echec(*P2, posXfin, posYfin, P2->CaseModif(posYfin, posXfin)->isCoulBlanc());
 	}
 	delete P2;
 	return ok;
