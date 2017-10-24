@@ -44,6 +44,7 @@ public:
 	std::string type_piece() const override;
 	bool getABouger() const override;
 	bool deplacable(int x, int y) const override;
+	void coordonneesIA(int tab[]) const override;
 	/**  modification (FIN)
 	/********************************/
 };

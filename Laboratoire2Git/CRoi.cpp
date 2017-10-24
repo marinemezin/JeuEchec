@@ -3,6 +3,7 @@
 /********************************
 /**  modification (DEBUT)*/
 #include "CPlateau.h"
+#include <time.h>
 /**  modification (FIN)
 /********************************/
 
@@ -188,6 +189,11 @@ std::string CRoi::type_piece() const
 bool CRoi::deplacable(int x, int y) const
 {
 	return CPiece::deplacable(x, y);
+}
+void CRoi::coordonneesIA(int tab[]) const
+{
+	tab[0] = (rand() % 3) - 1;
+	tab[1] = (rand() % 3) - 1;
 }
 /**  modification (FIN)
 /********************************/

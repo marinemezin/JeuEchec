@@ -3,6 +3,7 @@
 /********************************
 /**  modification (DEBUT)*/
 #include "CPlateau.h"
+#include <time.h>
 /**  modification (FIN)
 /********************************/
 #include <iostream>
@@ -59,6 +60,17 @@ bool CFou::deplacable(int x, int y) const {
 		}
 	}
 	return possible;
+}
+void CFou::coordonneesIA(int tab[]) const
+{
+	int choix = rand() % 2;
+	tab[0] = (rand() % 15) - 7;
+	if (choix == 0) {
+		tab[1] = tab[0] * (-1);
+	}
+	if (choix == 1) {
+		tab[1] = tab[0];
+	}
 }
 /**  modification (FIN)
 /********************************/

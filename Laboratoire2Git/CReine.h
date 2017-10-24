@@ -34,6 +34,7 @@ public:
 	std::string type_piece() const override;
 	CReine(CPlateau* J, int PX, int PY, int Force, int Coul);
 	bool deplacable(int x, int y) const override;
+	void coordonneesIA(int tab[]) const override;
 	/**  modification (FIN)
 	/********************************/
 };

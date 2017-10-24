@@ -1,8 +1,8 @@
 #include "CPion.h"
 /********************************
 /**  modification (DEBUT)*/
-#include <typeinfo>
 #include <string>
+#include <time.h>
 /**  modification (FIN)
 /********************************/
 #include <iostream>
@@ -149,6 +149,17 @@ bool CPion::deplacable(int x, int y) const{
 		if ((x + 1) >= 0 && (x + 1) <= 7 && (Jeu->Case(y - 1, x + 1)->isCoulBlanc() == 1)) { possible = true; }
 	}
 	return possible;
+}
+void CPion::coordonneesIA(int tab[]) const
+{
+	int choix = rand() % 2;
+	tab[0] = (rand() % 3) - 1;
+	if (choix == 0) {
+		tab[1] = -1;
+	}
+	if (choix == 1) {
+		tab[1] = -2; 
+	}
 }
 /**  modification (FIN)
 /********************************/

@@ -19,7 +19,6 @@ char Lire();
 bool roiEnEchec(CPlateau plateau, int couleur);
 bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
-void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
 /**  modification (FIN)
@@ -115,43 +114,54 @@ bool tourJoueur(CPlateau &P){
 	return false;
 }
 
-void finalValue(CPiece* piece, CPlateau &P, int tab[]){
-	if (piece->type_piece() == "CPion"){
+void finalValue(CPiece* piece, CPlateau &P, int tab[])
+{
+	if (piece->type_piece() == "CPion")
+	{
 		tab[0] = (rand() % 3) - 1;
 		tab[1] = -1; //ne peut pas avancer de deux cases au premier coup
 	}
-	if (piece->type_piece() == "CReine"){
+	if (piece->type_piece() == "CReine")
+	{
 		int choix = rand() % 4;
-		if (choix == 0){ //déplacement en ligne
+		if (choix == 0) //déplacement en ligne
+		{
 			tab[0] = (rand() % 15) - 7;
 			tab[1] = 0;
 		}
-		if (choix == 1){ //déplacement en colonne
+		if (choix == 1) //déplacement en colonne
+		{
 			tab[0] = 0;
 			tab[1] = (rand() % 15) - 7;
 		}
-		if (choix == 2 || choix == 3) { //déplacements diago
+		if (choix == 2 || choix == 3) //déplacements diago
+		{
 			tab[0] = (rand() % 15) - 7;
 			if (choix == 2) { tab[1] = tab[0] * (-1); }
 			if (choix == 3) { tab[1] = tab[0]; }
 		}
 	}
-	if (piece->type_piece() == "CRoi"){
+	if (piece->type_piece() == "CRoi")
+	{
 		tab[0] = (rand() % 3) - 1;
 		tab[1] = (rand() % 3) - 1;
 	}
-	if (piece->type_piece() == "CTour"){
+	if (piece->type_piece() == "CTour")
+	{
 		int choix = rand() % 2;
-		if (choix == 0){ //déplacement en ligne
+		if (choix == 0) //déplacement en ligne
+		{
 			tab[0] = (rand() % 15) - 7;
 			tab[1] = 0;
 		}
-		if (choix == 1){ //déplacement en colonne
+		if (choix == 1) //déplacement en colonne
+		{
 			tab[0] = 0;
 			tab[1] = (rand() % 15) - 7;
 		}
 	}
-	if (piece->type_piece() == "CCavalier"){
+	if (piece->type_piece() == "CCavalier")
+	{
 		//Choix du x : +1, -1, +2, -2 et choix du y en fonction
 		int choix = rand() % 4;
 		if (choix == 0) {
@@ -179,7 +189,8 @@ void finalValue(CPiece* piece, CPlateau &P, int tab[]){
 			if (choix == 1) { tab[1] = 1; }
 		}
 	}
-	if (piece->type_piece() == "CFou"){
+	if (piece->type_piece() == "CFou")
+	{
 		int choix = rand() % 2;
 		tab[0] = (rand() % 15) - 7;
 		if (choix == 0) { tab[1] = tab[0] * (-1); }
@@ -201,7 +212,7 @@ bool tourIA(CPlateau &P)
 
 	//Choisir des valeurs au hasard en fonction du pion sélectionné
 	int finalValeur[2];
-	finalValue(P.Case(initialY, initialX), P, finalValeur);
+	P.Case(initialY, initialX)->coordonneesIA(finalValeur);
 	int finalX = initialX + finalValeur[0];
 	int finalY = initialY + finalValeur[1];
 
@@ -218,7 +229,7 @@ bool tourIA(CPlateau &P)
 	//Tant que le pion n'a pas bougé recalculer une variation
 	while (!ok)
 	{
-		finalValue(P.Case(initialY , initialX), P, finalValeur);
+		P.Case(initialY, initialX)->coordonneesIA(finalValeur);
 		finalX = initialX + finalValeur[0];
 		finalY = initialY + finalValeur[1];
 

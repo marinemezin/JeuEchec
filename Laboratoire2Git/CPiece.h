@@ -98,8 +98,7 @@ public:
 	int getPosY() const { return PosY; }
 	virtual bool getABouger() const { return false; }
 	virtual bool deplacable(int x, int y) const;
-	/*virtual int valeurIAx() { return 0; }
-	virtual int valeurIAy() { return 0; }*/
+	virtual void coordonneesIA(int tab[]) const { /*rien*/ }
 	/**  modification (FIN)
 	/********************************/
 };
