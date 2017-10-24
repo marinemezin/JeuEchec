@@ -31,7 +31,6 @@ int main ()
 	CPlateau* P = new CPlateau(); 
 	srand(time(NULL));
 	int noJoueur = 1;
-	int echecJoueur = 0;
 	/********************************
 	/**  modification (DEBUT)*/	
 	while (!echecetmat(*P))
