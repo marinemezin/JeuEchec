@@ -1,5 +1,10 @@
 #include "CCavalier.h"
 
+/********************************
+/**  modification (DEBUT)*/
+#include <time.h>
+/**  modification (FIN)
+/********************************/
 
 #include <iostream>
 using namespace std;
@@ -88,6 +93,24 @@ bool CCavalier::deplacable(int x, int y) const
 		}
 	}
 	return possible;
+}
+void CCavalier::coordonneesIA(int tab[]) const
+{
+	int choix = rand() % 4;
+	if ((choix == 0) || (choix == 1)) {
+		if (choix == 0)	{ tab[0] = 1; }
+		if (choix == 1)	{ tab[0] = -1; }
+		choix = rand() % 2;
+		if (choix == 0) { tab[1] = -2; }
+		if (choix == 1) { tab[1] = 2; }
+	}
+	if ((choix == 2) || (choix == 3)) {
+		if (choix == 2) { tab[0] = 2; }
+		if (choix == 3) { tab[0] = -2; }
+		choix = rand() % 2;
+		if (choix == 0) { tab[1] = -1; }
+		if (choix == 1) { tab[1] = 1; }
+	}
 }
 /**  modification (FIN)
 /********************************/

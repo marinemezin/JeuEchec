@@ -19,7 +19,6 @@ char Lire();
 bool roiEnEchec(CPlateau plateau, int couleur);
 bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
-void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
 /**  modification (FIN)
@@ -122,61 +121,6 @@ bool tourJoueur(CPlateau &P)
 	return false;
 }
 
-void finalValue(CPiece* piece, CPlateau &P, int tab[])
-{
-	if (piece->type_piece() == "CPion")
-	{
-		piece->coordonneesIA(tab);
-	}
-	if (piece->type_piece() == "CReine")
-	{
-		piece->coordonneesIA(tab);
-	}
-	if (piece->type_piece() == "CRoi") {
-		piece->coordonneesIA(tab);
-	}
-	if (piece->type_piece() == "CTour")
-	{
-		piece->coordonneesIA(tab);
-	}
-	if (piece->type_piece() == "CCavalier")
-	{
-		//Choix du x : +1, -1, +2, -2 et choix du y en fonction
-		int choix = rand() % 4;
-		if (choix == 0) {
-			tab[0] = 1;
-			choix = rand() % 2;
-			if (choix == 0) { tab[1] = -2; }
-			if (choix == 1) { tab[1] = 2; }
-		}
-		if (choix == 1) {
-			tab[0] = -1;
-			choix = rand() % 2;
-			if (choix == 0) { tab[1] = -2; }
-			if (choix == 1) { tab[1] = 2; }
-		}
-		if (choix == 2) {
-			tab[0] = 2;
-			choix = rand() % 2;
-			if (choix == 0) { tab[1] = -1; }
-			if (choix == 1) { tab[1] = 1; }
-		}
-		if (choix == 3) {
-			tab[0] = -2;
-			choix = rand() % 2;
-			if (choix == 0) { tab[1] = -1; }
-			if (choix == 1) { tab[1] = 1; }
-		}
-	}
-	if (piece->type_piece() == "CFou")
-	{
-		int choix = rand() % 2;
-		tab[0] = (rand() % 15) - 7;
-		if (choix == 0) { tab[1] = tab[0] * (-1); }
-		if (choix == 1) { tab[1] = tab[0]; }
-	}
-}
-
 //IA joue les pions noirs
 bool tourIA(CPlateau &P) {
 	int initialX = (rand() % 8);
@@ -190,7 +134,7 @@ bool tourIA(CPlateau &P) {
 
 	//Choisir des valeurs au hasard en fonction du pion sélectionné
 	int finalValeur[2];
-	finalValue(P.Case(initialY, initialX), P, finalValeur);
+	P.Case(initialY, initialX)->coordonneesIA(finalValeur);
 	int finalX = initialX + finalValeur[0];
 	int finalY = initialY + finalValeur[1];
 
