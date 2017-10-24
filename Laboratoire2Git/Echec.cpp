@@ -167,9 +167,6 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 	if (P2->Bouger(posXdep, posYdep, posXfin, posYfin)){
 		ok = (P2->Case(posYfin, posXfin))->echec(*P2, posXfin, posYfin, P2->Case(posYfin, posXfin)->isCoulBlanc());
 	}
-	else{
-		ok = false;
-	}
 	delete P2;
 	return ok;
 }
