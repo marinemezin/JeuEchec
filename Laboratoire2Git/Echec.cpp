@@ -151,7 +151,7 @@ bool tourIA(CPlateau &P) {
 	//Tant que le pion n'a pas bougé recalculer une variation
 	while (!ok)
 	{
-		finalValue(P.Case(initialY , initialX), P, finalValeur);
+		P.Case(initialY, initialX)->coordonneesIA(finalValeur);
 		finalX = initialX + finalValeur[0];
 		finalY = initialY + finalValeur[1];
 
