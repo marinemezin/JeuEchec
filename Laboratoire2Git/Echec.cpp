@@ -18,7 +18,8 @@ bool tourIA(CPlateau &P);
 bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
-//bool pat(CPlateau P, int couleur);
+bool roiBloque(CPlateau P, int X, int Y);
+bool pat(CPlateau P, int couleur);
 /**  modification (FIN)
 /********************************/
 
@@ -28,7 +29,7 @@ int main () {
 	CPlateau* P = new CPlateau(); 
 	srand(time(NULL));
 	int noJoueur = 1;
-	while (!echecetmat(*P))	{
+	while (!echecetmat(*P) || pat(*P, 1) || pat(*P, -1)) {
 		CPlateau::verifPriseEnPassant(*P);
 		P->Afficher();
 		if (noJoueur == 1) {
@@ -37,11 +38,12 @@ int main () {
 		else {
 			if (tourIA(*P)) { noJoueur = 1; }
 		}
-
+		CEcran::ClrScr();
 		if (roiEnEchec(*P, -1)) { cout << "ECHEC joueur " << -1 << endl; }
 		if (roiEnEchec(*P, 1)) { cout << "ECHEC joueur " << 1 << endl; }
 	}
 	if (echecetmat(*P)) { cout << "ECHEC ET MAT"; }
+	if (pat(*P, 1) || pat(*P, -1)) { cout << "Match nul"; }
 	return 0;
 }
 /**  modification (FIN)
@@ -76,7 +78,6 @@ bool tourJoueur(CPlateau &P){
 	char initialY = Lire();
 	char finalX = Lire();
 	char finalY = Lire();
-	CEcran::ClrScr();
 	if (P.Case(initialY - '1', initialX - 'a')->isCoulBlanc() == 1) {
 		if (P.Case(initialY - '1', initialX - 'a')->deplacable(finalX - 'a', finalY - '1')) {
 			CPlateau* newP = new CPlateau(P);
@@ -131,9 +132,10 @@ bool tourIA(CPlateau &P)
 			ok = P.Bouger(iniX, iniY, finX, finY);
 		}
 	}
-	CEcran::ClrScr();
 	return ok;
 }	
+
+//amodif
 bool echecetmat(CPlateau &P){
 	bool echecetmat = false;
 	bool ok[9];
@@ -171,17 +173,42 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 	return ok;
 }
 
-/*bool pat(CPlateau P, int couleur)
+bool roiBloque(CPlateau P, int X, int Y)
 {
-	//Si le roi n'est pas en echec
-	if (!roiEnEchec(P, couleur))
-	{
-
+	int k = 0, compteur = 0;
+	for (int i = -1; i < 2; i++) {
+		for (int j = -1; j < 2; j++) {
+			if ((X + i) >= 0 && (X + i) <= 7
+				&& (Y + j) >= 0 && (Y + j) <= 7
+				&& (i != 0) && (j != 0)){
+				compteur++;
+				if (rendEnEchec(P, X, Y, X + i, Y + j)) {
+					k++;
+				}
+			}
+		}
 	}
-	//Et si n'importe quel mouvement le rendrait en echec
-	//Alors il y a match nul
-	return true;
-}*/
+	if(k == compteur){
+		return true;
+	}
+	return false;
+}
+
+bool pat(CPlateau P, int couleur)
+{
+	bool retour = false;
+	if (!roiEnEchec(P, couleur)) {
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				if ((P.Case(y, x)->type_piece() == "CRoi") 
+						&& (P.Case(y, x)->isCoulBlanc())) {
+					retour = roiBloque(P, x, y);
+				}
+			}
+		}
+	}
+	return retour;
+}
 /**  modification (FIN)
 /********************************/
 
