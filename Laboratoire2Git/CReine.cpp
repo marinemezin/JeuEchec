@@ -1,5 +1,9 @@
 #include "CReine.h"
-
+/********************************
+/**  modification (DEBUT)*/
+#include <time.h>
+/**  modification (FIN)
+/********************************/
 #include <iostream>
 using namespace std;
 
@@ -45,6 +49,27 @@ std::string CReine::type_piece() const
 bool CReine::deplacable(int x, int y) const
 {
 	return CPiece::deplacable(x, y);
+}
+void CReine::coordonneesIA(int tab[]) const
+{
+	int choix = rand() % 4;
+	if (choix == 0) { //déplacement en ligne
+		tab[0] = (rand() % 15) - 7;
+		tab[1] = 0;
+	}
+	if (choix == 1) { //déplacement en colonne
+		tab[0] = 0;
+		tab[1] = (rand() % 15) - 7;
+	}
+	if (choix == 2 || choix == 3) { //déplacements diago
+		tab[0] = (rand() % 15) - 7;
+		if (choix == 2) {
+			tab[1] = tab[0] * (-1);
+		}
+		if (choix == 3) {
+			tab[1] = tab[0];
+		}
+	}
 }
 /**  modification (FIN)
 /********************************/

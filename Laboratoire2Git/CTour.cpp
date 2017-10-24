@@ -1,7 +1,10 @@
 #include "CTour.h"
-/*modifcationnnnnnnnnnnnnnn*/
+/********************************
+/**  modification (DEBUT)*/
 #include "CPlateau.h"
-/*fin modifcationnnnnnnnnnnnnnn*/
+#include <time.h>
+/**  modification (FIN)
+/********************************/
 
 #include <iostream>
 using namespace std;
@@ -77,6 +80,18 @@ bool CTour::deplacable(int x, int y) const
 		}
 	}
 	return possible;
+}
+void CTour::coordonneesIA(int tab[]) const
+{
+	int choix = rand() % 2;
+	if (choix == 0) { //déplacement en ligne
+		tab[0] = (rand() % 15) - 7;
+		tab[1] = 0;
+	}
+	if (choix == 1) { //déplacement en colonne
+		tab[0] = 0;
+		tab[1] = (rand() % 15) - 7;
+	}
 }
 /**  modification (FIN)
 /********************************/

@@ -45,6 +45,7 @@ public:
 	std::string type_piece() const override;
 	void modifPriseEnPassant() override;
 	bool deplacable(int x, int y) const override;
+	void coordonneesIA(int tab[]) const override;
 	/**  modification (FIN)
 	/********************************/
 };

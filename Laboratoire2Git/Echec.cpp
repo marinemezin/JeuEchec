@@ -126,47 +126,18 @@ void finalValue(CPiece* piece, CPlateau &P, int tab[])
 {
 	if (piece->type_piece() == "CPion")
 	{
-		tab[0] = (rand() % 3) - 1;
-		tab[1] = -1; //ne peut pas avancer de deux cases au premier coup
+		piece->coordonneesIA(tab);
 	}
 	if (piece->type_piece() == "CReine")
 	{
-		int choix = rand() % 4;
-		if (choix == 0) //déplacement en ligne
-		{
-			tab[0] = (rand() % 15) - 7;
-			tab[1] = 0;
-		}
-		if (choix == 1) //déplacement en colonne
-		{
-			tab[0] = 0;
-			tab[1] = (rand() % 15) - 7;
-		}
-		if (choix == 2 || choix == 3) //déplacements diago
-		{
-			tab[0] = (rand() % 15) - 7;
-			if (choix == 2) { tab[1] = tab[0] * (-1); }
-			if (choix == 3) { tab[1] = tab[0]; }
-		}
+		piece->coordonneesIA(tab);
 	}
-	if (piece->type_piece() == "CRoi")
-	{
-		tab[0] = (rand() % 3) - 1;
-		tab[1] = (rand() % 3) - 1;
+	if (piece->type_piece() == "CRoi") {
+		piece->coordonneesIA(tab);
 	}
 	if (piece->type_piece() == "CTour")
 	{
-		int choix = rand() % 2;
-		if (choix == 0) //déplacement en ligne
-		{
-			tab[0] = (rand() % 15) - 7;
-			tab[1] = 0;
-		}
-		if (choix == 1) //déplacement en colonne
-		{
-			tab[0] = 0;
-			tab[1] = (rand() % 15) - 7;
-		}
+		piece->coordonneesIA(tab);
 	}
 	if (piece->type_piece() == "CCavalier")
 	{

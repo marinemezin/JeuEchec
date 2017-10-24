@@ -1,8 +1,8 @@
 #include "CPion.h"
 /********************************
 /**  modification (DEBUT)*/
-#include <typeinfo>
 #include <string>
+#include <time.h>
 /**  modification (FIN)
 /********************************/
 #include <iostream>
@@ -155,6 +155,17 @@ bool CPion::deplacable(int x, int y) const
 		}
 	}
 	return possible;
+}
+void CPion::coordonneesIA(int tab[]) const
+{
+	int choix = rand() % 2;
+	tab[0] = (rand() % 3) - 1;
+	if (choix == 0) {
+		tab[1] = -1;
+	}
+	if (choix == 1) {
+		tab[1] = -2; 
+	}
 }
 /**  modification (FIN)
 /********************************/
