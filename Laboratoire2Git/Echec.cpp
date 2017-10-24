@@ -35,8 +35,8 @@ int main ()
 	int echecJoueur = 0;
 	/********************************
 	/**  modification (DEBUT)*/	
-	//while (!echecetmat(*P))// case le jeu ...................................................................................
-	while(true)
+	while (!echecetmat(*P))// case le jeu ...................................................................................
+	//while(true)
 	{
 		nbrCoup++;
 		CPlateau::verifPriseEnPassant(*P);
@@ -268,7 +268,7 @@ bool echecetmat(CPlateau &P)
 				{
 					posXRoi = x; 
 					posYRoi = y;
-					if (P.CaseModif(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.CaseModif(posYRoi, posXRoi)->isCoulBlanc()))
+					if (P.CaseModif(posYRoi, posYRoi)->echec(P, posXRoi, posYRoi, P.CaseModif(posYRoi, posXRoi)->isCoulBlanc()))
 					{
 						int k = 0;
 						for (int i = -1; i < 2; i++)
