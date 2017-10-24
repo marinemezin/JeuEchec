@@ -17,7 +17,7 @@ bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
 bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY);
 bool echecetmat(CPlateau &P);
-bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
+bool rendEnEchec(CPlateau &P, int Xdep, int Ydep, int Xfin, int Yfin);
 bool roiBloque(CPlateau P, int X, int Y);
 bool pat(CPlateau P, int couleur);
 /**  modification (FIN)
@@ -136,14 +136,16 @@ bool tourIA(CPlateau &P)
 }	
 
 bool echecetmat(CPlateau &P){
-	bool echecetmat = true;
+	bool echecetmat = false;
 	bool ok[9];
 	int posXRoi = -1, posYRoi = -1;
 	for (int y = 0; y < 8; y++){
 		for (int x = 0; x < 8; x++){
 			if (P.Case(y, x)->type_piece() == "CRoi"){
 				posXRoi = x, posYRoi = y;
-				if (P.Case(posYRoi, posYRoi)->echec(P, posXRoi, posYRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc())){
+				if (P.Case(posYRoi, posYRoi)
+					->echec(P, posXRoi, posYRoi, P.Case(posYRoi, posXRoi)
+						->isCoulBlanc())){
 					int k = 0;
 					for (int i = -1; i < 2; i++){
 						for (int j = -1; j < 2; j++){
@@ -152,7 +154,7 @@ bool echecetmat(CPlateau &P){
 						}
 					}
 					for (int i = 0; i < 9; i++){
-						if (ok[i] == false) { echecetmat = false; }
+						if (ok[i] == false)		echecetmat = true;
 					}
 				}	
 			}
@@ -161,12 +163,13 @@ bool echecetmat(CPlateau &P){
 	return echecetmat;
 }
 
-bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin)
-{
+bool rendEnEchec(CPlateau &P, int Xdep, int Ydep, int Xfin, int Yfin) {
 	bool ok = false;
 	CPlateau* P2 = new CPlateau(P);
-	if (P2->Bouger(posXdep, posYdep, posXfin, posYfin)){
-		ok = (P2->Case(posYfin, posXfin))->echec(*P2, posXfin, posYfin, P2->Case(posYfin, posXfin)->isCoulBlanc());
+	if (P2->Bouger(Xdep, Ydep, Xfin, Yfin)) {
+		ok = (P2->Case(Yfin, Xfin))
+			->echec(*P2, Xfin, Yfin, P2->Case(Yfin, Xfin)
+				->isCoulBlanc());
 	}
 	delete P2;
 	return ok;
@@ -208,20 +211,5 @@ bool pat(CPlateau P, int couleur)
 	}
 	return retour;
 }
-/**  modification (FIN)
-/********************************/
-
-/********************************
-/**  modification (DEBUT)*/
-/*Test de l'echec !!! 
-e7e5
-h2h4
-e8e7
-h1h3
-h7h6
-h3e3
-h6h5
-e3e5
-*/
 /**  modification (FIN)
 /********************************/
