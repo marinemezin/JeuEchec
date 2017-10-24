@@ -266,7 +266,13 @@ bool echecetmat(CPlateau &P)
 			{
 				for (int j = -1; j < 2; j++)
 				{
-					ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j);
+					//ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j);
+					//Utiliser plutôt ça
+					//P.Case(finalX - 'a', finalY - '1')->echec(P, finalX - 'a', finalY - '1', P.Case(initialX - 'a', initialY - '1')->isCoulBlanc())
+					//Donnera true si tu va sur la case car tu sera en echec, false si tu vas sur la nouvelle et tu ne sera pas en echec
+					//Va prendre dans ton plateau la case où tu veux aller
+					//Va vérifier que ta case n'est pas en échec, cad qu'aucune pièce adverse ne peux venir te manger
+					//Dans la méthode echec, le plateau est recopié donc aucune perte de donnée
 					k++;
 				}
 			}
