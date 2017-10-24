@@ -19,6 +19,7 @@ char Lire();
 bool roiEnEchec(CPlateau plateau, int couleur);
 bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
+bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
 bool pat(CPlateau *P);
@@ -106,53 +107,40 @@ bool tourJoueur(CPlateau &P){
 	return false;
 }
 
-//IA joue les pions noirs
-bool tourIA(CPlateau &P)
+bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY)
 {
-	int initialX = (rand() % 8);
-	int initialY = (rand() % 8);
-	//tant que le pion trouvé n'est pas un pion noir ni un pion déplacable on cherche un autre pion
-	while ((P.Case(initialY, initialX)->isCoulBlanc() != -1) || (!P.Case(initialY, initialX)->deplacable(initialX, initialY)))
-	{
-		initialX = (rand() % 8);
-		initialY = (rand() % 8);
-	}
-
-	//Choisir des valeurs au hasard en fonction du pion sélectionné
-	int finalValeur[2];
-	P.Case(initialY, initialX)->coordonneesIA(finalValeur);
-	int finalX = initialX + finalValeur[0];
-	int finalY = initialY + finalValeur[1];
-
-	//Tenter de bouger le pion
-	CPlateau* newP = new CPlateau(P);
 	bool ok = false;
-	if (newP->Bouger(initialX, initialY, finalX, finalY)) {
+	CPlateau* newP = new CPlateau(P);
+	if (newP->Bouger(iniX, iniY, finX, finY)) {
 		if (!roiEnEchec(*newP, -1)) {
-			ok = P.Bouger(initialX, initialY, finalX, finalY);
+			ok = newP->Bouger(iniX, iniY, finX, finY);
 		}
 	}
 	delete newP;
-
-	//Tant que le pion n'a pas bougé recalculer une variation
-	while (!ok)
+	return ok;
+}
+bool tourIA(CPlateau &P)
+{
+	int iniX = (rand() % 8);
+	int iniY = (rand() % 8);
+	while ((P.Case(iniY, iniX)->isCoulBlanc() != -1) || (!P.Case(iniY, iniX)->deplacable(iniX, iniY)))
 	{
-		P.Case(initialY, initialX)->coordonneesIA(finalValeur);
-		finalX = initialX + finalValeur[0];
-		finalY = initialY + finalValeur[1];
-
-		//Tenter de bouger le pion
-		if (newP->Bouger(initialX, initialY, finalX, finalY)) {
-			if (!roiEnEchec(*newP, -1)) {
-				ok = P.Bouger(initialX, initialY, finalX, finalY);
-			}
-		}
+		iniX = (rand() % 8);
+		iniY = (rand() % 8);
+	}
+	int finalValeur[2];
+	P.Case(iniY, iniX)->coordonneesIA(finalValeur);
+	int finX = iniX + finalValeur[0];
+	int finY = iniY + finalValeur[1];
+	bool ok = IApeutJouer(P, iniX, iniY, finX, finY);
+	while (!ok) {
+		P.Case(iniY, iniX)->coordonneesIA(finalValeur);
+		finX = iniX + finalValeur[0];
+		finY = iniY + finalValeur[1];
+		ok = IApeutJouer(P, iniX, iniY, finX, finY);
 	}
 	CEcran::ClrScr();
-	//system("PAUSE");
 	return ok;
-
-
 }	
 bool echecetmat(CPlateau &P){
 	bool echecetmat = false;
