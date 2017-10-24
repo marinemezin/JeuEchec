@@ -73,7 +73,6 @@ bool CPion::avancer2casesBouger(int incX, int incY)
 	bool retour = false;
 	int valeurSoustraire = IsCoulBlanc == 1 ? -1 : 1;
 	if ((incY + valeurSoustraire == IsCoulBlanc) && (premierTour == true)) {
-		if (incX == 0 && abs(incY) == 2) {		// S'il avance au premier tour
 			if ((Jeu->CaseModif(PosY + incY, PosX)->isCaseVide()) 
 				&& (Jeu->CaseModif(PosY + incY + valeurSoustraire, PosX)->isCaseVide())) {
 				if (CPiece::Bouger(incX, incY))	{
@@ -85,7 +84,6 @@ bool CPion::avancer2casesBouger(int incX, int incY)
 					retour = true;
 				}
 			}
-		}
 	}
 	return retour;
 }
@@ -103,7 +101,9 @@ bool CPion::Bouger(int incX, int incY)
 		}
 	}
 	//S'il souhaite avancer de deux cases
-	retour = avancer2casesBouger(incX, incY);
+	if (incX == 0 && abs(incY) == 2) {		// S'il avance au premier tour
+		retour = avancer2casesBouger(incX, incY);
+	}
 	return retour;
 }
 /**  modification (FIN)
