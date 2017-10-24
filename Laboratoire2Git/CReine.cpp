@@ -46,10 +46,14 @@ std::string CReine::type_piece() const
 {
 	return "CReine";
 }
+
+
 bool CReine::deplacable(int x, int y) const
 {
 	return CPiece::deplacable(x, y);
 }
+
+
 void CReine::coordonneesIA(int tab[]) const
 {
 	int choix = rand() % 4;

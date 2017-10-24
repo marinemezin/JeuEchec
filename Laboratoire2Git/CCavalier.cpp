@@ -49,13 +49,12 @@ bool CCavalier::Bouger (int incX, int incY)
 
 /********************************
 /**  modification (DEBUT)*/
-
-std::string CCavalier::type_piece() const{
+std::string CCavalier::type_piece() const {
 	return "CCavalier";
 }
 
-bool CCavalier::testPourDeplacable(int leY, int leX) const
-{
+
+bool CCavalier::testPourDeplacable(int leY, int leX) const {
 	bool retour = false;
 	if (leY >= 0 && leY <= 7) {
 		if (leX >= 0 && leX <= 7) {
@@ -67,7 +66,8 @@ bool CCavalier::testPourDeplacable(int leY, int leX) const
 	return retour;
 }
 
-bool CCavalier::deplacable(int x, int y) const{
+
+bool CCavalier::deplacable(int x, int y) const {
 	bool possible = false;
 	if (!possible) { possible = testPourDeplacable(y - 2, x - 1); }
 	if (!possible) { possible = testPourDeplacable(y - 2, x + 1); }
@@ -79,8 +79,9 @@ bool CCavalier::deplacable(int x, int y) const{
 	if (!possible) { possible = testPourDeplacable(y + 2, x + 1); }
 	return possible;
 }
-void CCavalier::coordonneesIA(int tab[]) const
-{
+
+
+void CCavalier::coordonneesIA(int tab[]) const {
 	int choix = rand() % 4;
 	if ((choix == 0) || (choix == 1)) {
 		if (choix == 0)	{ tab[0] = 1; }

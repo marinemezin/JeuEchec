@@ -58,7 +58,7 @@ CPlateau::CPlateau()
 
 /********************************
 /**  modification (DEBUT)*/
-void CPlateau::verifPriseEnPassant(CPlateau &plateau){
+void CPlateau::verifPriseEnPassant(CPlateau &plateau) {
 	for (int i = 0; i < 8; i++){
 		for (int j = 0; j < 8; j++)	{
 			plateau.Jeu[i][j]->modifPriseEnPassant();
@@ -66,7 +66,7 @@ void CPlateau::verifPriseEnPassant(CPlateau &plateau){
 	}
 }
 
-CPlateau::CPlateau(CPlateau const& plateau){
+CPlateau::CPlateau(CPlateau const& plateau) {
 	Jeu = new CPiece**[T];
 	for (int z = 0; z < T; z++) { Jeu[z] = new CPiece*[T]; }
 	for (int y = 0; y < T; y++){
@@ -140,12 +140,12 @@ void CPlateau::Afficher()
 
 /********************************
 /**  modification (DEBUT)*/
-CPiece* CPlateau::Case(int y, int x) const
-{
+CPiece* CPlateau::Case(int y, int x) const {
 	return Jeu[y][x]; 
 }
-CPiece* CPlateau::CaseModif(int y, int x)
-{
+
+
+CPiece* CPlateau::CaseModif(int y, int x) {
 	return Jeu[y][x];
 }
 

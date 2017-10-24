@@ -89,7 +89,7 @@ public:
 
 	/********************************
 	/**  modification (DEBUT)*/
-	virtual bool priseEnPassant();
+	virtual bool priseEnPassant() { return false; }
 	virtual bool Manger(int incX, int incY);
 	virtual std::string type_piece() const;
 	virtual void modifPriseEnPassant() { /*rien*/ }

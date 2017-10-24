@@ -107,16 +107,10 @@ void CPiece::dessineCase()
 
 
 /********************************
-/**  modification (DEBUT)
-Cette méthode sera fausse pour toutes les pièces et sera juste redéfinie dans les pions*/
-bool CPiece::priseEnPassant(){
-	return false;
-}
-
+/**  modification (DEBUT)*/
 bool CPiece::Manger(int incX, int incY){
 	if (PosX + incX >= 0 && PosX + incX < 8 &&
-		PosY + incY >= 0 && PosY + incY < 8)
-	{
+		PosY + incY >= 0 && PosY + incY < 8) {
 		Jeu->prendrePiece(PosX, PosY);
 
 		PosX = PosX + incX;
@@ -128,11 +122,11 @@ bool CPiece::Manger(int incX, int incY){
 	return false;
 }
 
-std::string CPiece::type_piece() const{
+std::string CPiece::type_piece() const {
 	return "CPiece";
 }
 
-bool CPiece::deplacable(int x, int y) const{
+bool CPiece::deplacable(int x, int y) const {
 	//On observe les 8 cases qui l'entoure
 	bool possible = false;
 	for (int i = -1; i < 2; i++) {

@@ -59,13 +59,15 @@ char Lire()
 
 /********************************
 /**  modification (DEBUT)*/
-//Retourne le numéro de couleur du roi en echec
 bool roiEnEchec(CPlateau plateau, int couleur){
 	bool echec = false;
 	for (int y = 0; y < 8; y++){
 		for (int x = 0; x < 8; x++){
-			if ((plateau.Case(y, x)->type_piece() == "CRoi") && (plateau.Case(y, x)->isCoulBlanc() == couleur)){
-				if (plateau.Case(y, x)->echec(plateau, x, y, couleur))	echec = true;
+			if ((plateau.Case(y, x)->type_piece() == "CRoi") 
+				&& (plateau.Case(y, x)->isCoulBlanc() == couleur)){
+				if (plateau.Case(y, x)->echec(plateau, x, y, couleur)) {
+					echec = true;
+				}
 			}
 		}
 	}
@@ -74,16 +76,18 @@ bool roiEnEchec(CPlateau plateau, int couleur){
 
 
 bool tourJoueur(CPlateau &P){
-	char initialX = Lire();
-	char initialY = Lire();
-	char finalX = Lire();
-	char finalY = Lire();
-	if (P.Case(initialY - '1', initialX - 'a')->isCoulBlanc() == 1) {
-		if (P.Case(initialY - '1', initialX - 'a')->deplacable(finalX - 'a', finalY - '1')) {
+	char iniX = Lire();
+	char iniY = Lire();
+	char finX = Lire();
+	char finY = Lire();
+	if (P.Case(iniY - '1', iniX - 'a')
+		->isCoulBlanc() == 1) {
+		if (P.Case(iniY - '1', iniX - 'a')
+			->deplacable(finX - 'a', finY - '1')) {
 			CPlateau* newP = new CPlateau(P);
-			if (newP->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
+			if (newP->Bouger(iniX - 'a', iniY - '1', finX - 'a', finY - '1')) {
 				if (!roiEnEchec(*newP, 1)) {
-					if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
+					if (P.Bouger(iniX - 'a', iniY - '1', finX - 'a', finY - '1')) {
 						delete newP;
 						return true;
 					}
@@ -94,6 +98,7 @@ bool tourJoueur(CPlateau &P){
 	}
 	return false;
 }
+
 
 bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY)
 {
@@ -107,12 +112,13 @@ bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY)
 	delete newP;
 	return ok;
 }
-bool tourIA(CPlateau &P)
-{
+
+
+bool tourIA(CPlateau &P) {
 	int iniX = (rand() % 8);
 	int iniY = (rand() % 8);
-	while ((P.Case(iniY, iniX)->isCoulBlanc() != -1) || (!P.Case(iniY, iniX)->deplacable(iniX, iniY)))
-	{
+	while ((P.Case(iniY, iniX)->isCoulBlanc() != -1) 
+		|| (!P.Case(iniY, iniX)->deplacable(iniX, iniY))) {
 		iniX = (rand() % 8);
 		iniY = (rand() % 8);
 	}
@@ -129,32 +135,30 @@ bool tourIA(CPlateau &P)
 		finX = iniX + finalValeur[0];
 		finY = iniY + finalValeur[1];
 		if (IApeutJouer(P, iniX, iniY, finX, finY)) {
-			ok = P.Bouger(iniX, iniY, finX, finY);
-		}
+			ok = P.Bouger(iniX, iniY, finX, finY); }
 	}
 	return ok;
 }	
 
-bool echecetmat(CPlateau &P){
+
+bool echecetmat(CPlateau &P) {
 	bool echecetmat = false;
 	bool ok[9];
-	int posXRoi = -1, posYRoi = -1;
-	for (int y = 0; y < 8; y++){
-		for (int x = 0; x < 8; x++){
-			if (P.Case(y, x)->type_piece() == "CRoi"){
-				posXRoi = x, posYRoi = y;
-				if (P.Case(posYRoi, posYRoi)
-					->echec(P, posXRoi, posYRoi, P.Case(posYRoi, posXRoi)
+	for (int y = 0; y < 8; y++) {
+		for (int x = 0; x < 8; x++) {
+			if (P.Case(y, x)->type_piece() == "CRoi") {
+				if (P.Case(y, x)
+					->echec(P, x, y, P.Case(y, x)
 						->isCoulBlanc())){
 					int k = 0;
-					for (int i = -1; i < 2; i++){
-						for (int j = -1; j < 2; j++){
-							ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j); 
+					for (int i = -1; i < 2; i++) {
+						for (int j = -1; j < 2; j++) {
+							ok[k] = rendEnEchec(P, x, y, x+i,y+j); 
 							k++;
 						}
 					}
-					for (int i = 0; i < 9; i++){
-						if (ok[i] == false)		echecetmat = true;
+					for (int i = 0; i < 9; i++) {
+						if (ok[i] == false) { echecetmat = true; }
 					}
 				}	
 			}
@@ -162,6 +166,7 @@ bool echecetmat(CPlateau &P){
 	}
 	return echecetmat;
 }
+
 
 bool rendEnEchec(CPlateau &P, int Xdep, int Ydep, int Xfin, int Yfin) {
 	bool ok = false;
@@ -174,6 +179,7 @@ bool rendEnEchec(CPlateau &P, int Xdep, int Ydep, int Xfin, int Yfin) {
 	delete P2;
 	return ok;
 }
+
 
 bool roiBloque(CPlateau P, int X, int Y)
 {
@@ -195,6 +201,7 @@ bool roiBloque(CPlateau P, int X, int Y)
 	}
 	return false;
 }
+
 
 bool pat(CPlateau P, int couleur)
 {
