@@ -282,8 +282,14 @@ bool echecetmat(CPlateau &P)
 	return echecetmat;
 }
 
-bool rendEnEchec(CPlateau P, int posdepX, int posdepY, int posfinX, int posfinY) {
+bool rendEnEchec(CPlateau P, int posdepX, int posdepY, int posfinX, int posfinY)
+{
+	bool echec = false;
+	if (P.Case(posdepY, posdepX)->deplacable(posfinX, posfinY))
+	{
 
+	}
+	return echec;
 }
 /**  modification (FIN)
 /********************************/
