@@ -126,33 +126,27 @@ void CPion::Afficher()
 
 /********************************
 /**  modification (DEBUT)*/
-std::string CPion::type_piece() const
-{
+std::string CPion::type_piece() const{
 	return "CPion";
 }
 
-void CPion::modifPriseEnPassant()
-{
-	if (tour == 2)
-	{
+void CPion::modifPriseEnPassant(){
+	if (tour == 2){
 		tour = 0;
 		viensDavancer2Cases = false;
 	}
 	if (tour == 1) { tour++; }
 }
-bool CPion::deplacable(int x, int y) const
-{
+
+
+bool CPion::deplacable(int x, int y) const{
 	//IA joue les pions noirs
 	bool possible = false;
 	if ((y - 1) >= 0 && (y - 1) <= 7) {
 		if (Jeu->Case(y - 1, x)->isCaseVide()) { possible = true; }
 		//S'il peut manger
-		if ((x - 1) >= 0 && (x - 1) <= 7 && (Jeu->Case(y - 1, x - 1)->isCoulBlanc() == 1)) {
-			possible = true;
-		}
-		if ((x + 1) >= 0 && (x + 1) <= 7 && (Jeu->Case(y - 1, x + 1)->isCoulBlanc() == 1)) {
-			possible = true;
-		}
+		if ((x - 1) >= 0 && (x - 1) <= 7 && (Jeu->Case(y - 1, x - 1)->isCoulBlanc() == 1)) { possible = true; }
+		if ((x + 1) >= 0 && (x + 1) <= 7 && (Jeu->Case(y - 1, x + 1)->isCoulBlanc() == 1)) { possible = true; }
 	}
 	return possible;
 }

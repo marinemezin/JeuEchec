@@ -44,18 +44,18 @@ bool CFou::deplacable(int x, int y) const {
 	bool possible = false;
 	if ((y - 1) >= 0 && (y - 1) <= 7){
 		if ((x - 1) >= 0 && (x - 1) <= 7) {
-			if (Jeu->Case(y - 1, x - 1)->isCaseVide()) possible = true;
+			if (Jeu->Case(y - 1, x - 1)->isCaseVide()) { possible = true; }
 		}
 		if ((x + 1) >= 0 && (x + 1) <= 7) {
-			if (Jeu->Case(y - 1, x + 1)->isCaseVide()) possible = true;
+			if (Jeu->Case(y - 1, x + 1)->isCaseVide()) { possible = true; }
 		}
 	}
 	if ((y + 1) >= 0 && (y + 1) <= 7){
 		if ((x - 1) >= 0 && (x - 1) <= 7) {
-			if (Jeu->Case(y + 1, x - 1)->isCaseVide()) possible = true;
+			if (Jeu->Case(y + 1, x - 1)->isCaseVide()) { possible = true; }
 		}
 		if ((x + 1) >= 0 && (x + 1) <= 7) {
-			if (Jeu->Case(y + 1, x + 1)->isCaseVide()) possible = true;
+			if (Jeu->Case(y + 1, x + 1)->isCaseVide()) { possible = true; }
 		}
 	}
 	return possible;
