@@ -18,6 +18,7 @@ bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
 void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 bool echecetmat(CPlateau &P);
+bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
 
 
 int main ()
@@ -263,7 +264,7 @@ bool echecetmat(CPlateau &P)
 						{
 							for (int j = -1; j < 2; j++)
 							{
-								//ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j);
+								//ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j); 
 								//Utiliser plutôt ça
 								//P.Case(finalX - 'a', finalY - '1')->echec(P, finalX - 'a', finalY - '1', P.Case(initialX - 'a', initialY - '1')->isCoulBlanc())
 								//Donnera true si tu va sur la case car tu sera en echec, false si tu vas sur la nouvelle et tu ne sera pas en echec
@@ -287,6 +288,16 @@ bool echecetmat(CPlateau &P)
 		
 		return echecetmat;
 	}
+
+bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin)
+{
+	CPlateau* P2 = new CPlateau(P);
+	if (P2->Bouger(posXdep, posYdep, posXfin, posYfin))
+	{
+		P2->Case(posYfin, posXfin)->echec(*P2, posXfin, posYfin, P.Case(posYfin, posXfin)->isCoulBlanc());
+	}
+	delete P2;
+}
 /**  modification (FIN)
 /********************************/
 
