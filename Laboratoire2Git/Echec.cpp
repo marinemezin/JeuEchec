@@ -107,13 +107,11 @@ bool tourJoueur(CPlateau &P)
 	CEcran::ClrScr();
 
 	//Si la case peut bouger
-	if (P.Case(initialX - 'a', initialY - '1')->deplacable(finalX - 'a', finalY - '1')) {
+	if (P.Case(initialY - '1', initialX - 'a')->deplacable(finalX - 'a', finalY - '1')) {
 		//Si le déplacement ne rendra pas en echec le joueur
 		//On prend la case à laquelle on veux aller
 		//On regarde si une pièce adverse peut aller sur notre case
-		//Si oui le if retourne true + ! = false
-		//Si aucune case ne peux nous manger sur notre destination, if return false + ! = true
-		if (!P.Case(finalX - 'a', finalY - '1')->echec(P, finalX - 'a', finalY - '1', P.Case(initialX - 'a', initialY - '1')->isCoulBlanc())) {
+		if (!P.Case(finalY - '1', finalX - 'a')->echec(P, finalX - 'a', finalY - '1', P.Case(initialY - '1', initialX - 'a')->isCoulBlanc())) {
 			//On fait le déplacement et si le déplacement s'est bien passé
 			if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
 				return true;
@@ -264,13 +262,7 @@ bool echecetmat(CPlateau &P)
 						{
 							for (int j = -1; j < 2; j++)
 							{
-								//ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j); 
-								//Utiliser plutôt ça
-								//P.Case(finalX - 'a', finalY - '1')->echec(P, finalX - 'a', finalY - '1', P.Case(initialX - 'a', initialY - '1')->isCoulBlanc())
-								//Donnera true si tu va sur la case car tu sera en echec, false si tu vas sur la nouvelle et tu ne sera pas en echec
-								//Va prendre dans ton plateau la case où tu veux aller
-								//Va vérifier que ta case n'est pas en échec, cad qu'aucune pièce adverse ne peux venir te manger
-								//Dans la méthode echec, le plateau est recopié donc aucune perte de donnée
+								ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j); 
 								k++;
 							}
 						}
