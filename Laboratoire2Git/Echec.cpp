@@ -106,13 +106,13 @@ bool tourJoueur(CPlateau &P)
 	CEcran::ClrScr();
 
 	//Si la case peut bouger
-	if (P.Case(initialX - 'a', initialY - '1')->deplacable(finalX - 'a', finalY - '1')) {
+	if (P.Case(initialY - '1', initialX - 'a')->deplacable(finalX - 'a', finalY - '1')) {
 		//Si le déplacement ne rendra pas en echec le joueur
 		//On prend la case à laquelle on veux aller
 		//On regarde si une pièce adverse peut aller sur notre case
 		//Si oui le if retourne true + ! = false
 		//Si aucune case ne peux nous manger sur notre destination, if return false + ! = true
-		if (!P.Case(finalX - 'a', finalY - '1')->echec(P, finalX - 'a', finalY - '1', P.Case(initialX - 'a', initialY - '1')->isCoulBlanc())) {
+		if (!P.Case(finalY - '1', finalX - 'a')->echec(P, finalX - 'a', finalY - '1', P.Case(initialY - '1', initialX - 'a')->isCoulBlanc())) {
 			//On fait le déplacement et si le déplacement s'est bien passé
 			if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
 				return true;
@@ -287,7 +287,12 @@ bool rendEnEchec(CPlateau P, int posdepX, int posdepY, int posfinX, int posfinY)
 	bool echec = false;
 	if (P.Case(posdepY, posdepX)->deplacable(posfinX, posfinY))
 	{
-
+		CPlateau* copieplateau = new CPlateau(P);
+		if (copieplateau->Bouger(posdepX, posdepY, posfinX, posfinY))
+		{
+			echec = true;
+		}
+		delete copieplateau;
 	}
 	return echec;
 }
