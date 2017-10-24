@@ -48,6 +48,7 @@ public:
 	std::string type_piece() const override;
 	bool deplacable(int x, int y) const override;
 	void coordonneesIA(int tab[]) const override;
+	bool echec(CPlateau const&P, int posX, int posY, int coul) const;
 	/**  modification (FIN)
 	/********************************/
 };
