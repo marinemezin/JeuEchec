@@ -77,17 +77,19 @@ bool tourJoueur(CPlateau &P){
 	char finalX = Lire();
 	char finalY = Lire();
 	CEcran::ClrScr();
-	if (P.Case(initialY - '1', initialX - 'a')->deplacable(finalX - 'a', finalY - '1')) {
-		CPlateau* newP = new CPlateau(P);
-		if (newP->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
-			if (!roiEnEchec(*newP, 1)) {
-				if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
-					delete newP;
-					return true;
+	if (P.Case(initialY - '1', initialX - 'a')->isCoulBlanc() == 1) {
+		if (P.Case(initialY - '1', initialX - 'a')->deplacable(finalX - 'a', finalY - '1')) {
+			CPlateau* newP = new CPlateau(P);
+			if (newP->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
+				if (!roiEnEchec(*newP, 1)) {
+					if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
+						delete newP;
+						return true;
+					}
 				}
 			}
+			delete newP;
 		}
-		delete newP;
 	}
 	return false;
 }
@@ -138,9 +140,9 @@ bool echecetmat(CPlateau &P){
 	int posXRoi = -1, posYRoi = -1;
 	for (int y = 0; y < 8; y++){
 		for (int x = 0; x < 8; x++){
-			if (P.CaseModif(y, x)->type_piece() == "CRoi"){
+			if (P.Case(y, x)->type_piece() == "CRoi"){
 				posXRoi = x, posYRoi = y;
-				if (P.CaseModif(posYRoi, posYRoi)->echec(P, posXRoi, posYRoi, P.CaseModif(posYRoi, posXRoi)->isCoulBlanc())){
+				if (P.Case(posYRoi, posYRoi)->echec(P, posXRoi, posYRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc())){
 					int k = 0;
 					for (int i = -1; i < 2; i++){
 						for (int j = -1; j < 2; j++){
@@ -164,7 +166,7 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 	CPlateau* P2 = new CPlateau(P);
 	if (P2->Bouger(posXdep, posYdep, posXfin, posYfin))
 	{
-		ok = (P2->CaseModif(posYfin, posXfin))->echec(*P2, posXfin, posYfin, P2->CaseModif(posYfin, posXfin)->isCoulBlanc());
+		ok = (P2->Case(posYfin, posXfin))->echec(*P2, posXfin, posYfin, P2->Case(posYfin, posXfin)->isCoulBlanc());
 	}
 	delete P2;
 	return ok;
@@ -179,6 +181,7 @@ bool pat(CPlateau P, int couleur)
 	}
 	//Et si n'importe quel mouvement le rendrait en echec
 	//Alors il y a match nul
+	return true;
 }
 /**  modification (FIN)
 /********************************/
