@@ -81,18 +81,12 @@ char Lire()
 /********************************
 /**  modification (DEBUT)*/
 //Retourne le numéro de couleur du roi en echec
-bool roiEnEchec(CPlateau plateau, int couleur)
-{
+bool roiEnEchec(CPlateau plateau, int couleur){
 	bool echec = false;
-	for (int y = 0; y < 8; y++)
-	{
-		for (int x = 0; x < 8; x++)
-		{
-			if ((plateau.Case(y, x)->type_piece() == "CRoi") && (plateau.Case(y, x)->isCoulBlanc() == couleur))
-			{
-				if (plateau.Case(y, x)->echec(plateau, x, y, couleur)) {
-					echec = true;
-				}
+	for (int y = 0; y < 8; y++){
+		for (int x = 0; x < 8; x++){
+			if ((plateau.Case(y, x)->type_piece() == "CRoi") && (plateau.Case(y, x)->isCoulBlanc() == couleur)){
+				if (plateau.Case(y, x)->echec(plateau, x, y, couleur))	echec = true;
 			}
 		}
 	}
@@ -100,8 +94,7 @@ bool roiEnEchec(CPlateau plateau, int couleur)
 }
 
 
-bool tourJoueur(CPlateau &P)
-{
+bool tourJoueur(CPlateau &P){
 	char initialX = Lire();
 	char initialY = Lire();
 	char finalX = Lire();
@@ -122,54 +115,43 @@ bool tourJoueur(CPlateau &P)
 	return false;
 }
 
-void finalValue(CPiece* piece, CPlateau &P, int tab[])
-{
-	if (piece->type_piece() == "CPion")
-	{
+void finalValue(CPiece* piece, CPlateau &P, int tab[]){
+	if (piece->type_piece() == "CPion"){
 		tab[0] = (rand() % 3) - 1;
 		tab[1] = -1; //ne peut pas avancer de deux cases au premier coup
 	}
-	if (piece->type_piece() == "CReine")
-	{
+	if (piece->type_piece() == "CReine"){
 		int choix = rand() % 4;
-		if (choix == 0) //déplacement en ligne
-		{
+		if (choix == 0){ //déplacement en ligne
 			tab[0] = (rand() % 15) - 7;
 			tab[1] = 0;
 		}
-		if (choix == 1) //déplacement en colonne
-		{
+		if (choix == 1){ //déplacement en colonne
 			tab[0] = 0;
 			tab[1] = (rand() % 15) - 7;
 		}
-		if (choix == 2 || choix == 3) //déplacements diago
-		{
+		if (choix == 2 || choix == 3) { //déplacements diago
 			tab[0] = (rand() % 15) - 7;
 			if (choix == 2) { tab[1] = tab[0] * (-1); }
 			if (choix == 3) { tab[1] = tab[0]; }
 		}
 	}
-	if (piece->type_piece() == "CRoi")
-	{
+	if (piece->type_piece() == "CRoi"){
 		tab[0] = (rand() % 3) - 1;
 		tab[1] = (rand() % 3) - 1;
 	}
-	if (piece->type_piece() == "CTour")
-	{
+	if (piece->type_piece() == "CTour"){
 		int choix = rand() % 2;
-		if (choix == 0) //déplacement en ligne
-		{
+		if (choix == 0){ //déplacement en ligne
 			tab[0] = (rand() % 15) - 7;
 			tab[1] = 0;
 		}
-		if (choix == 1) //déplacement en colonne
-		{
+		if (choix == 1){ //déplacement en colonne
 			tab[0] = 0;
 			tab[1] = (rand() % 15) - 7;
 		}
 	}
-	if (piece->type_piece() == "CCavalier")
-	{
+	if (piece->type_piece() == "CCavalier"){
 		//Choix du x : +1, -1, +2, -2 et choix du y en fonction
 		int choix = rand() % 4;
 		if (choix == 0) {
@@ -197,8 +179,7 @@ void finalValue(CPiece* piece, CPlateau &P, int tab[])
 			if (choix == 1) { tab[1] = 1; }
 		}
 	}
-	if (piece->type_piece() == "CFou")
-	{
+	if (piece->type_piece() == "CFou"){
 		int choix = rand() % 2;
 		tab[0] = (rand() % 15) - 7;
 		if (choix == 0) { tab[1] = tab[0] * (-1); }
@@ -207,7 +188,8 @@ void finalValue(CPiece* piece, CPlateau &P, int tab[])
 }
 
 //IA joue les pions noirs
-bool tourIA(CPlateau &P) {
+bool tourIA(CPlateau &P)
+{
 	int initialX = (rand() % 8);
 	int initialY = (rand() % 8);
 	//tant que le pion trouvé n'est pas un pion noir ni un pion déplacable on cherche un autre pion
@@ -253,43 +235,31 @@ bool tourIA(CPlateau &P) {
 
 
 }	
-bool echecetmat(CPlateau &P)
-	{
-		bool echecetmat = false;
-		bool ok[9];
-		int posXRoi = -1;
-		int posYRoi = -1;
-		for (int y = 0; y < 8; y++)
-		{
-			for (int x = 0; x < 8; x++)
-			{
-				if (P.CaseModif(y, x)->type_piece() == "CRoi")
-				{
-					posXRoi = x; 
-					posYRoi = y;
-					if (P.CaseModif(posYRoi, posYRoi)->echec(P, posXRoi, posYRoi, P.CaseModif(posYRoi, posXRoi)->isCoulBlanc()))
-					{
-						int k = 0;
-						for (int i = -1; i < 2; i++)
-						{
-							for (int j = -1; j < 2; j++)
-							{
-								ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j); 
-								k++;
-							}
-						}
-						for (int i = 0; i < 9; i++)
-						{
-							if (ok[i] == false)		echecetmat = true;
+bool echecetmat(CPlateau &P){
+	bool echecetmat = false;
+	bool ok[9];
+	int posXRoi, posYRoi = -1;
+	for (int y = 0; y < 8; y++){
+		for (int x = 0; x < 8; x++){
+			if (P.CaseModif(y, x)->type_piece() == "CRoi"){
+				posXRoi = x, posYRoi = y;
+				if (P.CaseModif(posYRoi, posYRoi)->echec(P, posXRoi, posYRoi, P.CaseModif(posYRoi, posXRoi)->isCoulBlanc())){
+					int k = 0;
+					for (int i = -1; i < 2; i++){
+						for (int j = -1; j < 2; j++){
+							ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j); 
+							k++;
 						}
 					}
-					
-				}
+					for (int i = 0; i < 9; i++){
+						if (ok[i] == false)		echecetmat = true;
+					}
+				}	
 			}
 		}
-		
-		return echecetmat;
 	}
+	return echecetmat;
+}
 
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin)
 {
