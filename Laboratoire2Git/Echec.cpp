@@ -135,7 +135,6 @@ bool tourIA(CPlateau &P)
 	return ok;
 }	
 
-//amodif
 bool echecetmat(CPlateau &P){
 	bool echecetmat = false;
 	bool ok[9];
