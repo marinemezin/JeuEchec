@@ -11,6 +11,9 @@ using namespace std;
 /**  modification (FIN)
 /********************************/
 
+
+/********************************
+/**  modification (DEBUT)*/
 // Prototypes
 char Lire();
 int roiEnEchec(CPlateau plateau);
@@ -19,11 +22,12 @@ bool tourIA(CPlateau &P);
 void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
+/**  modification (FIN)
+/********************************/
 
 
 int main ()
 {
-
 	CPlateau* P = new CPlateau(); 
 	srand(time(NULL));
 	int nbrCoup = 0;
@@ -251,11 +255,11 @@ bool echecetmat(CPlateau &P)
 		{
 			for (int x = 0; x < 8; x++)
 			{
-				if (P.Case(y, x)->type_piece() == "CRoi")
+				if (P.CaseModif(y, x)->type_piece() == "CRoi")
 				{
 					posXRoi = x; 
 					posYRoi = y;
-					if (P.Case(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc()))
+					if (P.CaseModif(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.CaseModif(posYRoi, posXRoi)->isCoulBlanc()))
 					{
 						int k = 0;
 						for (int i = -1; i < 2; i++)
@@ -293,7 +297,7 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 	CPlateau* P2 = new CPlateau(P);
 	if (P2->Bouger(posXdep, posYdep, posXfin, posYfin))
 	{
-		ok = (P2->Case(posYfin, posXfin))->echec(*P2, posXfin, posYfin, P2->Case(posYfin, posXfin)->isCoulBlanc());
+		ok = (P2->CaseModif(posYfin, posXfin))->echec(*P2, posXfin, posYfin, P2->CaseModif(posYfin, posXfin)->isCoulBlanc());
 	}
 	delete P2;
 	return ok;
