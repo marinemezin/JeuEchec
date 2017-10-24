@@ -96,7 +96,7 @@ bool CPion::Bouger(int incX, int incY)
 	if((incY + valeurSoustraire == IsCoulBlanc) && (premierTour == true)) {
 		if (incX == 0 && abs(incY) == 2)		// S'il avance au premier tour
 		{
-			if ((Jeu->Case(PosY + incY, PosX)->isCaseVide()) && (Jeu->Case(PosY + incY + valeurSoustraire, PosX)->isCaseVide()))
+			if ((Jeu->CaseModif(PosY + incY, PosX)->isCaseVide()) && (Jeu->CaseModif(PosY + incY + valeurSoustraire, PosX)->isCaseVide()))
 			{
 				if (CPiece::Bouger(incX, incY))
 				{

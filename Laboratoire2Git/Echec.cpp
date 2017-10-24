@@ -35,7 +35,8 @@ int main ()
 	int echecJoueur = 0;
 	/********************************
 	/**  modification (DEBUT)*/	
-	while (echecetmat(*P))
+	//while (!echecetmat(*P))// case le jeu ...................................................................................
+	while(true)
 	{
 		nbrCoup++;
 		CPlateau::verifPriseEnPassant(*P);
