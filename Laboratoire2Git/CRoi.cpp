@@ -188,7 +188,7 @@ bool CRoi::echec(CPlateau const&P, int posX, int posY, int coul) const {
 			if (P.Case(y, x)->type_piece() != "CCasevide"){
 				if (P.Case(y, x)->isCoulBlanc() != coul){
 					CPlateau* copieplateau = new CPlateau(P);
-					if (copieplateau->Bouger(x, y, posX, posY)) echec = true;
+					if (copieplateau->Bouger(x, y, posX, posY)) { echec = true; }
 					delete copieplateau;
 				}
 			}
