@@ -109,7 +109,7 @@ bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY)
 	CPlateau* newP = new CPlateau(P);
 	if (newP->Bouger(iniX, iniY, finX, finY)) {
 		if (!roiEnEchec(*newP, -1)) {
-			ok = newP->Bouger(iniX, iniY, finX, finY);
+			ok = true;
 		}
 	}
 	delete newP;
@@ -128,12 +128,17 @@ bool tourIA(CPlateau &P)
 	P.Case(iniY, iniX)->coordonneesIA(finalValeur);
 	int finX = iniX + finalValeur[0];
 	int finY = iniY + finalValeur[1];
-	bool ok = IApeutJouer(P, iniX, iniY, finX, finY);
+	bool ok = false;
+	if (IApeutJouer(P, iniX, iniY, finX, finY)) {
+		ok = P.Bouger(iniX, iniY, finX, finY);
+	}
 	while (!ok) {
 		P.Case(iniY, iniX)->coordonneesIA(finalValeur);
 		finX = iniX + finalValeur[0];
 		finY = iniY + finalValeur[1];
-		ok = IApeutJouer(P, iniX, iniY, finX, finY);
+		if (IApeutJouer(P, iniX, iniY, finX, finY)) {
+			ok = P.Bouger(iniX, iniY, finX, finY);
+		}
 	}
 	CEcran::ClrScr();
 	return ok;
