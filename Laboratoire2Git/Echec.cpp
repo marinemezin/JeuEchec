@@ -18,45 +18,34 @@ bool tourIA(CPlateau &P);
 bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
-bool pat(CPlateau *P);
+//bool pat(CPlateau *P);
 /**  modification (FIN)
 /********************************/
 
-
-int main ()
-{
+/********************************
+/**  modification (DEBUT)*/
+int main () {
 	CPlateau* P = new CPlateau(); 
 	srand(time(NULL));
 	int noJoueur = 1;
-	/********************************
-	/**  modification (DEBUT)*/	
-	while (!echecetmat(*P))
-	{
+	while (!echecetmat(*P))	{
 		CPlateau::verifPriseEnPassant(*P);
 		P->Afficher();
-			
 		if (noJoueur == 1) {
-			if (tourJoueur(*P)) {
-				noJoueur = -1;
-			}
+			if (tourJoueur(*P)) { noJoueur = -1; }
 		}
 		else {
-			if (tourIA(*P)) {
-				noJoueur = 1;
-			}
+			if (tourIA(*P)) { noJoueur = 1; }
 		}
 
-		if (roiEnEchec(*P, -1)) {
-			cout << "ECHEC joueur " << -1 << endl;
-		}
-		if (roiEnEchec(*P, 1)) {
-			cout << "ECHEC joueur " << 1 << endl;
-		}
+		if (roiEnEchec(*P, -1)) { cout << "ECHEC joueur " << -1 << endl; }
+		if (roiEnEchec(*P, 1)) { cout << "ECHEC joueur " << 1 << endl; }
 	}
-	/**  modification (FIN)
-	/********************************/
+	if (echecetmat(*P)) { cout << "ECHEC ET MAT"; }
 	return 0;
 }
+/**  modification (FIN)
+/********************************/
 
 char Lire()
 {
@@ -179,6 +168,13 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 	}
 	delete P2;
 	return ok;
+}
+
+bool pat(CPlateau *P)
+{
+	//Si le roi n'est pas en echec
+	//Et si n'importe quel mouvement le rendrait en echec
+	//Alors il y a match nul
 }
 /**  modification (FIN)
 /********************************/
