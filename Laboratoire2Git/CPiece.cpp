@@ -59,7 +59,7 @@ bool CPiece::Bouger(int incX, int incY)
 {
 	if (PosX + incX >= 0 && PosX + incX < 8 && 
 		PosY + incY >= 0 && PosY + incY < 8)
-	{
+{
 		if (CheminVide(incX, incY))
 		{
 			Jeu->prendrePiece(PosX, PosY);

@@ -32,8 +32,7 @@ bool CTour::Bouger (int incX, int incY)
 {
 	/********************************
 	/**  modification (DEBUT)*/
-	if ((incY == 0 || incX == 0))
-	{
+	if ((incY == 0 || incX == 0)){
 		if (CPiece::Bouger(incX, incY)) {
 			aBouger = true;
 			return true;
@@ -47,16 +46,17 @@ bool CTour::Bouger (int incX, int incY)
 
 /********************************
 /**  modification (DEBUT)*/
-std::string CTour::type_piece() const
-{
+std::string CTour::type_piece() const{
 	return "CTour";
 }
-bool CTour::getABouger() const
-{
+
+
+bool CTour::getABouger() const{
 	return aBouger;
 }
-bool CTour::deplacable(int x, int y) const
-{
+
+
+bool CTour::deplacable(int x, int y) const{
 	//On observe les 4 cases (non diago) autour de la tour
 	bool possible = false;
 	if((x - 1) >= 0 && (x - 1) <= 7) {
@@ -81,8 +81,8 @@ bool CTour::deplacable(int x, int y) const
 	}
 	return possible;
 }
-void CTour::coordonneesIA(int tab[]) const
-{
+
+void CTour::coordonneesIA(int tab[]) const{
 	int choix = rand() % 2;
 	if (choix == 0) { //déplacement en ligne
 		tab[0] = (rand() % 15) - 7;

@@ -8,12 +8,8 @@ using namespace std;
 /**  modification (DEBUT)*/
 #include "CRoi.h"
 #include <time.h>
-/**  modification (FIN)
-/********************************/
 
 
-/********************************
-/**  modification (DEBUT)*/
 // Prototypes
 char Lire();
 bool roiEnEchec(CPlateau plateau, int couleur);

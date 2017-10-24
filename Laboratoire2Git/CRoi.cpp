@@ -42,13 +42,12 @@ void CRoi::Afficher()
 
 /********************************
 /**  modification (DEBUT)*/
-bool CRoi::valideTourRoque(int ajustCase, int positionY, int positionX, int posXAttendue, int posYAttendue)
-{
+bool CRoi::valideTourRoque(int ajustCase, int positionY, int positionX, int posXAttendue, int posYAttendue){
 	bool ok = false;
-	if ((Jeu->Case(positionY, positionX + ajustCase)->type_piece() == "CTour") && (Jeu->Case(positionY, positionX + ajustCase)->isCoulBlanc() == this->isCoulBlanc()))
-	{
-		if ((Jeu->Case(positionY, positionX + ajustCase)->getPosX() == posXAttendue) && (Jeu->Case(positionY, positionX + ajustCase)->getPosY() == posYAttendue))
-		{
+	if ((Jeu->Case(positionY, positionX + ajustCase)->type_piece() == "CTour") && 
+		(Jeu->Case(positionY, positionX + ajustCase)->isCoulBlanc() == this->isCoulBlanc())){
+		if ((Jeu->Case(positionY, positionX + ajustCase)->getPosX() == posXAttendue) &&
+			(Jeu->Case(positionY, positionX + ajustCase)->getPosY() == posYAttendue)){
 			if (Jeu->Case(positionY, positionX + ajustCase)->getABouger() == false) {
 				ok = true;
 			}
@@ -57,13 +56,10 @@ bool CRoi::valideTourRoque(int ajustCase, int positionY, int positionX, int posX
 	return ok;
 }
 
-bool CRoi::valideRoiRoque(int PosX, int PosY, int posXAttendue, int posYAttendue)
-{
+bool CRoi::valideRoiRoque(int PosX, int PosY, int posXAttendue, int posYAttendue){
 	bool ok = false;
-	if (!echec((*this->Jeu), PosX, PosY, this->isCoulBlanc())) //si le roi n'est pas en echec
-	{
-		if ((this->PosX == posXAttendue) && (this->PosY == posYAttendue)) //et a sa position initiale
-		{
+	if (!echec((*this->Jeu), PosX, PosY, this->isCoulBlanc())){ //si le roi n'est pas en echec
+		if ((this->PosX == posXAttendue) && (this->PosY == posYAttendue)){ //et a sa position initiale
 			ok = true;
 		}
 	}
@@ -104,18 +100,13 @@ bool CRoi::casesEnEchec(int X, int Y, int couleur)
 }
 //casesEnEchec(positionX, positionY, Jeu->Case(positionY, positionX)->isCoulBlanc())
 
-bool CRoi::casesDeplacementNonEchec(int positionX, int positionY, int couleur)
-{
+bool CRoi::casesDeplacementNonEchec(int positionX, int positionY, int couleur){
 	bool ok = false;
 	int valeurMultiplication = positionX / abs(positionX);
-	if (Jeu->Case(positionY, positionX)->isCaseVide() && Jeu->Case(positionY, positionX - valeurMultiplication)->isCaseVide()) //si les cases que le roi veux traverser sont libres
-	{
-		if (!echec((*this->Jeu), positionX, positionY, couleur))
-		{
-			if (!echec((*this->Jeu), positionX - valeurMultiplication, positionY, couleur))
-			{
-				ok = true;
-			}
+	if (Jeu->Case(positionY, positionX)->isCaseVide() && Jeu->Case(positionY, positionX - valeurMultiplication)->isCaseVide()){
+		//si les cases que le roi veux traverser sont libres
+		if (!echec((*this->Jeu), positionX, positionY, couleur)){
+			if (!echec((*this->Jeu), positionX - valeurMultiplication, positionY, couleur)) { ok = true; }
 		}
 	}
 	return ok;
@@ -124,10 +115,8 @@ bool CRoi::casesDeplacementNonEchec(int positionX, int positionY, int couleur)
 bool CRoi::mouvementRoque(int incX, int incY, int xTour, int yTour, int positionXTour, int positionYTour)
 {
 	bool ok = false;
-	if (CPiece::Bouger(incX, incY)) //on bouge le roi et la tour apres
-	{
-		if (Jeu->CaseModif(positionYTour, positionXTour)->Manger(xTour, yTour))
-		{
+	if (CPiece::Bouger(incX, incY)){ //on bouge le roi et la tour apres
+		if (Jeu->CaseModif(positionYTour, positionXTour)->Manger(xTour, yTour)){
 			this->aRoque = true;
 			ok = true;
 		}
@@ -135,17 +124,16 @@ bool CRoi::mouvementRoque(int incX, int incY, int xTour, int yTour, int position
 	return ok;
 }
 
-bool CRoi::Bouger (int incX, int incY)
-{
+bool CRoi::Bouger (int incX, int incY){
 	if (abs(incX) <= 1 && +abs(incY) <= 1) {
 		if (CPiece::Bouger(incX, incY)){
 			aBouger = true;
 			return true;
 		}
 	}
-
 	//le roi peut bouger en roquant
-	if ((abs(incX) == 2) && (abs(incY) == 0) && aRoque == false && aBouger == false) { //si le roi veux se déplacer de deux cases en horizontal et qu'il n'a jamais roqué, ni bougé
+	if ((abs(incX) == 2) && (abs(incY) == 0) && aRoque == false && aBouger == false) { 
+		//si le roi veux se déplacer de deux cases en horizontal et qu'il n'a jamais roqué, ni bougé
 		if (casesDeplacementNonEchec(PosX + incX, PosY + incY, IsCoulBlanc)) {
 			if (valideRoiRoque(PosX, PosY, 4, 0)) { //Roi Blanc
 				//Petit roque
@@ -176,36 +164,29 @@ bool CRoi::Bouger (int incX, int incY)
 	return false;
 }
 
-/**  modification (FIN)
-/********************************/
 
-/********************************
-/**  modification (DEBUT)*/
-std::string CRoi::type_piece() const
-{
+std::string CRoi::type_piece() const{
 	return "CRoi";
 }
 
-bool CRoi::deplacable(int x, int y) const
-{
+
+bool CRoi::deplacable(int x, int y) const{
 	return CPiece::deplacable(x, y);
 }
-void CRoi::coordonneesIA(int tab[]) const
-{
+
+
+void CRoi::coordonneesIA(int tab[]) const{
 	tab[0] = (rand() % 3) - 1;
 	tab[1] = (rand() % 3) - 1;
 }
-bool CRoi::echec(CPlateau const&P, int posX, int posY, int coul) const
-{
+
+
+bool CRoi::echec(CPlateau const&P, int posX, int posY, int coul) const {
 	bool echec = false;
-	for (int y = 0; y < 8; y++)
-	{
-		for (int x = 0; x < 8; x++)
-		{
-			if (P.Case(y, x)->type_piece() != "CCasevide")
-			{
-				if (P.Case(y, x)->isCoulBlanc() != coul)
-				{
+	for (int y = 0; y < 8; y++){
+		for (int x = 0; x < 8; x++){
+			if (P.Case(y, x)->type_piece() != "CCasevide"){
+				if (P.Case(y, x)->isCoulBlanc() != coul){
 					CPlateau* copieplateau = new CPlateau(P);
 					if (copieplateau->Bouger(x, y, posX, posY)) echec = true;
 					delete copieplateau;
