@@ -54,43 +54,29 @@ std::string CCavalier::type_piece() const{
 	return "CCavalier";
 }
 
+bool CCavalier::testPourDeplacable(int leY, int leX) const
+{
+	bool retour = false;
+	if (leY >= 0 && leY <= 7) {
+		if (leX >= 0 && leX <= 7) {
+			if (Jeu->Case(leY, leX)->isCaseVide()) {
+				retour = true;
+			}
+		}
+	}
+	return retour;
+}
+
 bool CCavalier::deplacable(int x, int y) const{
-	//Vérification des 8 cases possibles
 	bool possible = false;
-	if ((y - 2) >= 0 && (y - 2) <= 7) {
-		if ((x - 1) >= 0 && (x - 1) <= 7) {
-			if (Jeu->Case(y - 2, x - 1)->isCaseVide()) { possible = true; }
-		}
-		if ((x + 1) >= 0 && (x + 1) <= 7) {
-			if (Jeu->Case(y - 2, x + 1)->isCaseVide()) { possible = true; }
-		}
-	}
-	if ((y - 1) >= 0 && (y - 1) <= 7) {
-		if ((x - 2) >= 0 && (x - 2) <= 7) {
-			if (Jeu->Case(y - 1, x - 2)->isCaseVide()) { possible = true; }
-		}
-		if ((x + 2) >= 0 && (x + 2) <= 7) {
-			if (Jeu->Case(y - 1, x + 2)->isCaseVide()) { possible = true; }
-		}
-	}
-	if ((y + 1) >= 0 && (y + 1) <= 7)
-	{
-		if ((x - 2) >= 0 && (x - 2) <= 7) {
-			if (Jeu->Case(y + 1, x - 2)->isCaseVide()) { possible = true; }
-		}
-		if ((x + 2) >= 0 && (x + 2) <= 7) {
-			if (Jeu->Case(y + 1, x + 2)->isCaseVide()) { possible = true; }
-		}
-	}
-	if ((y + 2) >= 0 && (y + 2) <= 7)
-	{
-		if ((x - 1) >= 0 && (x - 1) <= 7) {
-			if (Jeu->Case(y + 2, x - 1)->isCaseVide()) { possible = true; }
-		}
-		if ((x + 1) >= 0 && (x + 1) <= 7) {
-			if (Jeu->Case(y + 2, x + 1)->isCaseVide()) { possible = true; }
-		}
-	}
+	if (!possible) { possible = testPourDeplacable(y - 2, x - 1); }
+	if (!possible) { possible = testPourDeplacable(y - 2, x + 1); }
+	if (!possible) { possible = testPourDeplacable(y - 1, x - 2); }
+	if (!possible) { possible = testPourDeplacable(y - 1, x + 2); }
+	if (!possible) { possible = testPourDeplacable(y + 1, x - 2); }
+	if (!possible) { possible = testPourDeplacable(y + 1, x + 2); }
+	if (!possible) { possible = testPourDeplacable(y + 2, x - 1); }
+	if (!possible) { possible = testPourDeplacable(y + 2, x + 1); }
 	return possible;
 }
 void CCavalier::coordonneesIA(int tab[]) const

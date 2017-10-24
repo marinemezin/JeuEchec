@@ -11,6 +11,12 @@ class CPlateau;
   */
 class CCavalier : public CPiece
 {
+	/********************************
+	/**  modification (DEBUT)*/
+private:
+	bool testPourDeplacable(int leY, int leX) const;
+	/**  modification (FIN)
+	/********************************/
 public:
 /**
   * Constructeur standard.
