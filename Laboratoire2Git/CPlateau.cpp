@@ -75,37 +75,37 @@ CPlateau::CPlateau(CPlateau const& plateau)
 	for (int z = 0; z < T; z++)
 		Jeu[z] = new CPiece*[T];
 
-	for (int i = 0; i < T; i++)
+	for (int y = 0; y < T; y++)
 	{
-		for (int j = 0; j < T; j++)
+		for (int x = 0; x < T; x++)
 		{
-			if (plateau.Case(i, j)->type_piece() == "CPion")
+			if (plateau.Case(y, x)->type_piece() == "CPion")
 			{
-				Jeu[i][j] = new CPion(this, i, j, plateau.Case(i, j)->isCoulBlanc());
+				Jeu[y][x] = new CPion(this, x, y, plateau.Case(y, x)->isCoulBlanc());
 			}
-			if (plateau.Case(i, j)->type_piece() == "CReine")
+			if (plateau.Case(y, x)->type_piece() == "CReine")
 			{
-				Jeu[i][j] = new CReine(this, i, j ,8, plateau.Case(i, j)->isCoulBlanc());
+				Jeu[y][x] = new CReine(this, x, y, 8, plateau.Case(y, x)->isCoulBlanc());
 			}
-			if (plateau.Case(i, j)->type_piece() == "CRoi")
+			if (plateau.Case(y, x)->type_piece() == "CRoi")
 			{
-				Jeu[i][j] = new CRoi(this, i, j, 5, plateau.Case(i, j)->isCoulBlanc());
+				Jeu[y][x] = new CRoi(this, x, y, 5, plateau.Case(y, x)->isCoulBlanc());
 			}
-			if (plateau.Case(i, j)->type_piece() == "CTour")
+			if (plateau.Case(y, x)->type_piece() == "CTour")
 			{
-				Jeu[i][j] = new CTour(this, i, j, plateau.Case(i, j)->isCoulBlanc());
+				Jeu[y][x] = new CTour(this, x, y, plateau.Case(y, x)->isCoulBlanc());
 			}
-			if (plateau.Case(i, j)->type_piece() == "CCavalier")
+			if (plateau.Case(y, x)->type_piece() == "CCavalier")
 			{
-				Jeu[i][j] = new CCavalier(this, i, j, plateau.Case(i, j)->isCoulBlanc());
+				Jeu[y][x] = new CCavalier(this, x, y, plateau.Case(y, x)->isCoulBlanc());
 			}
-			if (plateau.Case(i, j)->type_piece() == "CCasevide")
+			if (plateau.Case(y, x)->type_piece() == "CCasevide")
 			{
-				Jeu[i][j] = new CCaseVide(this, i, j);
+				Jeu[y][x] = new CCaseVide(this, x, y);
 			}
-			if (plateau.Case(i, j)->type_piece() == "CFou")
+			if (plateau.Case(y, x)->type_piece() == "CFou")
 			{
-				Jeu[i][j] = new CFou(this, i, j, plateau.Case(i, j)->isCoulBlanc());
+				Jeu[y][x] = new CFou(this, x, y, plateau.Case(y, x)->isCoulBlanc());
 			}
 		}
 	}

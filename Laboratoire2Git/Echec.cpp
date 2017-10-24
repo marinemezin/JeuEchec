@@ -16,7 +16,7 @@ using namespace std;
 /**  modification (DEBUT)*/
 // Prototypes
 char Lire();
-int roiEnEchec(CPlateau plateau);
+bool roiEnEchec(CPlateau plateau, int couleur);
 bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
 void finalValue(CPiece* piece, CPlateau &P, int tab[]);
@@ -53,10 +53,11 @@ int main ()
 			}
 		}*/
 
-		echecJoueur = roiEnEchec(*P);
-		if (echecJoueur != 0)
-		{
-			cout << "ECHEC joueur " << echecJoueur << endl;
+		if (roiEnEchec(*P, -1)) {
+			cout << "ECHEC joueur " << -1 << endl;
+		}
+		if (roiEnEchec(*P, 1)) {
+			cout << "ECHEC joueur " << 1 << endl;
 		}
 	}
 	/**  modification (FIN)
@@ -81,18 +82,17 @@ char Lire()
 /********************************
 /**  modification (DEBUT)*/
 //Retourne le numéro de couleur du roi en echec
-int roiEnEchec(CPlateau plateau)
+bool roiEnEchec(CPlateau plateau, int couleur)
 {
-	int echec = 0;
+	bool echec = false;
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
 		{
-			if (plateau.Case(y, x)->type_piece() == "CRoi")
+			if ((plateau.Case(y, x)->type_piece() == "CRoi") && (plateau.Case(y, x)->isCoulBlanc() == couleur))
 			{
-				if (plateau.Case(y, x)->echec(plateau, x, y, plateau.Case(y, x)->isCoulBlanc()))
-				{
-					echec = plateau.Case(y, x)->isCoulBlanc();
+				if (plateau.Case(y, x)->echec(plateau, x, y, couleur)) {
+					echec = true;
 				}
 			}
 		}
@@ -105,24 +105,20 @@ bool tourJoueur(CPlateau &P)
 {
 	char initialX = Lire();
 	char initialY = Lire();
-
 	char finalX = Lire();
 	char finalY = Lire();
-
 	CEcran::ClrScr();
-
-	//Si la case peut bouger
 	if (P.Case(initialY - '1', initialX - 'a')->deplacable(finalX - 'a', finalY - '1')) {
-		//Si le déplacement ne rendra pas en echec le joueur
-		//Cad ne met pas son roi en echec
-		//1) trouver les co du roi
-		//2) tester s'il sera en echec --->faire une méthode pour ça
-		//if (!P.Case(finalY - '1', finalX - 'a')->echec(P, finalX - 'a', finalY - '1', P.Case(initialY - '1', initialX - 'a')->isCoulBlanc())) {
-			//On fait le déplacement et si le déplacement s'est bien passé
-			if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
-				return true;
+		CPlateau* newP = new CPlateau(P);
+		if (newP->Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
+			if (!roiEnEchec(*newP, 1)) {
+				if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
+					delete newP;
+					return true;
+				}
 			}
-		//}
+		}
+		delete newP;
 	}
 	return false;
 }
@@ -229,7 +225,14 @@ bool tourIA(CPlateau &P) {
 	int finalY = initialY + finalValeur[1];
 
 	//Tenter de bouger le pion
-	bool ok = P.Bouger(initialX, initialY, finalX, finalY);
+	CPlateau* newP = new CPlateau(P);
+	bool ok = false;
+	if (newP->Bouger(initialX, initialY, finalX, finalY)) {
+		if (!roiEnEchec(*newP, -1)) {
+			ok = P.Bouger(initialX, initialY, finalX, finalY);
+		}
+	}
+	delete newP;
 
 	//Tant que le pion n'a pas bougé recalculer une variation
 	while (!ok)
@@ -239,7 +242,11 @@ bool tourIA(CPlateau &P) {
 		finalY = initialY + finalValeur[1];
 
 		//Tenter de bouger le pion
-		ok = P.Bouger(initialX, initialY, finalX, finalY);
+		if (newP->Bouger(initialX, initialY, finalX, finalY)) {
+			if (!roiEnEchec(*newP, -1)) {
+				ok = P.Bouger(initialX, initialY, finalX, finalY);
+			}
+		}
 	}
 	CEcran::ClrScr();
 	//system("PAUSE");
