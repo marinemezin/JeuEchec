@@ -69,6 +69,7 @@ bool CRoi::valideRoiRoque(int PosX, int PosY, int posXAttendue, int posYAttendue
 	return ok;
 }
 
+//a suppr
 bool CRoi::casesEnEchec(int X, int Y, int couleur)
 {
 	/*bool ok = false;
@@ -182,31 +183,6 @@ bool CRoi::Bouger (int incX, int incY)
 std::string CRoi::type_piece() const
 {
 	return "CRoi";
-}
-
-bool CRoi::echec(CPlateau const&plateau, int posX, int posY, int couleur)
-{
-	bool echec = false; 
-	for (int y = 0; y < 8; y++)
-	{
-		for (int x = 0; x < 8; x++)
-		{
-			if (plateau.Case(y, x)->type_piece() != "CCasevide")
-			{
-				/*ici*/if (plateau.Case(y, x)->isCoulBlanc() != couleur)
-				{
-					CPlateau* copieplateau = new CPlateau(plateau);
-					if (copieplateau->Bouger(x, y, posX, posY))
-					{
-						echec = true; 
-					}
-					delete copieplateau;
-				}
-			}
-		}
-	}
-
-	return echec; 
 }
 
 bool CRoi::deplacable(int x, int y) const

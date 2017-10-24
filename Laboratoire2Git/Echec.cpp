@@ -13,12 +13,12 @@ using namespace std;
 
 // Prototypes
 char Lire();
-bool echectest(CPlateau plateau);
+int roiEnEchec(CPlateau plateau);
 bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
 void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 bool echecetmat(CPlateau &P);
-bool rendenechec(CPlateau &P, int posdepX, int posdepY, int posfinX, int posfinY);
+bool rendEnEchec(CPlateau &P, int posdepX, int posdepY, int posfinX, int posfinY);
 
 
 int main ()
@@ -28,27 +28,30 @@ int main ()
 	srand(time(NULL));
 	int nbrCoup = 0;
 	int noJoueur = 1;
+	int echecJoueur = 0;
 	/********************************
 	/**  modification (DEBUT)*/	
 	while (nbrCoup < 30)
 	{
-
-		if (!echectest(*P))
-		{
-			nbrCoup++;
-			CPlateau::verifPriseEnPassant(*P);
-			P->Afficher();
+		nbrCoup++;
+		CPlateau::verifPriseEnPassant(*P);
+		P->Afficher();
 			
-			//if (noJoueur == 1) {
-				//if (tourJoueur(*P)) { noJoueur = -1; }
-			//}
-			//else {
-				if (tourIA(*P)) { noJoueur = 1; }
-			//}
+		//if (noJoueur == 1) {
+			if (tourJoueur(*P)) {
+				noJoueur = -1;
+			}/*
 		}
-		else
+		else {
+			if (tourIA(*P)) {
+				noJoueur = 1;
+			}
+		}*/
+
+		echecJoueur = roiEnEchec(*P);
+		if (echecJoueur != 0)
 		{
-			cout<<"ECHEC"<<endl;
+			cout << "ECHEC joueur " << echecJoueur << endl;
 		}
 	}
 	/**  modification (FIN)
@@ -72,24 +75,26 @@ char Lire()
 
 /********************************
 /**  modification (DEBUT)*/
-bool echectest(CPlateau plateau)
+//Retourne le numéro de couleur du roi en echec
+int roiEnEchec(CPlateau plateau)
 {
-	bool echec = false;
+	int echec = 0;
 	for (int y = 0; y < 8; y++)
 	{
 		for (int x = 0; x < 8; x++)
 		{
 			if (plateau.Case(y, x)->type_piece() == "CRoi")
 			{
-				if ((!echec) && (plateau.Case(y, x))->echec(plateau, x, y, plateau.Case(y, x)->isCoulBlanc()))
+				if (plateau.Case(y, x)->echec(plateau, x, y, plateau.Case(y, x)->isCoulBlanc()))
 				{
-					echec = true;
+					echec = plateau.Case(y, x)->isCoulBlanc();
 				}
 			}
 		}
 	}
 	return echec;
 }
+
 
 bool tourJoueur(CPlateau &P)
 {
@@ -100,6 +105,12 @@ bool tourJoueur(CPlateau &P)
 	char finalY = Lire();
 
 	CEcran::ClrScr();
+
+	/*if (P.Case(initialX - 'a', initialY - '1')->deplacable(finalX - 'a', finalY - '1'))
+	{
+		
+	}*/
+
 	if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
 		return true;
 	}
@@ -250,7 +261,7 @@ bool echecetmat(CPlateau &P)
 			{
 				for (int j = -1; j < 2; j++)
 				{
-					ok[k] = rendenechec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j);
+					ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j);
 					k++;
 				}
 			}
@@ -265,7 +276,7 @@ bool echecetmat(CPlateau &P)
 		return echecetmat;
 	}
 
-bool rendenechec(CPlateau &P, int posdepX, int posdepY, int posfinX, int posfinY)
+bool rendEnEchec(CPlateau &P, int posdepX, int posdepY, int posfinX, int posfinY)
 {
 	bool echec = false;
 	if (P.Case(posdepY, posdepX)->deplacable(posfinX, posdepY))

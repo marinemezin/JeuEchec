@@ -166,6 +166,30 @@ bool CPiece::deplacable(int x, int y) const
 	return possible;
 }
 
+bool CPiece::echec(CPlateau const&plateau, int posX, int posY, int couleur)
+{
+	bool echec = false;
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			if (plateau.Case(y, x)->type_piece() != "CCasevide")
+			{
+				if (plateau.Case(y, x)->isCoulBlanc() != couleur)
+				{
+					CPlateau* copieplateau = new CPlateau(plateau);
+					if (copieplateau->Bouger(x, y, posX, posY))
+					{
+						echec = true;
+					}
+					delete copieplateau;
+				}
+			}
+		}
+	}
+	return echec;
+}
+
 /**  modification (FIN)
 /********************************/
 
