@@ -137,7 +137,7 @@ bool tourIA(CPlateau &P)
 
 //amodif
 bool echecetmat(CPlateau &P){
-	bool echecetmat = false;
+	bool echecetmat = true;
 	bool ok[9];
 	int posXRoi = -1, posYRoi = -1;
 	for (int y = 0; y < 8; y++){
@@ -153,7 +153,7 @@ bool echecetmat(CPlateau &P){
 						}
 					}
 					for (int i = 0; i < 9; i++){
-						if (ok[i] == false)		echecetmat = true;
+						if (ok[i] == false) { echecetmat = false; }
 					}
 				}	
 			}
