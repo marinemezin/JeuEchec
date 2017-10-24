@@ -18,7 +18,6 @@ bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
 void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 bool echecetmat(CPlateau &P);
-bool rendEnEchec(CPlateau &P, int posdepX, int posdepY, int posfinX, int posfinY);
 
 
 int main ()
@@ -106,13 +105,19 @@ bool tourJoueur(CPlateau &P)
 
 	CEcran::ClrScr();
 
-	/*if (P.Case(initialX - 'a', initialY - '1')->deplacable(finalX - 'a', finalY - '1'))
-	{
-		
-	}*/
-
-	if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
-		return true;
+	//Si la case peut bouger
+	if (P.Case(initialX - 'a', initialY - '1')->deplacable(finalX - 'a', finalY - '1')) {
+		//Si le déplacement ne rendra pas en echec le joueur
+		//On prend la case à laquelle on veux aller
+		//On regarde si une pièce adverse peut aller sur notre case
+		//Si oui le if retourne true + ! = false
+		//Si aucune case ne peux nous manger sur notre destination, if return false + ! = true
+		if (!P.Case(finalX - 'a', finalY - '1')->echec(P, finalX - 'a', finalY - '1', P.Case(initialX - 'a', initialY - '1')->isCoulBlanc())) {
+			//On fait le déplacement et si le déplacement s'est bien passé
+			if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
+				return true;
+			}
+		}
 	}
 	return false;
 }
@@ -275,19 +280,6 @@ bool echecetmat(CPlateau &P)
 		}
 		return echecetmat;
 	}
-
-bool rendEnEchec(CPlateau &P, int posdepX, int posdepY, int posfinX, int posfinY)
-{
-	bool echec = false;
-	if (P.Case(posdepY, posdepX)->deplacable(posfinX, posdepY))
-	{
-		CPlateau* P2 = new CPlateau(P);
-		P2->Bouger(posdepX, posdepY, posfinX, posfinY);
-		echec = P2->Case(posfinY, posfinX)->echec(*P2, posfinX, posfinY, P.Case(posfinX, posfinY)->isCoulBlanc());
-		delete P2;
-	}
-	return echec;
-}
 /**  modification (FIN)
 /********************************/
 
