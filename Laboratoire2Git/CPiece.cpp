@@ -166,7 +166,7 @@ bool CPiece::deplacable(int x, int y) const
 	return possible;
 }
 
-bool CPiece::echec(CPlateau const&plateau, int posX, int posY, int couleur)
+bool CPiece::echec(CPlateau const&plateau, int posX, int posY, int couleur) const
 {
 	bool echec = false;
 	for (int y = 0; y < 8; y++)

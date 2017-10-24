@@ -93,7 +93,7 @@ public:
 	virtual bool Manger(int incX, int incY);
 	virtual std::string type_piece() const;
 	virtual void modifPriseEnPassant() { /*rien*/ }
-	bool echec(CPlateau const&plateau, int posX, int posY, int couleur);
+	bool echec(CPlateau const&plateau, int posX, int posY, int couleur) const;
 	int getPosX() const { return PosX; }
 	int getPosY() const { return PosY; }
 	virtual bool getABouger() const { return false; }
