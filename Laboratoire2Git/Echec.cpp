@@ -18,34 +18,34 @@ bool tourJoueur(CPlateau &P);
 bool tourIA(CPlateau &P);
 void finalValue(CPiece* piece, CPlateau &P, int tab[]);
 bool echecetmat(CPlateau &P);
+bool rendEnEchec(CPlateau P, int posdepX, int posdepY, int posfinX, int posfinY);
 
-
-int main ()
+int main()
 {
 
-	CPlateau* P = new CPlateau(); 
+	CPlateau* P = new CPlateau();
 	srand(time(NULL));
 	int nbrCoup = 0;
 	int noJoueur = 1;
 	int echecJoueur = 0;
 	/********************************
-	/**  modification (DEBUT)*/	
+	/**  modification (DEBUT)*/
 	while (nbrCoup < 30)
 	{
 		nbrCoup++;
 		CPlateau::verifPriseEnPassant(*P);
 		P->Afficher();
-			
+
 		//if (noJoueur == 1) {
-			if (tourJoueur(*P)) {
-				noJoueur = -1;
-			}/*
+		if (tourJoueur(*P)) {
+			noJoueur = -1;
+		}/*
+	}
+	else {
+		if (tourIA(*P)) {
+			noJoueur = 1;
 		}
-		else {
-			if (tourIA(*P)) {
-				noJoueur = 1;
-			}
-		}*/
+	}*/
 
 		echecJoueur = roiEnEchec(*P);
 		if (echecJoueur != 0)
@@ -229,7 +229,7 @@ bool tourIA(CPlateau &P) {
 	//Tant que le pion n'a pas bougé recalculer une variation
 	while (!ok)
 	{
-		finalValue(P.Case(initialY , initialX), P, finalValeur);
+		finalValue(P.Case(initialY, initialX), P, finalValeur);
 		finalX = initialX + finalValeur[0];
 		finalY = initialY + finalValeur[1];
 
@@ -241,52 +241,56 @@ bool tourIA(CPlateau &P) {
 	return ok;
 
 
-}	
+}
 bool echecetmat(CPlateau &P)
+{
+	bool echecetmat = false;
+	bool ok[9];
+	int posXRoi = -1;
+	int posYRoi = -1;
+	for (int y = 0; y < 8; y++)
 	{
-		bool echecetmat = false;
-		bool ok[9];
-		int posXRoi = -1;
-		int posYRoi = -1;
-		for (int y = 0; y < 8; y++)
+		for (int x = 0; x < 8; x++)
 		{
-			for (int x = 0; x < 8; x++)
+			if (P.Case(y, x)->type_piece() == "CRoi")
 			{
-				if (P.Case(y, x)->type_piece() == "CRoi")
+				posXRoi = x; //attention à la fin des boucles il retournera le dernier roi qu'il a rencontré et ne vérifiera pas les deux rois : ok on met dedans
+				posYRoi = y;
+				if (P.Case(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc()))
 				{
-					posXRoi = x; //attention à la fin des boucles il retournera le dernier roi qu'il a rencontré et ne vérifiera pas les deux rois : ok on met dedans
-					posYRoi = y;
-					if (P.Case(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc()))
+					int k = 0;
+					for (int i = -1; i < 2; i++)
 					{
-						int k = 0;
-						for (int i = -1; i < 2; i++)
+						for (int j = -1; j < 2; j++)
 						{
-							for (int j = -1; j < 2; j++)
-							{
-								ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi+i,posYRoi+j);
-								k++;
-							}
+							ok[k] = rendEnEchec(P, posXRoi, posYRoi, posXRoi + i, posYRoi + j);
+							k++;
 						}
 					}
-					for (int i = 0; i < 9; i++)
+				}
+				for (int i = 0; i < 9; i++)
+				{
+					if (ok[i] == false)
 					{
-						if (ok[i] == false)
-						{
-							echecetmat = true;
-						}
+						echecetmat = true;
 					}
 				}
 			}
 		}
-		
-		return echecetmat;
 	}
+
+	return echecetmat;
+}
+
+bool rendEnEchec(CPlateau P, int posdepX, int posdepY, int posfinX, int posfinY) {
+
+}
 /**  modification (FIN)
 /********************************/
 
 /********************************
 /**  modification (DEBUT)*/
-/*Test de l'echec !!! 
+/*Test de l'echec !!!
 e7e5
 h2h4
 e8e7
