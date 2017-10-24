@@ -164,9 +164,11 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 {
 	bool ok = false;
 	CPlateau* P2 = new CPlateau(P);
-	if (P2->Bouger(posXdep, posYdep, posXfin, posYfin))
-	{
+	if (P2->Bouger(posXdep, posYdep, posXfin, posYfin)){
 		ok = (P2->Case(posYfin, posXfin))->echec(*P2, posXfin, posYfin, P2->Case(posYfin, posXfin)->isCoulBlanc());
+	}
+	else{
+		ok = false;
 	}
 	delete P2;
 	return ok;

@@ -94,6 +94,7 @@ bool CRoi::mouvementRoque(int incX, int incY, int xTour, int yTour,
 	}
 	return ok;
 }
+
 bool CRoi::roiBlancRoque(int incX, int incY)
 {
 	//Petit roque
