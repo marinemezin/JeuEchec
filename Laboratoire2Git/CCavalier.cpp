@@ -50,12 +50,11 @@ bool CCavalier::Bouger (int incX, int incY)
 /********************************
 /**  modification (DEBUT)*/
 
-std::string CCavalier::type_piece() const
-{
+std::string CCavalier::type_piece() const{
 	return "CCavalier";
 }
-bool CCavalier::deplacable(int x, int y) const
-{
+
+bool CCavalier::deplacable(int x, int y) const{
 	//Vérification des 8 cases possibles
 	bool possible = false;
 	if ((y - 2) >= 0 && (y - 2) <= 7) {

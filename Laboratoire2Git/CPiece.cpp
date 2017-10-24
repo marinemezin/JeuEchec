@@ -109,13 +109,11 @@ void CPiece::dessineCase()
 /********************************
 /**  modification (DEBUT)
 Cette méthode sera fausse pour toutes les pièces et sera juste redéfinie dans les pions*/
-bool CPiece::priseEnPassant()
-{
+bool CPiece::priseEnPassant(){
 	return false;
 }
 
-bool CPiece::Manger(int incX, int incY)
-{
+bool CPiece::Manger(int incX, int incY){
 	if (PosX + incX >= 0 && PosX + incX < 8 &&
 		PosY + incY >= 0 && PosY + incY < 8)
 	{
@@ -130,44 +128,33 @@ bool CPiece::Manger(int incX, int incY)
 	return false;
 }
 
-std::string CPiece::type_piece() const
-{
+std::string CPiece::type_piece() const{
 	return "CPiece";
 }
 
-bool CPiece::deplacable(int x, int y) const
-{
+bool CPiece::deplacable(int x, int y) const{
 	//On observe les 8 cases qui l'entoure
 	bool possible = false;
 	for (int i = -1; i < 2; i++) {
 		int yHaut = y + 1;
 		int yBas = y - 1;
 		if (yHaut >= 0 && yHaut <= 7 && (x + i) >= 0 && (x + i) <= 7) {
-			if (Jeu->Case(yHaut, x + i)->isCaseVide()) {
-				possible = true;
-			}
+			if (Jeu->Case(yHaut, x + i)->isCaseVide()) possible = true;
 		}
 		if (yBas >= 0 && yBas <= 7 && (x + i) >= 0 && (x + i) <= 7) {
-			if (Jeu->Case(yBas, x + i)->isCaseVide()) {
-				possible = true;
-			}
+			if (Jeu->Case(yBas, x + i)->isCaseVide()) possible = true;
 		}
 	}
 	if ((x - 1) >= 0 && (x - 1) <= 7) {
-		if (Jeu->Case(y, x - 1)->isCaseVide()) {
-			possible = true;
-		}
+		if (Jeu->Case(y, x - 1)->isCaseVide()) possible = true;
 	}
 	if ((x + 1) >= 0 && (x + 1) <= 7) {
-		if (Jeu->Case(y, x + 1)->isCaseVide()) {
-			possible = true;
-		}
+		if (Jeu->Case(y, x + 1)->isCaseVide()) possible = true;
 	}
 	return possible;
 }
 
-bool CPiece::echec(CPlateau const&plateau, int posX, int posY, int couleur) const
-{
+bool CPiece::echec(CPlateau const&plateau, int posX, int posY, int couleur) const{
 	bool echec = false;
 	for (int y = 0; y < 8; y++)
 	{
@@ -178,10 +165,7 @@ bool CPiece::echec(CPlateau const&plateau, int posX, int posY, int couleur) cons
 				if (plateau.Case(y, x)->isCoulBlanc() != couleur)
 				{
 					CPlateau* copieplateau = new CPlateau(plateau);
-					if (copieplateau->Bouger(x, y, posX, posY))
-					{
-						echec = true;
-					}
+					if (copieplateau->Bouger(x, y, posX, posY)) echec = true;
 					delete copieplateau;
 				}
 			}
