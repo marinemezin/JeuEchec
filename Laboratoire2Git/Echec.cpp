@@ -254,9 +254,9 @@ bool echecetmat(CPlateau &P)
 		{
 			if (P.Case(y, x)->type_piece() == "CRoi")
 			{
-				posXRoi = x; //attention à la fin des boucles il retournera le dernier roi qu'il a rencontré et ne vérifiera pas les deux rois : ok on met dedans
+				posXRoi = x;
 				posYRoi = y;
-				if (P.Case(posYRoi, posYRoi)->echec(P, posYRoi, posXRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc()))
+				if (P.Case(posYRoi, posXRoi)->echec(P, posXRoi, posYRoi, P.Case(posYRoi, posXRoi)->isCoulBlanc()))
 				{
 					int k = 0;
 					for (int i = -1; i < 2; i++)
