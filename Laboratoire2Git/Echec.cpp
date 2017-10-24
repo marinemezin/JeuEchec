@@ -18,7 +18,7 @@ bool tourIA(CPlateau &P);
 bool IApeutJouer(CPlateau P, int iniX, int iniY, int finX, int finY);
 bool echecetmat(CPlateau &P);
 bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin);
-//bool pat(CPlateau *P);
+bool pat(CPlateau P);
 /**  modification (FIN)
 /********************************/
 
@@ -135,7 +135,7 @@ bool tourIA(CPlateau &P)
 bool echecetmat(CPlateau &P){
 	bool echecetmat = false;
 	bool ok[9];
-	int posXRoi, posYRoi = -1;
+	int posXRoi = -1, posYRoi = -1;
 	for (int y = 0; y < 8; y++){
 		for (int x = 0; x < 8; x++){
 			if (P.CaseModif(y, x)->type_piece() == "CRoi"){
@@ -170,9 +170,13 @@ bool rendEnEchec(CPlateau &P, int posXdep, int posYdep, int posXfin, int posYfin
 	return ok;
 }
 
-bool pat(CPlateau *P)
+bool pat(CPlateau P, int couleur)
 {
 	//Si le roi n'est pas en echec
+	if (!roiEnEchec(P, couleur))
+	{
+
+	}
 	//Et si n'importe quel mouvement le rendrait en echec
 	//Alors il y a match nul
 }
