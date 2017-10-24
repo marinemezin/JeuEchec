@@ -111,12 +111,12 @@ bool tourJoueur(CPlateau &P)
 		//Si le déplacement ne rendra pas en echec le joueur
 		//On prend la case à laquelle on veux aller
 		//On regarde si une pièce adverse peut aller sur notre case
-		if (!P.Case(finalY - '1', finalX - 'a')->echec(P, finalX - 'a', finalY - '1', P.Case(initialY - '1', initialX - 'a')->isCoulBlanc())) {
+		//if (!P.Case(finalY - '1', finalX - 'a')->echec(P, finalX - 'a', finalY - '1', P.Case(initialY - '1', initialX - 'a')->isCoulBlanc())) {
 			//On fait le déplacement et si le déplacement s'est bien passé
 			if (P.Bouger(initialX - 'a', initialY - '1', finalX - 'a', finalY - '1')) {
 				return true;
 			}
-		}
+		//}
 	}
 	return false;
 }
